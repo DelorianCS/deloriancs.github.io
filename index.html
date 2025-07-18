@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DelorianCS | CTF Writeups</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
@@ -27,14 +27,16 @@
     }
     .bio-card {
       max-width: 1000px;
-      margin: 60px auto 10px;
+      margin: 60px auto 10px; /* más margen arriba */
       padding: 20px;
       border: 1px solid #30363d;
       background-color: #161b22;
       border-radius: 10px;
     }
-    .whoami-line {
-      margin-bottom: 16px;
+    .bio-card pre {
+      color: #58a6ff;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
     .bio-flex {
       display: flex;
@@ -89,7 +91,16 @@
     }
     .platform {
       font-size: 13px;
-      color: #8b949e;
+      font-weight: bold;
+    }
+    .platform.TryHackMe {
+      color: #ff6b6b;
+    }
+    .platform.HackTheBox {
+      color: #00ff88;
+    }
+    .platform.VulnHub {
+      color: #b083ff;
     }
     footer {
       text-align: center;
@@ -97,21 +108,6 @@
       color: #8b949e;
       font-size: 12px;
       border-top: 1px solid #30363d;
-    }
-    .typewriter {
-      display: inline-block;
-      overflow: hidden;
-      border-right: .15em solid #58a6ff;
-      white-space: nowrap;
-      animation: typing 2s steps(7, end), blink .75s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 7ch }
-    }
-    @keyframes blink {
-      from, to { border-color: transparent }
-      50% { border-color: #58a6ff }
     }
   </style>
 </head>
@@ -121,9 +117,7 @@
   </header>
 
   <div class="bio-card">
-    <div class="whoami-line">
-      <span style="color: #58a6ff">delorian@kali</span> <span style="color: #c9d1d9">&gt;</span> <span class="typewriter">whoami</span>
-    </div>
+    <pre>delorian@kali > whoami</pre>
     <p>Cybersecurity enthusiast focused on pentesting through CTFs, labs and real-world challenges. I document my process, progress and results through here.</p>
     <div class="bio-flex">
       <div class="bio-section">
@@ -162,13 +156,54 @@
     </select>
   </div>
 
-  <div class="container" id="cards"></div>
+  <div class="container" id="cards">
+    <!-- Las tarjetas se generan dinámicamente en JS -->
+  </div>
 
   <footer>
     © 2025 DelorianCS | Built for hackers by a hacker
   </footer>
 
   <script>
+    const machineList = [
+      "anonymous", "anthem", "appointment", "archetype", "basic_pentesting_1", "blog", "blue",
+      "bolt", "bounty_hacker", "brooklynninenine", "cap", "chillhack", "colddbox", "crocodile",
+      "cyberlens", "dc-1", "dreaming", "gaming_server", "ice", "ignite", "kenobi",
+      "lesson_learned", "lookup", "madness", "mkingdom", "mr_robot_1", "mustacchio",
+      "oopsie", "publisher", "redeemer", "responder", "rootme", "sequel", "simple_ctf",
+      "source", "startup", "symfonos_1", "the_sticker_shop", "thompson", "ua_highschool",
+      "vaccine", "vulnversity", "w1se_guy"
+    ];
+
+    const platformMap = {
+      "kenobi": "TryHackMe", "colddbox": "TryHackMe", "mr_robot_1": "VulnHub", "vulnversity": "TryHackMe",
+      "dc-1": "VulnHub", "basic_pentesting_1": "VulnHub", "symfonos_1": "VulnHub", "ice": "TryHackMe",
+      "simple_ctf": "TryHackMe", "blue": "TryHackMe", "startup": "TryHackMe", "thompson": "TryHackMe",
+      "anonymous": "TryHackMe", "mustacchio": "TryHackMe", "cap": "HackTheBox", "vaccine": "HackTheBox",
+      "oopsie": "HackTheBox", "blog": "TryHackMe", "archetype": "HackTheBox", "responder": "HackTheBox",
+      "crocodile": "HackTheBox", "sequel": "HackTheBox", "appointment": "HackTheBox", "redeemer": "HackTheBox",
+      "anthem": "TryHackMe", "bolt": "TryHackMe", "ignite": "TryHackMe", "publisher": "TryHackMe",
+      "chillhack": "TryHackMe", "source": "TryHackMe", "brooklynninenine": "TryHackMe", "mkingdom": "TryHackMe",
+      "rootme": "TryHackMe", "bounty_hacker": "TryHackMe", "madness": "TryHackMe", "gaming_server": "TryHackMe",
+      "dreaming": "TryHackMe", "cyberlens": "TryHackMe", "ua_highschool": "TryHackMe",
+      "the_sticker_shop": "TryHackMe", "lesson_learned": "TryHackMe", "w1se_guy": "TryHackMe",
+      "lookup": "TryHackMe"
+    };
+
+    const container = document.getElementById("cards");
+    machineList.forEach(name => {
+      const platform = platformMap[name] || "TryHackMe";
+      const card = document.createElement("div");
+      card.className = "card";
+      card.setAttribute("data-name", name.replace(/_/g, " "));
+      card.setAttribute("data-platform", platform);
+      card.innerHTML = `
+        <h2><a href="writeups/${name}.html">${name.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}</a></h2>
+        <div class="platform ${platform}">${platform}</div>
+      `;
+      container.appendChild(card);
+    });
+
     const search = document.getElementById('search'),
           plat = document.getElementById('filter-platform'),
           cards = [...document.getElementById('cards').children];
@@ -183,6 +218,7 @@
         c.style.display = matches ? '' : 'none';
       });
     }
+
     [search, plat].forEach(el => el.addEventListener('input', filterCards));
   </script>
 </body>
