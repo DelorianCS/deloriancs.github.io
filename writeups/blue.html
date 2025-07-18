@@ -42,16 +42,19 @@
 </head>
 <body>
   <h1>Blue</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Started by scanning the target with <code>nmap</code>, using version detection and vulnerability script category to check if its vulnerable to <code>ms17-010</code>.</p>
+  <p>The scan revealed multiple open ports under 1000. Among the findings, port 445 (SMB) indicated the target was vulnerable to <code>ms17-010</code> (EternalBlue).</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Used <code>Metasploit</code> to search and load the exploit module for <code>ms17-010</code>. Configured the required target settings including RHOST and payload for reverse shell.</p>
+  <p>Launched the exploit and successfully received a shell back.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Once inside, verified access and explored user directories for flags. Since the exploit provided NT AUTHORITY\SYSTEM privileges, no further escalation was required.</p>
+  <p>Retrieved <code>user.txt</code> from the user profile directory and <code>root.txt</code> from the Administrator's desktop.</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Mkingdom | Writeup</title>
+  <title>mKingdom - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -41,17 +41,40 @@
   </style>
 </head>
 <body>
-  <h1>Mkingdom</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <h1>mKingdom</h1>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Only <code>port 85</code> open → HTTP site with static image</p>
+  <p><code>gobuster</code> reveals <code>/app</code> → leads to <code>/app/castle</code> ("Toad’s website")</p>
+  <p>Site runs Concrete5 CMS <code>v8.5.2</code></p>
+  <p>Tried default creds → <code>admin:password</code> → works</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Upload page found → fuzzed extensions with <code>ffuf</code> → only <code>.txt</code> and <code>.xml</code> allowed</p>
+  <p>Used Concrete5 settings to add <code>.php</code> to allowed list</p>
+  <p>Uploaded PHP reverse shell via web interface</p>
+  <p>Started <code>nc -nvlp 1234</code> → triggered shell → got <code>www-data</code> access</p>
 
-  <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <h2>Privilege Escalation (to toad)</h2>
+  <p>Uploaded <code>LinEnum</code> via <code>python3 -m http.server</code></p>
+  <p>Found: <code>mysql -u root</code> (no password)</p>
+  <p>In <code>mysql</code> database → user <code>toad</code> with hashed password</p>
+  <p>Used <code>hashcat -m 300</code> with <code>rockyou.txt</code> → cracked password</p>
+  <p>Switched user to <code>toad</code></p>
+
+  <h2>Privilege Escalation (to mario)</h2>
+  <p>Ran LinEnum again → found env var <code>PWD_TOKEN</code> (base64-encoded)</p>
+  <p>Decoded token → used it to switch to user <code>mario</code></p>
+  <p>Got <code>user.txt</code> in <code>/home/mario</code></p>
+
+  <h2>Privilege Escalation (to root)</h2>
+  <p>Uploaded <code>pspy64</code> → saw cron job fetching <code>counter.sh</code> every minute</p>
+  <p>Modified <code>/etc/hosts</code> to point <code>mkingdom.thm</code> to attacker IP</p>
+  <p>Placed custom <code>counter.sh</code> with reverse shell in web root</p>
+  <p>Started <code>http.server</code> and <code>nc</code> listener on port <code>4444</code></p>
+  <p>Got reverse shell as <code>root</code> via cron execution</p>
+  <p>Accessed <code>/root/root.txt</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

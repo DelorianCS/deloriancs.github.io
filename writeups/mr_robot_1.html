@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Mr Robot 1 | Writeup</title>
+  <title>Mr. Robot - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -41,17 +41,31 @@
   </style>
 </head>
 <body>
-  <h1>Mr Robot 1</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <h1>Mr. Robot</h1>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p><code>nmap</code> revealed <code>ports 80</code> and <code>443</code> open → HTTP/HTTPS with self-signed cert</p>
+  <p><code>nikto</code> identified <code>WordPress</code> and <code>robots.txt</code></p>
+  <p><code>dirb</code> listed valid directories (filtered for <code>200</code> responses)</p>
+  <p><code>robots.txt</code> exposed <code>key-1</code> and a wordlist file <code>fsocity.dic</code></p>
+  <p>Cleaned dictionary (duplicates removed) → used for brute-force</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Targeted <code>wp-login.php</code> → verified brute-force viability</p>
+  <p>Used <code>hydra</code> to enumerate valid user: <code>elliot</code></p>
+  <p>Used <code>wpscan</code> with cleaned wordlist → found password: <code>ER28-0652</code></p>
+  <p>Logged in to WordPress as admin → confirmed full admin privileges</p>
+  <p>Replaced <code>404.php</code> with <code>PHP reverse shell</code></p>
+  <p>Triggered 404 page → got shell as <code>www-data</code></p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Checked <code>/home</code> directory → found user <code>robot</code></p>
+  <p><code>password.raw-md5</code> was readable → cracked online (password = <code>abcdefghijklmnopqrstuvwxyz</code>)</p>
+  <p><code>su robot</code> worked → read <code>key-2-of-3.txt</code></p>
+  <p>Checked for <code>SUID</code> binaries → found vulnerable <code>nmap</code> binary</p>
+  <p>Used <code>interactive mode</code> of nmap → spawned shell as <code>root</code></p>
+  <p>Accessed <code>key-3-of-3.txt</code> from <code>/root</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

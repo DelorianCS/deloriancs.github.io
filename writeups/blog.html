@@ -42,16 +42,34 @@
 </head>
 <body>
   <h1>Blog</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Target added to <code>/etc/hosts</code> as <code>blog.thm</code>.</p>
+  <p>Nmap reveals open <code>80/tcp</code> (HTTP). Site runs WordPress. Directory scan with <code>dirsearch</code> finds <code>/robots.txt</code> and <code>/0/</code>.</p>
+  <p>Page <code>/0/</code> contains post by user <code>kwheel</code>. Profile found.</p>
+  <p>Bruteforce login using <code>wpscan</code> reveals:</p>
+  <ul>
+    <li>Username: <code>kwheel</code></li>
+    <li>Password: <code>cutiepie1</code></li>
+  </ul>
+  <p>Logged in to <code>/wp-admin</code>, user is not admin. <code>wpscan</code> reveals WordPress version <code>5.0</code>.</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Site vulnerable to <code>CVE-2019-8942</code> — WordPress Image RCE.</p>
+  <p>Used Metasploit module <code>exploit/multi/http/wp_crop_rce</code> with:</p>
+  <ul>
+    <li>RHOST: <code>blog.thm</code></li>
+    <li>Username: <code>kwheel</code></li>
+    <li>Password: <code>cutiepie1</code></li>
+  </ul>
+  <p>Got meterpreter session.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Enumerated system and found <code>checker</code> binary with SUID bit set.</p>
+  <p>Executing it grants root shell.</p>
+  <p>User flag located at <code>/media/usb/user.txt</code></p>
+  <p>Root flag located in <code>/root/root.txt</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

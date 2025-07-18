@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Oopsie | Writeup</title>
+  <title>Oopsie - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -42,16 +42,25 @@
 </head>
 <body>
   <h1>Oopsie</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
-
-  <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p><code>nmap</code> showed <code>ports 22</code> and <code>80</code> open</p>
+  <p>Discovered login page at <code>/cdn-cgi/login/</code> using <code>dirbuster</code></p>
+  <p>Used known credentials <code>admin / MEGACORP_4dm1n!!</code> to access panel</p>
+  <p>Found parameter <code>id=</code> vulnerable to tampering → discovered super admin ID</p>
+  <p>Modified cookies (user + role) to match super admin → gained access to upload page</p>
+  <p>Uploaded <code>php reverse shell</code> and triggered it via <code>/uploads</code> route</p>
+  <p>Obtained reverse shell connection with <code>nc -lvnp 443</code></p>
+  <p>Enumerated system → found <code>user.txt</code> under <code>/home/robert</code></p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Found <code>db.php</code> containing MySQL creds: <code>robert / M3g4C0rpUs3r!</code></p>
+  <p>Used creds to switch to <code>robert</code> → successful</p>
+  <p><code>find / -perm -u=s -type f</code> revealed custom binary: <code>/usr/bin/bugtracker</code></p>
+  <p>Binary executed <code>cat</code> without absolute path → created fake <code>cat</code> in <code>/tmp</code> to spawn root shell</p>
+  <p>Updated <code>PATH</code> to include <code>/tmp</code> first → executed <code>bugtracker</code> → root shell obtained</p>
+  <p>Accessed <code>/root/root.txt</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

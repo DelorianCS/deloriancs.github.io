@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Crocodile | Writeup</title>
+  <title>Weak RSA | Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -41,17 +41,19 @@
   </style>
 </head>
 <body>
-  <h1>Crocodile</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <h1>Weak RSA</h1>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Used <code>nmap</code> to scan the target. Identified FTP on port 21 and Apache HTTP server on port 80. Default scripts helped detect versions like <code>vsftpd 3.0.3</code> and <code>apache httpd 2.4.41</code>.</p>
+  <p>FTP service allowed anonymous login. Used standard client to connect and explore the available files. Downloaded <code>allowed.userlist</code> and <code>allowed.userlist.passwd</code> from the server.</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Ran <code>gobuster</code> to enumerate web directories. Discovered <code>login.php</code> which exposed a login interface. Tested username and password combinations from the FTP dump.</p>
+  <p>Successfully logged in using one of the privileged users listed in the FTP files. Gained access to the internal admin page which contained the final target information.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>This challenge focused solely on web exploitation and credential discovery. No shell access or further escalation was needed. After logging in with valid credentials, access was granted to the sensitive information.</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

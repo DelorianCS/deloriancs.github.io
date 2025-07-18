@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Responder | Writeup</title>
+  <title>Responder - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -42,16 +42,30 @@
 </head>
 <body>
   <h1>Responder</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Initial HTTP request redirects to domain <code>unika.htb</code></p>
+  <p>Added IP and domain to <code>/etc/hosts</code> to access web content</p>
+  <p><code>nmap</code> confirms <code>Apache + PHP</code> on port <code>80</code></p>
+  <p>Found <code>page</code> parameter used for language switching</p>
+  <p>Identified potential for <strong>LFI</strong> using <code>../../../../../../../../windows/system32/drivers/etc/hosts</code></p>
+  <p>Identified potential for <strong>RFI</strong> using <code>//10.10.14.6/somefile</code></p>
 
-  <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <h2>Responder & Hash Capture</h2>
+  <p>NTLM = <code>New Technology LAN Manager</code></p>
+  <p>Started Responder with <code>-I</code> flag for network interface</p>
+  <p>Captured NetNTLMv2 hash when accessing SMB share from browser</p>
 
-  <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <h2>Password Cracking</h2>
+  <p>Saved captured hash to file</p>
+  <p>Used <code>john</code> (John the Ripper) with <code>rockyou.txt</code> to crack hash</p>
+  <p><strong>Password recovered:</strong> <code>badminton</code></p>
+
+  <h2>Remote Access</h2>
+  <p>Remote Windows service used: <code>WinRM</code> on TCP port <code>5985</code></p>
+  <p>Used <code>evil-winrm</code> with credentials to access the box</p>
+  <p>Found user flag in Mike's directory using <code>cd</code>, <code>dir</code>, and <code>type</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

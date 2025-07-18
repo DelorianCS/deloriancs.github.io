@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Vaccine | Writeup</title>
+  <title>Vaccine - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -42,17 +42,36 @@
 </head>
 <body>
   <h1>Vaccine</h1>
-  <p>Status: <strong>In progress...</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Performed <code>nmap -sV -sC &lt;IP&gt;</code></p>
+  <p>Open ports:</p>
+  <ul>
+    <li><code>21/tcp</code> (FTP) — anonymous login allowed, file found: <code>backup.zip</code></li>
+    <li><code>22/tcp</code> (SSH)</li>
+    <li><code>80/tcp</code> (HTTP) — login page at <code>/</code></li>
+  </ul>
 
-  <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <h2>Exploiting</h2>
+  <p>Logged into FTP anonymously, downloaded <code>backup.zip</code></p>
+  <p>Cracked ZIP password with <code>zip2john</code> + <code>john</code></p>
+  <p>Extracted MD5 hash: <code>2cb42f8734ea607eefed3b70af13bbd3</code>, cracked using <code>hashcat -a 0 -m 0</code> and <code>rockyou.txt</code></p>
+  <p>Logged into web panel, found injectable parameter at <code>/dashboard.php?search=</code></p>
+  <p>Used <code>sqlmap</code> with session cookie to extract DB credentials</p>
+  <p>SQL injection escalated with <code>--os-shell</code></p>
+  <p>Spawned reverse shell using bash TCP one-liner</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Found DB credentials in <code>/var/www/html/dashboard.php</code>:</p>
+  <pre><code>user=postgres
+password=P@s5w0rd!</code></pre>
+  <p>Logged in via SSH as <code>postgres</code></p>
+  <p>Checked sudo permissions → <code>/bin/vi</code> allowed</p>
+  <p>Escalated via GTFOBins vi method:</p>
+  <pre><code>sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf
+:set shell=/bin/sh
+:shell</code></pre>
+  <p>Got root shell</p>
 
-  <p><a href="../index.html">← Back to Writeups</a></p>
 </body>
 </html>

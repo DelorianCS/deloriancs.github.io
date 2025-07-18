@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Thompson | Writeup</title>
+  <title>Thompson - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -42,16 +42,33 @@
 </head>
 <body>
   <h1>Thompson</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Scanned target using Nmap</p>
+  <p>Ports found: <code>22 (SSH)</code>, <code>8009 (AJP)</code>, <code>8080 (Apache Tomcat 8.5.5)</code></p>
+  <p>Accessed <code>http://&lt;IP&gt;:8080</code> → default Tomcat page</p>
+  <p>Found credentials in unauthorized error message when accessing Manager App</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Logged into <strong>Tomcat Manager</strong> with exposed creds</p>
+  <p>Uploaded reverse shell as WAR file using Application Manager</p>
+  <p>Payload created with <strong>msfvenom</strong> using <code>java/jsp_shell_reverse_tcp</code></p>
+  <p>Started <code>nc -nvlp 4444</code> listener</p>
+  <p>Triggered reverse shell by visiting <code>/shell</code> endpoint</p>
+  <p>Shell received as user <code>tomcat</code></p>
+  <p>Enumerated <code>/home/jack</code> → found <code>user.txt</code></p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Found suspicious script: <code>id.sh</code></p>
+  <p>Script writes output of <code>id</code> into <code>test.txt</code></p>
+  <p><code>test.txt</code> confirms script runs as <code>root</code></p>
+  <p>Modified <code>id.sh</code> to output contents of <code>/root/root.txt</code> to <code>test.txt</code></p>
+  <p>Waited for cron to trigger → checked <code>test.txt</code> → root flag obtained</p>
+
+  <h2>Conclusion</h2>
+  <p>Exploited Tomcat Manager to deploy WAR reverse shell</p>
+  <p>Escalated to root via writable cron-executed script</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chillhack | Writeup</title>
+  <title>ChillHack | Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -41,17 +41,22 @@
   </style>
 </head>
 <body>
-  <h1>Chillhack</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <h1>ChillHack</h1>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Initial <code>nmap</code> scan revealed ports <code>21</code> (FTP), <code>22</code> (SSH), and <code>80</code> (HTTP). Anonymous FTP login was allowed and provided access to <code>note.txt</code>, which mentioned two users: <code>Anurodh</code> and <code>Apaar</code>.</p>
+  <p>Web server on port <code>80</code> hosted a sports blog. Source code inspection revealed nothing, so used <code>Gobuster</code> to enumerate directories and discovered <code>/secret</code>.</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p><code>/secret</code> exposed a command execution interface with restricted commands. Bypassed the filter using encoded Netcat reverse shell and set up a listener to catch it. Gained a reverse shell as <code>www-data</code>.</p>
+  <p>Stabilized the shell and enumerated users. Found <code>helpline.sh</code> script that could be run as <code>apaar</code> using <code>sudo</code>. Abused the script to spawn a shell as <code>apaar</code> and retrieved the user flag.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Generated SSH key pair and added public key to <code>authorized_keys</code> on the target. Gained full SSH access as <code>apaar</code>.</p>
+  <p>Uploaded and executed <code>linPEAS</code> to find privilege escalation vectors. Discovered MySQL running and a second web server on port <code>9001</code>. Located credentials in <code>index.php</code> and accessed MySQL. Retrieved user hashes from <code>webportal</code> DB.</p>
+  <p>Cracked hashes using <code>CrackStation</code>, but login for <code>anurodh</code> failed. Found suspicious image in <code>/var/www/images</code>, extracted zip using <code>steghide</code>. Cracked zip password using <code>zip2john</code> + <code>john</code>. Extracted HTML file contained working password for <code>anurodh</code>.</p>
+  <p>Logged in as <code>anurodh</code>. Discovered it was a Docker container. Used <code>GTFObins</code> Docker escape technique to break out and mount the host file system. Escalated to root and retrieved the root flag.</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

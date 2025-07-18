@@ -1,58 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ignite | Writeup</title>
-  <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ignite - Writeup</title>
   <style>
     body {
-      background: #0d1117;
+      background-color: #0d1117;
       color: #c9d1d9;
       font-family: 'Hack', monospace;
+      font-size: 18px;
+      line-height: 1.6;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
+    h1, h2 {
+      color: #58a6ff;
+    }
     h1 {
-      color: #58a6ff;
-      font-size: 2.4em;
-    }
-    h2 {
-      color: #58a6ff;
-      margin-top: 30px;
-      font-size: 1.8em;
-    }
-    p {
-      font-size: 1.1em;
-      line-height: 1.6em;
+      border-bottom: 2px solid #21262d;
+      padding-bottom: 10px;
     }
     code {
-      background: #161b22;
-      padding: 2px 4px;
+      background-color: #161b22;
+      padding: 2px 6px;
       border-radius: 4px;
+      font-size: 16px;
     }
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+    .section {
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
-  <h1>Ignite</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <h1>Ignite </h1>
 
-  <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <div class="section">
+    <h2>Enumeration</h2>
+    <p>An initial scan revealed that only port 80 was open and serving HTTP. Visiting the site showed a login page from a CMS called <code>Fuel CMS</code>.</p>
+    <p>Reviewing the robots.txt file exposed a directory named <code>/fuel</code>, which led to the login interface.</p>
+    <p>Although default credentials were later found to work (<code>admin:admin</code>), they were not required. A quick lookup on the CMS version revealed a known RCE vulnerability.</p>
+  </div>
 
-  <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <div class="section">
+    <h2>Exploiting</h2>
+    <p>An exploit script for Fuel CMS 1.4.1 allowed remote command execution. The script was modified to point to the target IP.</p>
+    <p>Once the script was executed locally, commands could be sent through the vulnerable filter parameter. This was confirmed by sending basic commands and reading back the responses.</p>
+    <p>To gain a stable shell, a reverse shell payload was used, and a listener was started. After triggering the payload, shell access was obtained on the target as a low-privileged user.</p>
+  </div>
 
-  <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
-
-  <p><a href="../index.html">← Back to Writeups</a></p>
+  <div class="section">
+    <h2>Privilege Escalation</h2>
+    <p>Basic enumeration scripts yielded no direct path. Manual inspection led to a configuration file located in the CMS directory, which contained credentials for the root user.</p>
+    <p>Using these credentials, privilege escalation was achieved via <code>su</code> and root shell access was gained.</p>
+  </div>
 </body>
 </html>

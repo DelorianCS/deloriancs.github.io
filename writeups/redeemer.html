@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redeemer | Writeup</title>
+  <title>Redeemer - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -42,16 +42,32 @@
 </head>
 <body>
   <h1>Redeemer</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Ping confirmed target is alive</p>
+  <p><code>nmap -sV -p-</code> used to discover open ports</p>
+  <p>Only open port found: <code>6379/tcp</code> → Redis</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Used <code>redis-cli -h &lt;target-ip&gt;</code> to connect to Redis instance</p>
+  <p>Confirmed Redis version: <code>5.0.7</code></p>
+  <p>Used command <code>info</code> to gather server info</p>
+  <p>Used command <code>keys *</code> to list database keys</p>
+  <p>Used command <code>get &lt;keyname&gt;</code> to retrieve flag</p>
+  <p>User flag captured</p>
 
-  <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <h2>Quiz Answers</h2>
+  <p><strong>Open TCP port:</strong> <code>6379</code></p>
+  <p><strong>Service running:</strong> <code>redis</code></p>
+  <p><strong>Type of DB:</strong> <code>In-memory Database</code></p>
+  <p><strong>CLI utility:</strong> <code>redis-cli</code></p>
+  <p><strong>Flag for hostname:</strong> <code>-h</code></p>
+  <p><strong>Command to get server info:</strong> <code>info</code></p>
+  <p><strong>Redis version:</strong> <code>5.0.7</code></p>
+  <p><strong>Command to select DB:</strong> <code>select</code></p>
+  <p><strong>Keys in DB 0:</strong> <code>4</code></p>
+  <p><strong>Command to list all keys:</strong> <code>keys *</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

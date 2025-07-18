@@ -42,16 +42,19 @@
 </head>
 <body>
   <h1>Archetype</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Initial scan was done using <code>rustscan</code>. Open ports: 135 (RPC), 139/445 (SMB), 1433 (MSSQL)</p>
+  <p>SMB shares were discovered. Connecting without <code>-N -L</code> allowed access. Guessed credentials <code>kali:kali</code> worked for share <code>backups</code>. Found <code>prod.dtsConfig</code> with SQL credentials: <code>ARCHETYPE\\sql_svc:M3g4c0rp123</code></p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Used <code>mssqlclient.py</code> from Impacket to connect using SQL creds. Confirmed <code>sysadmin</code> role with SQL query. Enabled <code>xp_cmdshell</code> and executed commands remotely. Hosted PowerShell reverse shell payload via Python HTTP server and allowed ports via UFW.</p>
+  <p>Connected back to attack machine using a PowerShell TCP reverse shell and obtained a shell as <code>sql_svc</code>. Retrieved <code>user.txt</code> from Desktop.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Read PowerShell history file and found administrator credentials: <code>administrator:MEGACORP_4dm1n!!</code></p>
+  <p>Used <code>psexec.py</code> from Impacket to get admin shell. Retrieved <code>root.txt</code> from Administrator's Desktop.</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

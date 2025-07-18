@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Brooklynninenine | Writeup</title>
+  <title>Brooklyn Nine-Nine | Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -41,17 +41,20 @@
   </style>
 </head>
 <body>
-  <h1>Brooklynninenine</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <h1>Brooklyn Nine-Nine</h1>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Started with a VPN connection and basic checks to ensure the target was live. Used <code>nmap</code> to scan for open ports. Found FTP and SSH available, along with an accessible HTTP service.</p>
+  <p>Connected to the FTP service and downloaded a file named <code>note_to_jake.txt</code>, which hinted at a weak password for user <code>jake</code>.</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Used <code>hydra</code> to brute-force SSH credentials for user <code>jake</code>. Successfully found a working password. Logged in via SSH to gain initial access.</p>
+  <p>Explored Jake's home directory and retrieved the first flag, confirming initial user-level access.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Investigated the system and identified potential escalation paths. One approach involved steganography techniques, possibly tied to hidden files or images found on the system.</p>
+  <p>Eventually, root access was achieved after deeper enumeration and exploitation of overlooked files. Retrieved the root flag to complete the room.</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

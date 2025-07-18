@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Startup | Writeup</title>
+  <title>Startup - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -42,16 +42,34 @@
 </head>
 <body>
   <h1>Startup</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Ran <code>nmap -A -T4</code> and found ports <code>21 (FTP)</code>, <code>22 (SSH)</code>, and <code>80 (HTTP)</code></p>
+  <p>Anonymous FTP login allowed, FTP is writable</p>
+  <p>Inspected FTP contents: unhelpful files, but writable directory confirmed</p>
+  <p>Used Gobuster to discover <code>/files</code> directory on web server</p>
+  <p>Confirmed <code>/files</code> is synced with FTP and supports file execution via browser</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Uploaded a PHP reverse shell from <code>pentestmonkey</code> to FTP</p>
+  <p>Executed the payload from browser → received reverse shell</p>
+  <p>Stabilized shell with <code>bash -i</code></p>
+
+  <h2>Post Exploitation</h2>
+  <p>Found <code>recipe.txt</code> → contains the word <code>love</code></p>
+  <p>Copied <code>suspicious.pcapng</code> from <code>/incidents</code> to FTP folder</p>
+  <p>Analyzed pcap with Wireshark → found password used by attacker</p>
+  <p>Logged into user <code>lennie</code> with extracted credentials</p>
+  <p>Read <code>/home/lennie/user.txt</code></p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Found root-owned script <code>planner.sh</code> calling <code>print.sh</code> (writable)</p>
+  <p>Uploaded <code>pspy</code> via FTP to monitor cron jobs</p>
+  <p>Confirmed root executes <code>planner.sh</code> every minute</p>
+  <p>Injected reverse shell into <code>print.sh</code> and set up listener</p>
+  <p>Received root shell, confirmed with <code>id</code></p>
+  <p>Read <code>/root/root.txt</code> for root flag</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

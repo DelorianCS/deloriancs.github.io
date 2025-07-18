@@ -42,16 +42,21 @@
 </head>
 <body>
   <h1>Bounty Hacker</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Started with a port scan using <code>nmap</code> to identify exposed services. Found FTP (21), SSH (22), and HTTP (80) open.</p>
+  <p>Checked the HTTP server but found only a static page. Then tested FTP for anonymous login and successfully accessed two files: <code>locks.txt</code> and <code>task.txt</code>.</p>
+  <p>Inside <code>task.txt</code>, found the username <code>lin</code>, confirming who wrote the task list.</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Used <code>hydra</code> to brute-force the SSH login for user <code>lin</code> using the <code>locks.txt</code> file from the FTP server. Successfully retrieved the password <code>RedDr4gonSynd1cat3</code>.</p>
+  <p>Logged in via SSH as <code>lin</code> and gained user access to the target system.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Enumerated SUID binaries with <code>find</code> and then checked sudo permissions using <code>sudo -l</code>. Discovered that <code>lin</code> can run <code>/bin/tar</code> as root.</p>
+  <p>Exploited the tar binary using a known checkpoint-exec technique to spawn a root shell.</p>
+  <p>Accessed <code>/root</code> and retrieved the final flag.</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

@@ -42,16 +42,23 @@
 </head>
 <body>
   <h1>Bolt</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Started with <code>nmap</code> to scan open ports and services. Found the CMS running on a non-standard HTTP port (8000).</p>
+  <p>Visited the web page on that port and identified it as Bolt CMS by checking the generator tag and theme assets.</p>
+  <p>Found the CMS username by reading article content on the front page, and the password was revealed in another blog post.</p>
+  <p>Discovered the login path by checking the Bolt documentation, then logged in using the credentials.</p>
+  <p>Observed the CMS version in the dashboard once logged in.</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Searched <code>Exploit-DB</code> for an RCE affecting Bolt CMS 3.7.x and retrieved the corresponding EDB-ID.</p>
+  <p>Started <code>Metasploit</code> and located the authenticated RCE module for Bolt. Configured required values such as RHOST, LHOST, USERNAME and PASSWORD.</p>
+  <p>Ran the exploit, which uploaded a PHP shell through the profile editor, then used a crafted request to gain remote code execution.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>The shell session landed directly as <code>root</code>, so no privilege escalation was required.</p>
+  <p>Used <code>find</code> to locate <code>flag.txt</code> and retrieved it successfully from the user's home directory.</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

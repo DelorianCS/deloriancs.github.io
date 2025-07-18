@@ -2,57 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Gaming Server | Writeup</title>
+  <title>Gaming Server | TryHackMe Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
-      background: #0d1117;
+      background-color: #0d1117;
       color: #c9d1d9;
       font-family: 'Hack', monospace;
+      line-height: 1.7;
       padding: 40px;
-      max-width: 800px;
-      margin: auto;
+      font-size: 17px;
     }
-    h1 {
+    h1, h2 {
       color: #58a6ff;
-      font-size: 2.4em;
-    }
-    h2 {
-      color: #58a6ff;
-      margin-top: 30px;
-      font-size: 1.8em;
-    }
-    p {
-      font-size: 1.1em;
-      line-height: 1.6em;
     }
     code {
-      background: #161b22;
-      padding: 2px 4px;
+      background-color: #161b22;
+      padding: 2px 6px;
       border-radius: 4px;
     }
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+    section {
+      margin-bottom: 40px;
     }
   </style>
 </head>
 <body>
-  <h1>Gaming Server</h1>
-  <p>Status: <strong>In progress...</strong></p>
 
-  <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <h1>Gaming Server — TryHackMe</h1>
 
-  <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <section>
+    <h2>Enumeration</h2>
+    <p>Initial enumeration revealed two open ports: SSH and HTTP. The website hosted on port 80 appeared to be related to gaming. Directory brute-forcing uncovered a hidden <code>/secret</code> folder containing an RSA private key, which was crucial for SSH access.</p>
+    <p>Further directory enumeration led to <code>/uploads</code>, where a file resembling a password wordlist was found. Additionally, a comment in the page source hinted at valuable clues.</p>
+  </section>
 
-  <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <section>
+    <h2>Exploiting</h2>
+    <p>The RSA private key from <code>/secret</code> was converted into a hash and cracked using a password wordlist. The resulting credentials were used to gain SSH access to the machine. With proper permissions set, the private key successfully authenticated the user.</p>
+    <p>After logging in, the user was able to explore their home directory and retrieve the first flag, confirming initial access.</p>
+  </section>
 
-  <p><a href="../index.html">← Back to Writeups</a></p>
+  <section>
+    <h2>Privilege Escalation</h2>
+    <p>The target machine supported <code>lxd</code>, which allowed for container-based privilege escalation. An Alpine Linux image was built and served over a temporary web server, then imported into the victim system.</p>
+    <p>A privileged container was initialized and bound to the root filesystem. Executing a shell inside this container provided full root access to the underlying host. Navigating the root filesystem confirmed full compromise of the machine.</p>
+  </section>
+
 </body>
 </html>

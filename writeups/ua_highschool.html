@@ -1,58 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Ua Highschool | Writeup</title>
-  <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
-  <style>
-    body {
-      background: #0d1117;
-      color: #c9d1d9;
-      font-family: 'Hack', monospace;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
-      color: #58a6ff;
-      font-size: 2.4em;
-    }
-    h2 {
-      color: #58a6ff;
-      margin-top: 30px;
-      font-size: 1.8em;
-    }
-    p {
-      font-size: 1.1em;
-      line-height: 1.6em;
-    }
-    code {
-      background: #161b22;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <h1>Ua Highschool</h1>
-  <p>Status: <strong>In progress...</strong></p>
+The “U.A. High School” room on TryHackMe is inspired by anime name “My Hero Academia” . This room will be about the challenges of cybersecurity that is in the theme of Hero course students in U.A. High School, where students train to become heroes.
+ROOM OBJECTIVES
 
-  <h2>Enumeration</h2>
-  <p>In progress...</p>
+Finding the User and Root Flags.
+LET’S GET READY TO RUMBLEEEE!!!!!!
 
-  <h2>Exploitation</h2>
-  <p>In progress...</p>
+The first step is to use the nmap command to scan IP address.
 
-  <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+Found 2 Open Ports : Port 80 ( HTTP ) & Port 22 ( SSH )
 
-  <p><a href="../index.html">← Back to Writeups</a></p>
-</body>
-</html>
+Next,Directory Enumeration by Using GoBuster
+
+We Found a Directory → /assets
+
+We find that the directory is not valid and returning a 404
+
+Let’s Enumerate the Sub-Directory → /assets
+
+PHP detected which may lead us to index.php
+
+PHP > Command Injection
+
+We found a Base64 on the main index php page using ls command
+
+From the Base64 We found > images , index.php and styles.css
+
+wow now it’s confirmed that we have a index.php while using index.php ,
+Command Injection Check ✅
+
+Using Command injection Lets get a reverse connection using Netcat
+
+Let’s Setup our Netcat first @ 4444 port
+
+then getting a Reverse Shell using PHP exec by us revgen to make it.
+
+paste PHP exec to command injection and BOOM! we got a shell now
+
+We Got the www-data connection via the PHP exec code
+
+We Found 2 Files , Let’s Transfer these files from the Victim’s machine to the attacker’s system using Netcat .
+use attcker ip and the new port is different from the previous port.
+
+The file was corrupted first so had to fix it with hexedit or any tool.
+
+I used tool https://github.com/Haxrein/MagicBytes which actually preety cool tool to fix corruped jpg file. you can manually do too with hexedit.
+
+After fix the file we get this
+
+The format for the correct now using this file we can use stegnography to check file contents
+
+Using steghide to extract the files inside the file
+
+We need a passphrase to extract the contents
+
+after enumerating more on each directory endup getting a passphrase.txt file which actually contained a base64 encoded password.
+
+Used the password to extract the hidden txt file which was the credential of deku user.
+
+Let’s try using this passphrase with the jpg file we just fixed
+
+We have now got the creds for Deku , our user !!
+
+Let’s try to login using the creds we extracted from a jpg file
+
+And we found a user flag
+Privilege Escalation
+
+First things first use sudo -l
+
+Let’s try to check the contents of feedback.sh
+
+when I read the feedback.sh file it was entirely vulnerable and quickly found a way to figure it out for escalation.
+If you see eval function it actually able to execute command on linux to basically I could write as root.
+
+We have added user deku to sudoers files
+
+Let’s check again by using sudo -l
+
+we have set NOPASSWD to ALL
+
+lets grant sudo access to our /bin/bash to escalate privileges ans get the root.txt
+
+Congratulation to you guy. you have pwned U.A. High School room!

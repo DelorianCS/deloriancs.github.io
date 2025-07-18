@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dc-1 | Writeup</title>
+  <title>DC-1 | Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -41,17 +41,18 @@
   </style>
 </head>
 <body>
-  <h1>Dc-1</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <h1>DC-1</h1>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Started with host discovery to identify the target's IP address on the network. A full service/version scan revealed open ports: SSH (22), HTTP (80), and RPC (111). Browsing to port 80 presented a web server running Drupal.</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Used the Drupalgeddon2 exploit to gain remote code execution. After configuring the exploit in Metasploit, a successful meterpreter session was obtained. Within the shell, retrieved the initial flag and discovered further Drupal configuration in <code>sites/default/settings.php</code>.</p>
+  <p>Accessed the MySQL database using known credentials, enumerated the Drupal tables, and extracted password hashes. After cracking them, used the credentials to log in to the dashboard and obtain another flag.</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Back in the meterpreter shell, explored the system manually. Discovered a user home directory and searched for binaries with SUID permissions. Using one of these, escalated to root. From there, accessed the root directory and retrieved the final flag.</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

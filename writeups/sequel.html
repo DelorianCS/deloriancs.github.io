@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sequel | Writeup</title>
+  <title>Sequel - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -42,16 +42,43 @@
 </head>
 <body>
   <h1>Sequel</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p><code>nmap -sC -sV -p-</code> revealed port <code>3306</code> → MariaDB</p>
+  <p>Database service detected: <code>MariaDB</code></p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Connected to database using:</p>
+  <code>mysql -u root -h &lt;target-ip&gt;</code>
+  <p>No password required for root user</p>
 
-  <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Listed databases with:</p>
+  <code>show databases;</code>
+  <p>Found default databases plus custom: <code>htb</code></p>
+
+  <p>Switched to htb database:</p>
+  <code>use htb;</code>
+
+  <p>Listed tables with:</p>
+  <code>show tables;</code>
+
+  <p>Viewed content using:</p>
+  <code>select * from users;</code><br>
+  <code>select * from config;</code>
+
+  <h2>SQL Basics</h2>
+  <p><strong>Query all columns:</strong> <code>*</code></p>
+  <p><strong>End SQL statements with:</strong> <code>;</code></p>
+
+  <h2>Quiz Answers</h2>
+  <p><strong>Port running MySQL:</strong> <code>3306</code></p>
+  <p><strong>MySQL variant:</strong> <code>MariaDB</code></p>
+  <p><strong>Switch for username:</strong> <code>-u</code></p>
+  <p><strong>User with no password:</strong> <code>root</code></p>
+  <p><strong>Symbol to display all in table:</strong> <code>*</code></p>
+  <p><strong>Symbol to end queries:</strong> <code>;</code></p>
+  <p><strong>Unique DB name:</strong> <code>htb</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

@@ -42,16 +42,30 @@
 </head>
 <body>
   <h1>Anthem</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>Initial <code>nmap -A</code> scan revealed open ports: <code>80</code> (HTTP), <code>135</code> (MSRPC), <code>139</code> (NetBIOS), <code>445</code> (SMB), <code>3389</code> (RDP)</p>
+  <p>Checked <code>/robots.txt</code> → Found potential password string and disallowed directories: <code>/bin/</code>, <code>/config/</code>, <code>/umbraco/</code>, <code>/umbraco_client/</code></p>
+  <p><code>/umbraco</code> reveals CMS is Umbraco | Website domain visible on homepage</p>
+  <p>Author names found on blog articles | OSINT led to discovering admin name via poem | Constructed email format using patterns</p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Flags hidden in article source code and author profile pages</p>
+  <ul>
+    <li>Flag 1 & 2 → In HTML source of article "We are hiring"</li>
+    <li>Flag 3 → On author profile page</li>
+    <li>Flag 4 → In source of second article</li>
+  </ul>
+  <p>Used known email/password pattern to RDP into machine</p>
+  <p>Command: <code>xfreerdp /f /u:USERNAME /p:PASSWORD /v:IP</code></p>
+  <p>If NLA issues → add <code>/cert-ignore</code> or <code>-sec-nla</code></p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Found hidden folder <code>C:\\backup</code> with file <code>restore</code> | Lacked permissions</p>
+  <p>Used Windows GUI to add user access via Properties > Security tab</p>
+  <p>Opened file → found Administrator password</p>
+  <p>Accessed <code>C:\\Users\\Administrator\\Desktop</code> → Read <code>root.txt</code> flag</p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>

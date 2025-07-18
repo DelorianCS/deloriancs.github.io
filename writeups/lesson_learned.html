@@ -2,57 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lesson Learned | Writeup</title>
-  <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
+  <title>Lesson Learned - Writeup</title>
   <style>
     body {
-      background: #0d1117;
+      background-color: #0d1117;
       color: #c9d1d9;
       font-family: 'Hack', monospace;
+      font-size: 18px;
       padding: 40px;
-      max-width: 800px;
-      margin: auto;
+      line-height: 1.6;
     }
     h1 {
-      color: #58a6ff;
-      font-size: 2.4em;
+      font-size: 32px;
+      margin-bottom: 10px;
     }
     h2 {
-      color: #58a6ff;
-      margin-top: 30px;
-      font-size: 1.8em;
-    }
-    p {
-      font-size: 1.1em;
-      line-height: 1.6em;
+      font-size: 26px;
+      margin-top: 40px;
+      border-bottom: 1px solid #30363d;
+      padding-bottom: 5px;
     }
     code {
-      background: #161b22;
-      padding: 2px 4px;
+      background-color: #161b22;
+      padding: 3px 6px;
       border-radius: 4px;
-    }
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <h1>Lesson Learned</h1>
-  <p>Status: <strong>In progress...</strong></p>
+
+  <h1>Lesson Learned?</h1>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p>I started with an aggressive <code>nmap</code> scan to identify open ports and running services</p>
+  <p>Found port <code>80</code> open so I visited the web page</p>
+  <p>I tested default credentials and received an invalid login message</p>
+  <p>I attempted SQL injection using Burp Suite to intercept and modify the request</p>
+  <p>Used <code>Burp Intruder</code> and tested payloads like <code>' OR '2'='2'--</code> which produced a server error</p>
+  <p>I reset the machine and moved to a new approach</p>
+  <p>Used <code>SecLists</code> to brute-force usernames</p>
+  <p>Discovered a valid user: <code>martin</code></p>
+  <p>Tested payload <code>martin' AND ''=''-- -</code> to bypass authentication</p>
+  <p>Successfully logged in</p>
 
-  <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <h2>Exploiting</h2>
+  <p>The injection was possible due to insecure SQL parsing in the login form</p>
+  <p>Used boolean-based payload instead of classic OR 1=1 for safer exploitation</p>
+  <p>Confirmed login and accessed the user interface</p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>No privilege escalation was needed as the challenge was focused on SQL login bypass</p>
 
-  <p><a href="../index.html">← Back to Writeups</a></p>
 </body>
 </html>

