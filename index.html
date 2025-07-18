@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My CTF Writeups</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    header {
+      background-color: #161b22;
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 1px solid #30363d;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #58a6ff;
+      font-size: 32px;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #8b949e;
+      font-size: 14px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h2 {
+      color: #58a6ff;
+      margin-top: 0;
+    }
+
+    .platform {
+      font-size: 13px;
+      color: #8b949e;
+    }
+
+    .difficulty {
+      background-color: #238636;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: white;
+      margin-left: 5px;
+    }
+
+    .tag {
+      background-color: #21262d;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-right: 6px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #238636;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #8b949e;
+      font-size: 12px;
+      border-top: 1px solid #30363d;
+    }
+
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>DelorianCS | CTF Writeups</h1>
+    <p>"He who has a why to live can bear almost any how." — Nietzsche</p>
+  </header>
+
+  <div class="container">
+
+    <div class="card">
+      <h2><a href="writeups/kenobi.html">Kenobi</a></h2>
+      <div class="platform">TryHackMe <span class="difficulty">Easy</span></div>
+      <div class="status">Completed</div>
+      <div>
+        <span class="tag">NFS</span>
+        <span class="tag">ID_RSA</span>
+        <span class="tag">SUID</span>
+        <span class="tag">ifconfig abuse</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><a href="writeups/mrrobot.html">Mr Robot 1</a></h2>
+      <div class="platform">VulnHub <span class="difficulty" style="background-color:#d29922;">Medium</span></div>
+      <div class="status">Completed</div>
+      <div>
+        <span class="tag">WordPress</span>
+        <span class="tag">RCE</span>
+        <span class="tag">Nmap</span>
+        <span class="tag">SUID</span>
+      </div>
+    </div>
+
+    <!-- Puedes seguir agregando más tarjetas aquí -->
+
+  </div>
+
+  <footer>
+    © 2025 DelorianCS | Powered by GitHub Pages
+  </footer>
+
+</body>
+</html>
+
