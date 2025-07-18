@@ -25,6 +25,23 @@
       color: #58a6ff;
       font-size: 32px;
     }
+    .terminal-line {
+      color: #58a6ff;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #58a6ff;
+      width: 0;
+      animation: typing 2.5s steps(30, end) 1s forwards, blink-caret .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #58a6ff; }
+    }
     .bio-card {
       max-width: 1000px;
       margin: 40px auto 10px;
@@ -100,13 +117,6 @@
       font-size: 12px;
       border-top: 1px solid #30363d;
     }
-    #terminal-line {
-      color: #58a6ff;
-      font-family: 'Hack', monospace;
-      white-space: pre;
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
   </style>
 </head>
 <body>
@@ -115,7 +125,7 @@
   </header>
 
   <div class="bio-card">
-    <div id="terminal-line"></div>
+    <div class="terminal-line">@delorian@kali:~$ whoami</div>
     <p>Cybersecurity enthusiast focused on pentesting through CTFs, labs and real-world challenges. I document my process, progress and results through here.</p>
     <div class="bio-flex">
       <div class="bio-section">
@@ -155,7 +165,7 @@
   </div>
 
   <div class="container" id="cards">
-    <!-- Las tarjetas van aquí. Mantén o pega el bloque completo de tarjetas que ya tienes. -->
+    <!-- Tarjetas generadas dinámicamente desde JS -->
   </div>
 
   <footer>
@@ -163,42 +173,40 @@
   </footer>
 
   <script>
-    // Animación terminal
-    const terminalLine = document.getElementById('terminal-line');
-    const fullText = 'delorian@kali > whoami';
-    terminalLine.textContent = '';
-    let i = 0;
-    const speed = 50;
+    const search = document.getElementById('search'),
+          plat = document.getElementById('filter-platform'),
+          cardsContainer = document.getElementById('cards');
 
-    function type() {
-      if (i < fullText.length) {
-        terminalLine.textContent += fullText.charAt(i);
-        i++;
-        setTimeout(type, speed);
-      }
+    const machines = [
+      { name: 'Kenobi', file: 'kenobi.html', platform: 'TryHackMe' },
+      { name: 'ColddBox', file: 'colddbox.html', platform: 'TryHackMe' },
+      { name: 'Mr Robot 1', file: 'mr_robot_1.html', platform: 'VulnHub' },
+      { name: 'Vulnversity', file: 'vulnversity.html', platform: 'TryHackMe' },
+      { name: 'DC-1', file: 'dc-1.html', platform: 'VulnHub' }
+    ];
+
+    function renderCards() {
+      cardsContainer.innerHTML = '';
+      const q = search.value.toLowerCase(), p = plat.value;
+      machines.forEach(({name, file, platform}) => {
+        const matches = (!q || name.toLowerCase().includes(q)) && (!p || platform === p);
+        if (!matches) return;
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.dataset.name = name;
+        div.dataset.platform = platform;
+        div.innerHTML = `
+          <h2><a href="writeups/${file}">${name}</a></h2>
+          <div class="platform">${platform}</div>
+        `;
+        cardsContainer.appendChild(div);
+      });
     }
 
-    window.onload = function () {
-      type();
+    search.addEventListener('input', renderCards);
+    plat.addEventListener('input', renderCards);
 
-      // Filtro
-      const search = document.getElementById('search'),
-            plat = document.getElementById('filter-platform'),
-            cards = [...document.getElementById('cards').children];
-
-      function filterCards() {
-        const q = search.value.toLowerCase(),
-              p = plat.value;
-        cards.forEach(c => {
-          const name = c.dataset.name.toLowerCase(),
-                platform = c.dataset.platform;
-          const matches = (!q || name.includes(q)) && (!p || platform === p);
-          c.style.display = matches ? '' : 'none';
-        });
-      }
-
-      [search, plat].forEach(el => el.addEventListener('input', filterCards));
-    }
+    renderCards();
   </script>
 </body>
 </html>
