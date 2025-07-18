@@ -1,51 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lookup Writeup</title>
-  <link href="https://fonts.googleapis.com/css2?family=Hack&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Lookup | Writeup</title>
+  <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
-    body {{
-      background-color: #0d1117;
+    body {
+      background: #0d1117;
       color: #c9d1d9;
       font-family: 'Hack', monospace;
-      padding: 2rem;
-      font-size: 1.1rem;
-    }}
-    h1 {{
-      color: #58a6ff;
-      font-size: 2rem;
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 0.5rem;
-    }}
-    h2 {{
-      color: #79c0ff;
-      margin-top: 2rem;
-    }}
-    p, li {{
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      font-size: 18px;
       line-height: 1.6;
-    }}
-    code {{
-      background-color: #161b22;
-      color: #d2a8ff;
-      padding: 0.2rem 0.4rem;
+    }
+    h1 { color: #58a6ff; font-size: 32px; }
+    h2 { color: #c9d1d9; font-size: 24px; margin-top: 40px; }
+    a { color: #58a6ff; }
+    code {
+      background: #161b22;
+      padding: 2px 6px;
       border-radius: 4px;
-      font-size: 1rem;
-    }}
-    ul {{
-      padding-left: 1.2rem;
-    }}
+      font-size: 16px;
+    }
+    ul {
+      padding-left: 20px;
+    }
   </style>
 </head>
 <body>
   <h1>Lookup</h1>
+  <p>Status: Completed</p>
 
   <h2>Enumeration</h2>
   <ul>
-    <li>Open ports: <code>22</code> (SSH), <code>80</code> (HTTP) via <code>Nmap</code></li>
+    <li>Open ports: <code>22 (SSH)</code>, <code>80 (HTTP)</code> via <code>nmap</code></li>
     <li><code>Rustscan</code> used for fast port scanning</li>
-    <li>Directories <code>/php</code> and <code>/files</code> found via <code>Gobuster</code></li>
+    <li>Directories <code>/php</code> and <code>/files</code> found using <code>Gobuster</code></li>
     <li><code>Searchsploit</code> reveals vulnerability in <code>elFinder 2.1.47</code></li>
     <li>Users identified: <code>admin</code> and <code>think</code></li>
   </ul>
@@ -53,7 +45,7 @@
   <h2>Exploiting</h2>
   <ul>
     <li>Exploited <code>elFinder</code> command injection using Metasploit module: <code>elfinder_php_connector_exiftran_cmd_injection</code></li>
-    <li>Gained Meterpreter shell as <code>www-data</code></li>
+    <li>Gained <code>Meterpreter</code> shell as <code>www-data</code></li>
   </ul>
 
   <h2>Privilege Escalation</h2>
@@ -61,8 +53,10 @@
     <li>Used <code>pwm</code> to escalate to <code>think</code> user</li>
     <li>Modified <code>PATH</code> variable to point to custom <code>/tmp/id</code></li>
     <li>Read <code>user.txt</code> flag</li>
-    <li>Used <code>Hydra</code> to crack <code>think</code>'s SSH credentials</li>
+    <li>Used <code>hydra</code> to crack <code>think</code>'s SSH credentials</li>
     <li>Logged in via SSH and retrieved <code>root.txt</code> flag</li>
   </ul>
+
+  <p><a href="../index.html">← Back to Writeups</a></p>
 </body>
 </html>
