@@ -60,7 +60,8 @@
       display: flex;
       justify-content: center;
       gap: 10px;
-      padding: 20px;
+      padding:  30px 20px 10px;
+      flex-wrap: wrap;
     }
     .filters input, .filters select {
       background: #161b22;
@@ -87,8 +88,8 @@
     .card:hover {
       transform: translateY(-4px);
     }
-    .card h2 { color: #58a6ff; margin-top: 0; }
-    .platform, .status { font-size: 13px; color: #8b949e; }
+    .card h2 { color: #58a6ff; margin-top: 0; font-size: 20px; }
+    .platform, .status, .rating { font-size: 13px; color: #8b949e; }
     .difficulty {
       background: #238636;
       padding: 2px 6px;
@@ -97,7 +98,7 @@
       color: #fff;
       margin-left: 5px;
     }
-    .tag {
+    .tag, .cert {
       background: #21262d;
       padding: 3px 8px;
       border-radius: 4px;
@@ -125,7 +126,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <h1>DelorianCS | CTF Writeups</h1>
   </header>
@@ -133,7 +133,6 @@
   <div class="bio-card">
     <h2>About Me</h2>
     <p>Cybersecurity enthusiast focused on practical learning through CTFs, labs and real-world challenges. I document my process, progress and results through writeups and tools.</p>
-
     <div class="bio-flex">
       <div class="bio-section">
         <h3>Certifications</h3>
@@ -178,7 +177,7 @@
   </div>
 
   <div class="container" id="cards">
-    <!-- Cards go here -->
+    <!-- ALL CARDS INSERTED AUTOMATICALLY FROM MACHINE LIST -->
   </div>
 
   <footer>
@@ -209,6 +208,5 @@
     }
     [search, plat, diff].forEach(el => el.addEventListener('input', filterCards));
   </script>
-
 </body>
 </html>
