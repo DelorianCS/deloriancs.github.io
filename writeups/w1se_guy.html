@@ -36,13 +36,12 @@
 
 <h2>Enumeration</h2>
 
-<p>This room challenges us to break a weak XOR encryption scheme. When connecting to the server, a flag is encrypted with a random 5-character key. The key loops over the plaintext.</p>
-
-<p>We know TryHackMe flags always start with <code>THM{</code>, which gives us an advantage: a known-plaintext XOR attack. From that, we can recover part of the key and brute-force the rest.</p>
+<p>On connection, the server returns an XOR-encrypted flag using a 5-character repeating key.</p>
+<p>The encrypted flag is hex-encoded and can be decrypted using a known-plaintext attack since all THM flags start with <code>THM{</code>.</p>
 
 <h2>Exploitation</h2>
 
-<p>We start by XORing the encrypted bytes against <code>THM{</code> to extract a partial key. Then we brute-force the remaining 1 character. Below is a clean Python script built to automate the entire process.</p>
+<p>We reverse the XOR with the known prefix <code>THM{</code> to recover part of the key. With 4 characters known, we brute-force the last one from a-zA-Z0-9. Below is the full decryption script:</p>
 
 <pre><code>import argparse
 import itertools
@@ -107,14 +106,13 @@ if __name__ == "__main__":
     main()
 </code></pre>
 
-<p>This script demonstrates how known-plaintext attacks can break XOR with short keys. Try it against the encrypted output you get from the W1seGuy challenge!</p>
-
 <h2>Takeaways</h2>
+
 <ul>
-  <li>Always assume short keys with repeating patterns are weak</li>
-  <li>XOR is reversible — and predictable when the plaintext is partially known</li>
-  <li>TryHackMe flags give a reliable prefix and suffix for brute-force validation</li>
-  <li>CyberChef is great for visualizing XOR, but scripting gives full control</li>
+  <li>Weak XOR with repeating keys is vulnerable to known-plaintext attacks</li>
+  <li><code>THM{</code> gives us a great anchor to extract partial key</li>
+  <li>Brute-forcing the final key character is trivial with modern compute</li>
+  <li>CyberChef helps, but scripting is faster and more reusable</li>
 </ul>
 
 </body>
