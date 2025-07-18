@@ -3,143 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My CTF Writeups</title>
+  <title>DelorianCS | CTF Writeups</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: 'Hack', monospace;
+    body { margin: 0; background: #0d1117; color: #c9d1d9; font-family: 'Hack', monospace; }
+    header { background: #161b22; padding: 30px 20px; text-align: center; border-bottom: 1px solid #30363d; }
+    header h1 { margin: 0; color: #58a6ff; font-size: 32px; }
+    header .links a { margin: 0 10px; color: #58a6ff; text-decoration: none; }
+    header .links a:hover { text-decoration: underline; font-weight: bold; }
+    .filters { display: flex; justify-content: center; gap: 10px; padding: 20px; }
+    .filters input, .filters select {
+      background: #161b22; color: #c9d1d9; border: 1px solid #30363d;
+      padding: 8px; border-radius: 5px; font-family: 'Hack', monospace;
     }
-
-    header {
-      background-color: #161b22;
-      padding: 40px 20px;
-      text-align: center;
-      border-bottom: 1px solid #30363d;
-    }
-
-    header h1 {
-      margin: 0;
-      color: #58a6ff;
-      font-size: 32px;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 16px;
-      padding: 40px 20px;
-    }
-
-    .card {
-      background-color: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 10px;
-      padding: 20px;
-      transition: transform 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-    }
-
-    .card h2 {
-      color: #58a6ff;
-      margin-top: 0;
-    }
-
-    .platform {
-      font-size: 13px;
-      color: #8b949e;
-    }
-
-    .difficulty {
-      background-color: #238636;
-      padding: 2px 6px;
-      border-radius: 5px;
-      font-size: 12px;
-      color: white;
-      margin-left: 5px;
-    }
-
-    .tag {
-      background-color: #21262d;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      margin-right: 6px;
-      display: inline-block;
-      margin-top: 5px;
-    }
-
-    .status {
-      display: inline-block;
-      margin-top: 10px;
-      background-color: #238636;
-      color: white;
-      font-weight: bold;
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 5px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #8b949e;
-      font-size: 12px;
-      border-top: 1px solid #30363d;
-    }
-
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
+    .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 16px; padding: 0 20px 40px; }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px; transition: 0.2s; }
+    .card:hover { transform: translateY(-4px); }
+    .card h2 { color: #58a6ff; margin-top: 0; }
+    .platform, .status { font-size: 13px; color: #8b949e; }
+    .difficulty { background: #238636; padding: 2px 6px; border-radius: 5px; font-size: 12px; color: #fff; margin-left: 5px; }
+    .tag { background: #21262d; padding: 3px 8px; border-radius: 4px; font-size: 12px; margin: 5px 6px 0 0; display: inline-block; }
+    .status { display: inline-block; margin-top: 10px; background: #238636; color: #fff; font-weight: bold; font-size: 12px; padding: 4px 10px; border-radius: 5px; }
+    footer { text-align: center; padding: 20px; color: #8b949e; font-size: 12px; border-top: 1px solid #30363d; }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>DelorianCS | CTF Writeups</h1>
+    <div class="links">
+      <a href="#">eJPTv2</a>
+      <a href="https://tryhackme.com/p/DelorianCS" target="_blank">TryHackMe</a>
+      <a href="https://www.hackthebox.com/home/users/profile/841952" target="_blank">HackTheBox</a>
+      <a href="https://github.com/DelorianCS" target="_blank">GitHub</a>
+      <a href="#" title="Coming soon">LinkedIn</a>
+      <a href="#" title="Coming soon">Indeed</a>
+    </div>
   </header>
 
-  <div class="container">
+  <div class="filters">
+    <input type="text" id="search" placeholder="Search by name, tag...">
+    <select id="filter-platform">
+      <option value="">All platforms</option>
+      <option>TryHackMe</option><option>VulnHub</option><option>HackTheBox</option>
+    </select>
+    <select id="filter-difficulty">
+      <option value="">All difficulties</option>
+      <option>Easy</option><option>Medium</option><option>Hard</option>
+    </select>
+  </div>
 
-    <div class="card">
+  <div class="container" id="cards">
+
+    <div class="card" data-name="Kenobi" data-platform="TryHackMe" data-difficulty="Easy" data-tags="NFS ID_RSA SUID ifconfig">
       <h2><a href="writeups/kenobi.html">Kenobi</a></h2>
       <div class="platform">TryHackMe <span class="difficulty">Easy</span></div>
       <div class="status">Completed</div>
       <div>
-        <span class="tag">NFS</span>
-        <span class="tag">ID_RSA</span>
-        <span class="tag">SUID</span>
-        <span class="tag">ifconfig abuse</span>
+        <span class="tag">NFS</span><span class="tag">ID_RSA</span><span class="tag">SUID</span><span class="tag">ifconfig</span>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-name="Mr Robot 1" data-platform="VulnHub" data-difficulty="Medium" data-tags="WordPress RCE Nmap SUID">
       <h2><a href="writeups/mrrobot.html">Mr Robot 1</a></h2>
-      <div class="platform">VulnHub <span class="difficulty" style="background-color:#d29922;">Medium</span></div>
+      <div class="platform">VulnHub <span class="difficulty" style="background:#d29922">Medium</span></div>
       <div class="status">Completed</div>
       <div>
-        <span class="tag">WordPress</span>
-        <span class="tag">RCE</span>
-        <span class="tag">Nmap</span>
-        <span class="tag">SUID</span>
+        <span class="tag">WordPress</span><span class="tag">RCE</span><span class="tag">Nmap</span><span class="tag">SUID</span>
       </div>
     </div>
+
+    <!-- Más tarjetas aquí... -->
 
   </div>
 
   <footer>
     © 2025 DelorianCS | Powered by GitHub Pages
   </footer>
+
+  <script>
+    const search = document.getElementById('search'),
+          plat = document.getElementById('filter-platform'),
+          diff = document.getElementById('filter-difficulty'),
+          cards = [...document.getElementById('cards').children];
+
+    function filterCards() {
+      const q = search.value.toLowerCase(),
+            p = plat.value,
+            d = diff.value;
+
+      cards.forEach(c => {
+        const name = c.dataset.name.toLowerCase(),
+              tags = c.dataset.tags.toLowerCase(),
+              platform = c.dataset.platform,
+              difficulty = c.dataset.difficulty;
+        const matches = (!q || name.includes(q) || tags.includes(q))
+                     && (!p || platform === p)
+                     && (!d || difficulty === d);
+        c.style.display = matches ? '' : 'none';
+      });
+    }
+    [search, plat, diff].forEach(el => el.addEventListener('input', filterCards));
+  </script>
 
 </body>
 </html>
