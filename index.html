@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DelorianCS | CTF Writeups</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
@@ -12,13 +12,8 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
     }
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
     header {
       background-color: #161b22;
       padding: 40px 20px;
@@ -38,14 +33,10 @@
       background-color: #161b22;
       border-radius: 10px;
     }
-    .terminal {
-      font-family: 'Hack', monospace;
-      font-size: 15px;
+    .bio-card h2 {
+      margin-top: 0;
       color: #58a6ff;
-      margin-bottom: 10px;
-    }
-    .terminal span {
-      color: #3fb950;
+      font-size: 20px;
     }
     .bio-flex {
       display: flex;
@@ -61,11 +52,6 @@
       list-style: none;
       padding-left: 0;
       line-height: 1.8;
-    }
-    .bio-section img {
-      vertical-align: middle;
-      height: 20px;
-      margin-right: 8px;
     }
     .filters {
       display: flex;
@@ -87,8 +73,6 @@
       grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
       gap: 16px;
       padding: 0 20px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
     }
     .card {
       background-color: #161b22;
@@ -105,10 +89,9 @@
       margin-top: 0;
       font-size: 20px;
     }
-    .platform img {
-      height: 16px;
-      vertical-align: middle;
-      margin-right: 6px;
+    .platform {
+      font-size: 13px;
+      color: #8b949e;
     }
     footer {
       text-align: center;
@@ -116,6 +99,13 @@
       color: #8b949e;
       font-size: 12px;
       border-top: 1px solid #30363d;
+    }
+    #terminal-line {
+      color: #58a6ff;
+      font-family: 'Hack', monospace;
+      white-space: pre;
+      font-size: 15px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -125,27 +115,24 @@
   </header>
 
   <div class="bio-card">
-    <div class="terminal">
-      <span>delorian@kali</span> &gt; whoami
-    </div>
+    <div id="terminal-line"></div>
     <p>Cybersecurity enthusiast focused on pentesting through CTFs, labs and real-world challenges. I document my process, progress and results through here.</p>
     <div class="bio-flex">
       <div class="bio-section">
         <h3>Certifications</h3>
         <ul>
-          <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/EJPT_by_Ken.png" alt="eJPT"> eJPTv2 — Junior Penetration Tester</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/753/753244.png" alt="OSCP"> OSCP — In progress</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="CPTS"> CPTS — In progress</li>
+          <li><strong>eJPTv2</strong> — Junior Penetration Tester</li>
+          <li><strong>CPTS</strong> — In progress</li>
         </ul>
       </div>
       <div class="bio-section">
         <h3>Profiles</h3>
         <ul>
-          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/tryhackme-vpbxyth62mbot3imfcpb08.png" alt="THM"> <a href="https://tryhackme.com/p/DelorianCS" target="_blank">TryHackMe</a></li>
-          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/hackthebox-x24e2j9cksob570h9epxb.png" alt="HTB"> <a href="https://www.hackthebox.com/home/users/profile/841952" target="_blank">HackTheBox</a></li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> <a href="https://github.com/DelorianCS" target="_blank">GitHub</a></li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"> LinkedIn — soon</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" alt="Indeed"> Indeed — soon</li>
+          <li><a href="https://tryhackme.com/p/DelorianCS" target="_blank">TryHackMe</a></li>
+          <li><a href="https://www.hackthebox.com/home/users/profile/841952" target="_blank">HackTheBox</a></li>
+          <li><a href="https://github.com/DelorianCS" target="_blank">GitHub</a></li>
+          <li>LinkedIn — soon</li>
+          <li>Indeed — soon</li>
         </ul>
       </div>
       <div class="bio-section">
@@ -168,7 +155,7 @@
   </div>
 
   <div class="container" id="cards">
-    <!-- AQUÍ PEGAR TODAS LAS CARDS DE LAS MÁQUINAS -->
+    <!-- Las tarjetas van aquí. Mantén o pega el bloque completo de tarjetas que ya tienes. -->
   </div>
 
   <footer>
@@ -176,21 +163,42 @@
   </footer>
 
   <script>
-    const search = document.getElementById('search'),
-          plat = document.getElementById('filter-platform'),
-          cards = [...document.getElementById('cards').children];
+    // Animación terminal
+    const terminalLine = document.getElementById('terminal-line');
+    const fullText = 'delorian@kali > whoami';
+    terminalLine.textContent = '';
+    let i = 0;
+    const speed = 50;
 
-    function filterCards() {
-      const q = search.value.toLowerCase(),
-            p = plat.value;
-      cards.forEach(c => {
-        const name = c.dataset.name.toLowerCase(),
-              platform = c.dataset.platform;
-        const matches = (!q || name.includes(q)) && (!p || platform === p);
-        c.style.display = matches ? '' : 'none';
-      });
+    function type() {
+      if (i < fullText.length) {
+        terminalLine.textContent += fullText.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      }
     }
-    [search, plat].forEach(el => el.addEventListener('input', filterCards));
+
+    window.onload = function () {
+      type();
+
+      // Filtro
+      const search = document.getElementById('search'),
+            plat = document.getElementById('filter-platform'),
+            cards = [...document.getElementById('cards').children];
+
+      function filterCards() {
+        const q = search.value.toLowerCase(),
+              p = plat.value;
+        cards.forEach(c => {
+          const name = c.dataset.name.toLowerCase(),
+                platform = c.dataset.platform;
+          const matches = (!q || name.includes(q)) && (!p || platform === p);
+          c.style.display = matches ? '' : 'none';
+        });
+      }
+
+      [search, plat].forEach(el => el.addEventListener('input', filterCards));
+    }
   </script>
 </body>
 </html>
