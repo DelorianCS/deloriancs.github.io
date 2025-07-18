@@ -33,10 +33,21 @@
       background-color: #161b22;
       border-radius: 10px;
     }
-    .bio-card h2 {
+    .bio-card p {
       margin-top: 0;
+    }
+    .command {
       color: #58a6ff;
-      font-size: 20px;
+      font-weight: bold;
+      font-family: 'Hack', monospace;
+      white-space: pre;
+      overflow: hidden;
+      display: inline-block;
+      animation: typing 3s steps(30, end);
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
     }
     .bio-flex {
       display: flex;
@@ -108,7 +119,7 @@
   </header>
 
   <div class="bio-card">
-    <h2>About Me</h2>
+    <div class="command">delorian@kali &gt; whoami</div>
     <p>Cybersecurity enthusiast focused on pentesting through CTFs, labs and real-world challenges. I document my process, progress and results through here.</p>
     <div class="bio-flex">
       <div class="bio-section">
@@ -149,221 +160,178 @@
 
   <div class="container" id="cards">
 
-    <div class="card" data-name="Kenobi" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/kenobi.html">Kenobi</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="ColddBox" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/colddbox.html">ColddBox</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Mr Robot 1" data-platform="VulnHub" data-tags="">
-      <h2><a href="writeups/mr_robot_1.html">Mr Robot 1</a></h2>
-      <div class="platform">VulnHub</div>
-    </div>
-    
-    <div class="card" data-name="Vulnversity" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/vulnversity.html">Vulnversity</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="DC-1" data-platform="VulnHub" data-tags="">
-      <h2><a href="writeups/dc-1.html">DC-1</a></h2>
-      <div class="platform">VulnHub</div>
-    </div>
-    
-    <div class="card" data-name="Basic Pentesting: 1" data-platform="VulnHub" data-tags="">
-      <h2><a href="writeups/basic_pentesting_1.html">Basic Pentesting: 1</a></h2>
-      <div class="platform">VulnHub</div>
-    </div>
-    
-    <div class="card" data-name="symfonos 1" data-platform="VulnHub" data-tags="">
-      <h2><a href="writeups/symfonos_1.html">symfonos 1</a></h2>
-      <div class="platform">VulnHub</div>
-    </div>
-    
-    <div class="card" data-name="ICE" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/ice.html">ICE</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Simple CTF" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/simple_ctf.html">Simple CTF</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Blue" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/blue.html">Blue</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Startup" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/startup.html">Startup</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Thompson" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/thompson.html">Thompson</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
     <div class="card" data-name="Anonymous" data-platform="TryHackMe" data-tags="">
       <h2><a href="writeups/anonymous.html">Anonymous</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="Mustacchio" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/mustacchio.html">Mustacchio</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Cap" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/cap.html">Cap</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
-    <div class="card" data-name="Vaccine" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/vaccine.html">Vaccine</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
-    <div class="card" data-name="Oopsie" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/oopsie.html">Oopsie</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
-    <div class="card" data-name="Blog" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/blog.html">Blog</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Archetype" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/archetype.html">Archetype</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
-    <div class="card" data-name="Responder" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/responder.html">Responder</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
-    <div class="card" data-name="Crocodile" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/crocodile.html">Crocodile</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
-    <div class="card" data-name="Sequel" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/sequel.html">Sequel</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
-    <div class="card" data-name="Appointment" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/appointment.html">Appointment</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
-    <div class="card" data-name="Redeemer" data-platform="HackTheBox" data-tags="">
-      <h2><a href="writeups/redeemer.html">Redeemer</a></h2>
-      <div class="platform">HackTheBox</div>
-    </div>
-    
     <div class="card" data-name="Anthem" data-platform="TryHackMe" data-tags="">
       <h2><a href="writeups/anthem.html">Anthem</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
+    <div class="card" data-name="Appointment" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/appointment.html">Appointment</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Archetype" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/archetype.html">Archetype</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Basic Pentesting 1" data-platform="VulnHub" data-tags="">
+      <h2><a href="writeups/basic_pentesting_1.html">Basic Pentesting 1</a></h2>
+      <div class="platform">VulnHub</div>
+    </div>
+    <div class="card" data-name="Blog" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/blog.html">Blog</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Blue" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/blue.html">Blue</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
     <div class="card" data-name="Bolt" data-platform="TryHackMe" data-tags="">
       <h2><a href="writeups/bolt.html">Bolt</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="Ignite" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/ignite.html">Ignite</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Publisher" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/publisher.html">Publisher</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="ChillHack" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/chillhack.html">ChillHack</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="Source" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/source.html">Source</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="BrooklynNineNine" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/brooklynninenine.html">BrooklynNineNine</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="mKingdom" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/mkingdom.html">mKingdom</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
-    <div class="card" data-name="RootMe" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/rootme.html">RootMe</a></h2>
-      <div class="platform">TryHackMe</div>
-    </div>
-    
     <div class="card" data-name="Bounty Hacker" data-platform="TryHackMe" data-tags="">
       <h2><a href="writeups/bounty_hacker.html">Bounty Hacker</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="Madness" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/madness.html">Madness</a></h2>
+    <div class="card" data-name="Brooklynninenine" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/brooklynninenine.html">Brooklynninenine</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="Gaming Server" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/gaming_server.html">Gaming Server</a></h2>
+    <div class="card" data-name="Cap" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/cap.html">Cap</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Chillhack" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/chillhack.html">Chillhack</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
+    <div class="card" data-name="Colddbox" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/colddbox.html">Colddbox</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Crocodile" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/crocodile.html">Crocodile</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Cyberlens" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/cyberlens.html">Cyberlens</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="DC-1" data-platform="VulnHub" data-tags="">
+      <h2><a href="writeups/dc-1.html">DC-1</a></h2>
+      <div class="platform">VulnHub</div>
+    </div>
     <div class="card" data-name="Dreaming" data-platform="TryHackMe" data-tags="">
       <h2><a href="writeups/dreaming.html">Dreaming</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="CyberLens" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/cyberlens.html">CyberLens</a></h2>
+    <div class="card" data-name="Gaming Server" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/gaming_server.html">Gaming Server</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="U.A Highschool" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/ua_highschool.html">U.A Highschool</a></h2>
+    <div class="card" data-name="Ice" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/ice.html">Ice</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="The Sticker Shop" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/the_sticker_shop.html">The Sticker Shop</a></h2>
+    <div class="card" data-name="Ignite" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/ignite.html">Ignite</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="Lesson Learned?" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/lesson_learned.html">Lesson Learned?</a></h2>
+    <div class="card" data-name="Kenobi" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/kenobi.html">Kenobi</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
-    <div class="card" data-name="W1se Guy" data-platform="TryHackMe" data-tags="">
-      <h2><a href="writeups/w1se_guy.html">W1se Guy</a></h2>
+    <div class="card" data-name="Lesson Learned" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/lesson_learned.html">Lesson Learned</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
     <div class="card" data-name="Lookup" data-platform="TryHackMe" data-tags="">
       <h2><a href="writeups/lookup.html">Lookup</a></h2>
       <div class="platform">TryHackMe</div>
     </div>
-    
+    <div class="card" data-name="Madness" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/madness.html">Madness</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Mkingdom" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/mkingdom.html">Mkingdom</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Mr Robot 1" data-platform="VulnHub" data-tags="">
+      <h2><a href="writeups/mr_robot_1.html">Mr Robot 1</a></h2>
+      <div class="platform">VulnHub</div>
+    </div>
+    <div class="card" data-name="Mustacchio" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/mustacchio.html">Mustacchio</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Oopsie" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/oopsie.html">Oopsie</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Publisher" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/publisher.html">Publisher</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Redeemer" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/redeemer.html">Redeemer</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Responder" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/responder.html">Responder</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Rootme" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/rootme.html">Rootme</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Sequel" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/sequel.html">Sequel</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Simple Ctf" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/simple_ctf.html">Simple Ctf</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Source" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/source.html">Source</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Startup" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/startup.html">Startup</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Symfonos 1" data-platform="VulnHub" data-tags="">
+      <h2><a href="writeups/symfonos_1.html">Symfonos 1</a></h2>
+      <div class="platform">VulnHub</div>
+    </div>
+    <div class="card" data-name="The Sticker Shop" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/the_sticker_shop.html">The Sticker Shop</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Thompson" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/thompson.html">Thompson</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Ua Highschool" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/ua_highschool.html">Ua Highschool</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="Vaccine" data-platform="HackTheBox" data-tags="">
+      <h2><a href="writeups/vaccine.html">Vaccine</a></h2>
+      <div class="platform">HackTheBox</div>
+    </div>
+    <div class="card" data-name="Vulnversity" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/vulnversity.html">Vulnversity</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
+    <div class="card" data-name="W1Se Guy" data-platform="TryHackMe" data-tags="">
+      <h2><a href="writeups/w1se_guy.html">W1Se Guy</a></h2>
+      <div class="platform">TryHackMe</div>
+    </div>
   </div>
 
   <footer>
