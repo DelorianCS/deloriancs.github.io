@@ -33,19 +33,28 @@
       background-color: #161b22;
       border-radius: 10px;
     }
-    .bio-card h2 {
-      margin-top: 0;
+    .terminal-title {
       color: #58a6ff;
       font-size: 20px;
-      font-family: monospace;
+      font-family: 'Hack', monospace;
+      margin-bottom: 10px;
     }
-    .bio-card .terminal {
-      background-color: #0d1117;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      font-family: monospace;
-      font-size: 16px;
+    .terminal-line {
+      color: #2fbb4f;
+      font-family: 'Hack', monospace;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #2fbb4f;
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink .7s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent }
     }
     .bio-flex {
       display: flex;
@@ -60,12 +69,12 @@
     .bio-section ul {
       list-style: none;
       padding-left: 0;
-      line-height: 1.8;
+      line-height: 2;
     }
     .bio-section img {
+      height: 24px;
       vertical-align: middle;
-      height: 32px;
-      margin-right: 10px;
+      margin-right: 8px;
     }
     .filters {
       display: flex;
@@ -106,6 +115,13 @@
     .platform {
       font-size: 13px;
       color: #8b949e;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .platform img {
+      height: 18px;
+      width: 18px;
     }
     footer {
       text-align: center;
@@ -122,25 +138,26 @@
   </header>
 
   <div class="bio-card">
-    <h2 class="terminal">whoami</h2>
+    <div class="terminal-title">whoami</div>
+    <div class="terminal-line">delorian@kali &gt; whoami</div>
     <p>Cybersecurity enthusiast focused on pentesting through CTFs, labs and real-world challenges. I document my process, progress and results through here.</p>
     <div class="bio-flex">
       <div class="bio-section">
         <h3>Certifications</h3>
         <ul>
-          <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/EJPT_by_Ken.png" alt="eJPT" style="height:40px;"> <strong>eJPTv2</strong> — Junior Penetration Tester</li>
-          <li><strong>OSCP</strong> — In progress</li>
-          <li><strong>CPTS</strong> — In progress</li>
+          <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/EJPT_by_Ken.png" alt="eJPT"> eJPTv2 — Junior Penetration Tester</li>
+          <li><img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" alt="OSCP"> OSCP — In progress</li>
+          <li><img src="https://cdn-icons-png.flaticon.com/512/1042/1042557.png" alt="CPTS"> CPTS — In progress</li>
         </ul>
       </div>
       <div class="bio-section">
         <h3>Profiles</h3>
         <ul>
-          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/tryhackme-vpbxyth62mbot3imfcpb08.png/tryhackme-anodupj9mqt3ekhc90qmo9.png?_a=DATAdtAAZAA0" alt="THM" style="height:32px;"> <a href="https://tryhackme.com/p/DelorianCS" target="_blank">TryHackMe</a></li>
-          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/hackthebox-x24e2j9cksob570h9epxb.png/hackthebox-gzgxni5aeyvdzirjyqvzlf.png?_a=DATAg1AAZAA0" alt="HTB" style="height:32px;"> <a href="https://www.hackthebox.com/home/users/profile/841952" target="_blank">HackTheBox</a></li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" style="height:32px;"> <a href="https://github.com/DelorianCS" target="_blank">GitHub</a></li>
-          <li>LinkedIn — soon</li>
-          <li>Indeed — soon</li>
+          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/tryhackme-vpbxyth62mbot3imfcpb08.png/tryhackme-anodupj9mqt3ekhc90qmo9.png?_a=DATAdtAAZAA0" alt="THM"> <a href="https://tryhackme.com/p/DelorianCS" target="_blank">TryHackMe</a></li>
+          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/hackthebox-x24e2j9cksob570h9epxb.png/hackthebox-gzgxni5aeyvdzirjyqvzlf.png?_a=DATAg1AAZAA0" alt="HTB"> <a href="https://www.hackthebox.com/home/users/profile/841952" target="_blank">HackTheBox</a></li>
+          <li><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> <a href="https://github.com/DelorianCS" target="_blank">GitHub</a></li>
+          <li><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"> LinkedIn — soon</li>
+          <li><img src="https://cdn-icons-png.flaticon.com/512/5968/5968751.png" alt="Indeed"> Indeed — soon</li>
         </ul>
       </div>
       <div class="bio-section">
@@ -152,4 +169,40 @@
     </div>
   </div>
 
-<!-- Cards and rest of page remain unchanged -->
+  <div class="filters">
+    <input type="text" id="search" placeholder="Search by name or platform...">
+    <select id="filter-platform">
+      <option value="">All platforms</option>
+      <option>TryHackMe</option>
+      <option>HackTheBox</option>
+      <option>VulnHub</option>
+    </select>
+  </div>
+
+  <div class="container" id="cards">
+    <!-- Your existing machine cards go here -->
+  </div>
+
+  <footer>
+    © 2025 DelorianCS | Built for hackers by a hacker
+  </footer>
+
+  <script>
+    const search = document.getElementById('search'),
+          plat = document.getElementById('filter-platform'),
+          cards = [...document.getElementById('cards').children];
+
+    function filterCards() {
+      const q = search.value.toLowerCase(),
+            p = plat.value;
+      cards.forEach(c => {
+        const name = c.dataset.name.toLowerCase(),
+              platform = c.dataset.platform;
+        const matches = (!q || name.includes(q)) && (!p || platform === p);
+        c.style.display = matches ? '' : 'none';
+      });
+    }
+    [search, plat].forEach(el => el.addEventListener('input', filterCards));
+  </script>
+</body>
+</html>
