@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DelorianCS | CTF Writeups</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <style>
@@ -12,8 +12,13 @@
       color: #c9d1d9;
       font-family: 'Hack', monospace;
     }
-    a { color: #58a6ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
     header {
       background-color: #161b22;
       padding: 40px 20px;
@@ -33,28 +38,14 @@
       background-color: #161b22;
       border-radius: 10px;
     }
-    .terminal-title {
+    .terminal {
+      font-family: 'Hack', monospace;
+      font-size: 15px;
       color: #58a6ff;
-      font-size: 20px;
-      font-family: 'Hack', monospace;
       margin-bottom: 10px;
     }
-    .terminal-line {
-      color: #2fbb4f;
-      font-family: 'Hack', monospace;
-      margin-bottom: 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #2fbb4f;
-      width: 0;
-      animation: typing 3s steps(30, end) forwards, blink .7s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    @keyframes blink {
-      50% { border-color: transparent }
+    .terminal span {
+      color: #3fb950;
     }
     .bio-flex {
       display: flex;
@@ -69,11 +60,11 @@
     .bio-section ul {
       list-style: none;
       padding-left: 0;
-      line-height: 2;
+      line-height: 1.8;
     }
     .bio-section img {
-      height: 24px;
       vertical-align: middle;
+      height: 20px;
       margin-right: 8px;
     }
     .filters {
@@ -96,6 +87,8 @@
       grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
       gap: 16px;
       padding: 0 20px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .card {
       background-color: #161b22;
@@ -112,16 +105,10 @@
       margin-top: 0;
       font-size: 20px;
     }
-    .platform {
-      font-size: 13px;
-      color: #8b949e;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
     .platform img {
-      height: 18px;
-      width: 18px;
+      height: 16px;
+      vertical-align: middle;
+      margin-right: 6px;
     }
     footer {
       text-align: center;
@@ -138,26 +125,27 @@
   </header>
 
   <div class="bio-card">
-    <div class="terminal-title">whoami</div>
-    <div class="terminal-line">delorian@kali &gt; whoami</div>
+    <div class="terminal">
+      <span>delorian@kali</span> &gt; whoami
+    </div>
     <p>Cybersecurity enthusiast focused on pentesting through CTFs, labs and real-world challenges. I document my process, progress and results through here.</p>
     <div class="bio-flex">
       <div class="bio-section">
         <h3>Certifications</h3>
         <ul>
           <li><img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/EJPT_by_Ken.png" alt="eJPT"> eJPTv2 — Junior Penetration Tester</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" alt="OSCP"> OSCP — In progress</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/1042/1042557.png" alt="CPTS"> CPTS — In progress</li>
+          <li><img src="https://cdn-icons-png.flaticon.com/512/753/753244.png" alt="OSCP"> OSCP — In progress</li>
+          <li><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="CPTS"> CPTS — In progress</li>
         </ul>
       </div>
       <div class="bio-section">
         <h3>Profiles</h3>
         <ul>
-          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/tryhackme-vpbxyth62mbot3imfcpb08.png/tryhackme-anodupj9mqt3ekhc90qmo9.png?_a=DATAdtAAZAA0" alt="THM"> <a href="https://tryhackme.com/p/DelorianCS" target="_blank">TryHackMe</a></li>
-          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/hackthebox-x24e2j9cksob570h9epxb.png/hackthebox-gzgxni5aeyvdzirjyqvzlf.png?_a=DATAg1AAZAA0" alt="HTB"> <a href="https://www.hackthebox.com/home/users/profile/841952" target="_blank">HackTheBox</a></li>
+          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/tryhackme-vpbxyth62mbot3imfcpb08.png" alt="THM"> <a href="https://tryhackme.com/p/DelorianCS" target="_blank">TryHackMe</a></li>
+          <li><img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/hackthebox-x24e2j9cksob570h9epxb.png" alt="HTB"> <a href="https://www.hackthebox.com/home/users/profile/841952" target="_blank">HackTheBox</a></li>
           <li><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> <a href="https://github.com/DelorianCS" target="_blank">GitHub</a></li>
           <li><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"> LinkedIn — soon</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/5968/5968751.png" alt="Indeed"> Indeed — soon</li>
+          <li><img src="https://cdn-icons-png.flaticon.com/512/5969/5969020.png" alt="Indeed"> Indeed — soon</li>
         </ul>
       </div>
       <div class="bio-section">
@@ -180,7 +168,7 @@
   </div>
 
   <div class="container" id="cards">
-    <!-- Your existing machine cards go here -->
+    <!-- AQUÍ PEGAR TODAS LAS CARDS DE LAS MÁQUINAS -->
   </div>
 
   <footer>
