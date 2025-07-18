@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -60,7 +60,7 @@
       display: flex;
       justify-content: center;
       gap: 10px;
-      padding:  30px 20px 10px;
+      padding: 30px 20px 10px;
       flex-wrap: wrap;
     }
     .filters input, .filters select {
@@ -88,34 +88,16 @@
     .card:hover {
       transform: translateY(-4px);
     }
-    .card h2 { color: #58a6ff; margin-top: 0; font-size: 20px; }
-    .platform, .status, .rating { font-size: 13px; color: #8b949e; }
-    .difficulty {
-      background: #238636;
-      padding: 2px 6px;
-      border-radius: 5px;
-      font-size: 12px;
-      color: #fff;
-      margin-left: 5px;
+    .card h2 {
+      color: #58a6ff;
+      margin-top: 0;
+      font-size: 20px;
     }
-    .tag, .cert {
-      background: #21262d;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      margin: 5px 6px 0 0;
-      display: inline-block;
+    .platform {
+      font-size: 13px;
+      color: #8b949e;
     }
-    .status {
-      display: inline-block;
-      margin-top: 10px;
-      background: #238636;
-      color: #fff;
-      font-weight: bold;
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 5px;
-    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -161,23 +143,17 @@
   </div>
 
   <div class="filters">
-    <input type="text" id="search" placeholder="Search by name or tags...">
+    <input type="text" id="search" placeholder="Search by name or platform...">
     <select id="filter-platform">
       <option value="">All platforms</option>
       <option>TryHackMe</option>
       <option>HackTheBox</option>
       <option>VulnHub</option>
     </select>
-    <select id="filter-difficulty">
-      <option value="">All difficulties</option>
-      <option>Easy</option>
-      <option>Medium</option>
-      <option>Hard</option>
-    </select>
   </div>
 
   <div class="container" id="cards">
-    <!-- ALL CARDS INSERTED AUTOMATICALLY FROM MACHINE LIST -->
+    <!-- ⬇️ Aquí debes pegar el contenido de 'cards_output.html' ⬇️ -->
   </div>
 
   <footer>
@@ -187,26 +163,20 @@
   <script>
     const search = document.getElementById('search'),
           plat = document.getElementById('filter-platform'),
-          diff = document.getElementById('filter-difficulty'),
           cards = [...document.getElementById('cards').children];
 
     function filterCards() {
       const q = search.value.toLowerCase(),
-            p = plat.value,
-            d = diff.value;
+            p = plat.value;
 
       cards.forEach(c => {
         const name = c.dataset.name.toLowerCase(),
-              tags = c.dataset.tags.toLowerCase(),
-              platform = c.dataset.platform,
-              difficulty = c.dataset.difficulty;
-        const matches = (!q || name.includes(q) || tags.includes(q))
-                     && (!p || platform === p)
-                     && (!d || difficulty === d);
+              platform = c.dataset.platform;
+        const matches = (!q || name.includes(q)) && (!p || platform === p);
         c.style.display = matches ? '' : 'none';
       });
     }
-    [search, plat, diff].forEach(el => el.addEventListener('input', filterCards));
+    [search, plat].forEach(el => el.addEventListener('input', filterCards));
   </script>
 </body>
 </html>
