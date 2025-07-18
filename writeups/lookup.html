@@ -2,31 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Lookup | Writeup</title>
-  <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lookup - Writeup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #0d1117;
+      font-family: 'Fira Code', monospace;
+      background-color: #0d1117;
       color: #c9d1d9;
-      font-family: 'Hack', monospace;
-      padding: 40px;
-      max-width: 800px;
-      margin: auto;
+      padding: 2rem;
+      line-height: 1.6;
     }
-    h1 { color: #58a6ff; }
-    a { color: #58a6ff; }
-    code { background: #161b22; padding: 2px 4px; border-radius: 4px; }
+    h1, h2, h3 {
+      color: #58a6ff;
+    }
+    code {
+      background-color: #161b22;
+      padding: 2px 4px;
+      border-radius: 4px;
+      color: #79c0ff;
+    }
+    pre {
+      background-color: #161b22;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Lookup</h1>
-  <p>Status: Completed</p>
-  <h2>Enumeration</h2>
-  <p>Describe your recon process here...</p>
-  <h2>Exploitation</h2>
-  <p>Describe how you got initial access...</p>
-  <h2>Privilege Escalation</h2>
-  <p>Describe how you got root access...</p>
-  <p><a href="../index.html">← Back to Writeups</a></p>
+  <h1>Lookup - Writeup</h1>
+
+  <div class="section">
+    <h2>Room Focus</h2>
+    <ul>
+      <li>Real-world <code>vulnerabilities</code>: web app + privilege escalation</li>
+      <li>Learn <code>reconnaissance</code>, <code>scanning</code>, <code>enumeration</code></li>
+      <li>Exploit <code>command injection</code> + scripting automation</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Tools and Techniques</h2>
+    <ul>
+      <li><code>Nmap</code> → Scan open ports: 22 (ssh), 80 (http)</li>
+      <li><code>Rustscan</code> → Fast scanning</li>
+      <li><code>Gobuster</code> → Directory enumeration: <code>/php</code>, <code>/files</code></li>
+      <li><code>Searchsploit</code> → Find elFinder exploits</li>
+      <li><code>Metasploit</code> → Use <code>elfinder_php_connector_exiftran_cmd_injection</code></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Exploits and Vulnerabilities</h2>
+    <p><strong>elFinder Command Injection</strong> in version <code>2.1.47</code> → <code>RCE</code> via <code>exiftran</code></p>
+  </div>
+
+  <div class="section">
+    <h2>Steps to Root</h2>
+    <h3>Initial Enumeration</h3>
+    <ul>
+      <li>Identified open ports</li>
+      <li>Found admin username <code>think</code></li>
+      <li>Searched exploits for <code>elFinder</code></li>
+    </ul>
+
+    <h3>Exploitation</h3>
+    <ul>
+      <li>Used Metasploit module to gain <code>www-data</code> shell</li>
+      <li>Escalated to user <code>think</code> via <code>pwm</code> command</li>
+      <li>Edited <code>PATH</code> to run fake <code>/tmp/id</code> binary</li>
+      <li>Captured <code>user.txt</code></li>
+    </ul>
+
+    <h3>SSH Access</h3>
+    <ul>
+      <li>Cracked think password with Hydra</li>
+      <li>Logged via SSH</li>
+      <li>Captured <code>root.txt</code></li>
+    </ul>
+  </div>
+
 </body>
 </html>
