@@ -21,12 +21,29 @@
 <body>
   <h1>W1se Guy</h1>
   <p>Status: Completed</p>
+
   <h2>Enumeration</h2>
-  <p>Describe your recon process here...</p>
-  <h2>Exploitation</h2>
-  <p>Describe how you got initial access...</p>
+  <ul>
+    <li>Challenge exposed on TCP port <code>1337</code></li>
+    <li>XOR-encrypted flag provided on connection</li>
+    <li>Used <code>nc &lt;IP&gt; 1337</code> to extract XORed hex string</li>
+  </ul>
+
+  <h2>Exploiting</h2>
+  <ul>
+    <li>Used known-plaintext attack with <code>THM{{</code> and <code>}}</code> to derive key</li>
+    <li>Extracted 5-byte XOR key</li>
+    <li>Used <code>pwntools</code> to automate decryption</li>
+    <li>Successfully decrypted first flag: <code>THM{{...}}</code></li>
+  </ul>
+
   <h2>Privilege Escalation</h2>
-  <p>Describe how you got root access...</p>
-  <p><a href="../index.html">← Back to Writeups</a></p>
+  <ul>
+    <li>Submitted XOR key to server</li>
+    <li>Server returned second flag after verification</li>
+  </ul>
+
+  <p><a href="../index.html">&larr; Back to Writeups</a></p>
 </body>
 </html>
+"""
