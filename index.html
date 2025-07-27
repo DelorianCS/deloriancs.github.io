@@ -1,273 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link rel="icon" type="image/x-icon" href="favicon.ico">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DelorianCS | CTF Writeups</title>
+  <title>DelorianCS</title>
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: 'Hack', monospace;
-    }
-    a { color: #58a6ff; text-decoration: none; }
-    .card a:hover, .platform:hover { text-decoration: none; }
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background-color: #000;
+    font-family: 'Hack', monospace;
+    color: #c9d1d9;
+    overflow: hidden;
+  }
 
-    header {
-      background-color: #161b22;
-      padding: 40px 20px;
-      text-align: center;
-      border-bottom: 1px solid #30363d;
-    }
-    header h1 {
-      margin: 0;
-      color: #58a6ff;
-      font-size: 32px;
-    }
+  canvas#matrix {
+    position: fixed; top: 0; left: 0; z-index: -1;
+    width: 100vw; height: 100vh;
+  }
 
-    .bio-card {
-      max-width: 1000px;
-      margin: 60px auto 10px;
-      padding: 20px;
-      border: 1px solid #30363d;
-      background-color: #161b22;
-      border-radius: 10px;
-      animation: fadeIn 0.5s ease-in;
-    }
+  .glow {
+    text-shadow: 0 0 5px #58a6ff, 0 0 10px #58a6ff;
+  }
 
-    .typing-line {
-      color: #58a6ff;
-      font-weight: bold;
-      font-size: 20px;
-      display: inline-block;
-    }
+  .content {
+    position: absolute; top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    background: rgba(13,17,23,0.92);
+    padding: 3em 2em;
+    border-radius: 15px;
+    border: 1px solid #30363d;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 0 30px #58a6ff33;
+    animation: fadeInUp 1.2s ease both;
+  }
 
-    .cursor {
-      display: inline-block;
-      width: 10px;
-      animation: blink 0.8s infinite;
-      color: #58a6ff;
-    }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translate(-50%, -40%); }
+    100% { opacity: 1; transform: translate(-50%, -50%); }
+  }
 
-    @keyframes blink {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
+  .terminal {
+    background: #161b22;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #58a6ff55;
+    font-size: 1.3em;
+    color: #58a6ff;
+    margin-bottom: 1.5em;
+    letter-spacing: 1px;
+  }
 
-    .bio-flex {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      justify-content: space-between;
-    }
-    .bio-section {
-      flex: 1;
-      min-width: 300px;
-    }
-    .bio-section ul {
-      list-style: none;
-      padding-left: 0;
-      line-height: 1.8;
-    }
+  .typed-text {
+    border-right: 2px solid #58a6ff;
+  }
 
-    .filters {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 30px 20px 10px;
-      flex-wrap: wrap;
-    }
+  .output {
+    opacity: 0;
+    color: #c9d1d9;
+    transition: opacity 0.4s ease;
+    margin-top: 5px;
+  }
 
-    .filters input, .filters select {
-      background: #161b22;
-      color: #c9d1d9;
-      border: 1px solid #30363d;
-      padding: 8px;
-      border-radius: 5px;
-      font-family: 'Hack', monospace;
-    }
+  .info-block {
+    font-size: 16px;
+    margin: 1em 0;
+    color: #8b949e;
+  }
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
-      gap: 16px;
-      padding: 0 20px 40px;
-    }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 25px auto 0;
+    width: fit-content;
+    text-align: left;
+  }
 
-    .card {
-      background-color: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 10px;
-      padding: 20px;
-      transition: 0.3s;
-      opacity: 0.95;
-      cursor: pointer;
-    }
+  li {
+    margin: 12px 0;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
 
-    .card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 0 10px #58a6ff33;
-      opacity: 1;
-    }
+  li:hover {
+    transform: scale(1.05);
+  }
 
-    .card h2 {
-      color: #58a6ff;
-      margin-top: 0;
-      font-size: 20px;
-    }
+  a {
+    color: #58a6ff;
+    text-decoration: none;
+    font-size: 1.165em;
+    display: flex;
+    align-items: center;
+    transition: 0.3s ease;
+  }
 
-    .platform {
-      font-size: 13px;
-      font-weight: bold;
-      color: #8b949e;
-    }
+  a i {
+    margin-right: 10px;
+    min-width: 20px;
+    text-align: center;
+  }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #8b949e;
-      font-size: 12px;
-      border-top: 1px solid #30363d;
-    }
-  </style>
+  a:hover {
+    color: #8b949e;
+    text-shadow: 0 0 8px #58a6ff;
+  }
+</style>
+
 </head>
 <body>
+  <canvas id="matrix"></canvas>
 
-<header>
-  <h1>DelorianCS | CTF Writeups</h1>
-</header>
+  <div class="content">
+    <div class="terminal glow">
+      <div><span>$</span> <span class="typed-text" id="typed-text"></span></div>
+      <div class="output" id="typed-output">&gt; Delorian</div>
+    </div>
 
-<div class="bio-card">
-  <div>
-    <span class="typing-line" id="typed"></span><span class="cursor">|</span>
+<p style="margin-bottom: 8px;"><strong>Skills:</strong>
+  <span style="color:#c9d1d9;">
+    <i class="fa-brands fa-python"></i> Python &nbsp;·&nbsp;
+    <i class="fa-brands fa-html5"></i> HTML &nbsp;·&nbsp;
+    <i class="fa-solid fa-terminal"></i> Bash
+  </span>
+</p>
+<p style="margin-bottom: 8px; text-align: left;">
+  <strong>Focus:</strong>
+  <span style="color:#c9d1d9;">
+    <i class="fa-solid fa-sitemap"></i> Pentesting &nbsp;·&nbsp;
+    <i class="fa-solid fa-bullseye"></i> Red Teaming
+  </span>
+</p>
+
+<p><strong>Certifications:</strong>
+  <span style="color:#c9d1d9;">
+    <a href="https://certs.ine.com/ed2a1426-c2c1-4604-8956-bb79cb1d09ec" target="_blank" style="color:#c9d1d9; text-decoration: none;">eJPTv2</a>
+  </span>
+</p>
+
+</p>
+</p>
+<ul>
+  <li><a href="https://app.hackthebox.com/profile/2378119" target="_blank"><i class="fa-solid fa-cube"></i>Hack The Box</a></li>
+  <li><a href="https://delorian.gitbook.io/writeups/"><i class="fa-solid fa-book"></i>CTF Writeups</a></li>
+  <li><a href="https://github.com/DelorianCS" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a></li>
+  <li><a href="https://tryhackme.com/p/DelorianCS" target="_blank"><i class="fa-brands fa-hackerrank"></i>TryHackMe</a></li>
+  <li><a href="https://app.hackthebox.com/profile/DelorianCS" target="_blank"><i class="fa-solid fa-graduation-cap"></i>HTB Academy</a></li>
+  <li><a href="https://www.linkedin.com/in/DelorianCS" target="_blank"><i class="fa-brands fa-linkedin"></i>LinkedIn</a></li>
+  <li><a href="https://machinetracker.lovable.app" target="_blank"><i class="fa-solid fa-magnifying-glass-chart"></i>WebApp Project</a></li>
+</ul>
   </div>
-  <p id="bio-text" style="display:none;">
-    I'm a Cybersecurity enthusiast focused on pentesting CTFs, labs and real-world challenges. I document my process, progress and results through here.
-  </p>
 
-  <div class="bio-flex">
-    <div class="bio-section">
-      <h3>Certifications</h3>
-      <ul>
-        <li><strong>eJPTv2</strong> — Completed</li>
-        <li><strong>CPTS</strong> — In progress</li>
-      </ul>
-    </div>
-    <div class="bio-section">
-      <h3>Profiles</h3>
-      <ul>
-        <li><a href="https://tryhackme.com/p/DelorianCS" target="_blank">TryHackMe</a></li>
-        <li><a href="https://github.com/DelorianCS" target="_blank">GitHub</a></li>
-      </ul>
-    </div>
-    <div class="bio-section">
-      <h3>Project</h3>
-      <ul>
-        <li><a href="https://machinetracker.lovable.app" target="_blank">Machine Tracker</a>
-          <div class="project-description">
-            Track and share your CTF journey with others!
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+  <script>
+    const txt = 'whoami';
+    let i = 0;
 
-<div class="filters">
-  <input type="text" id="search" placeholder="Search by name or platform...">
-  <select id="filter-platform">
-    <option value="">All platforms</option>
-    <option>TryHackMe</option>
-    <option>HackTheBox</option>
-    <option>VulnHub</option>
-  </select>
-</div>
+    window.onload = () => {
+      const t = document.getElementById('typed-text');
+      const o = document.getElementById('typed-output');
+      function typeChar(){
+        if(i<txt.length){ t.textContent+=txt[i++]; setTimeout(typeChar,100); }
+        else { t.style.borderRight='none'; setTimeout(()=>o.style.opacity=1,200); }
+      }
+      typeChar();
 
-<div class="container" id="cards"></div>
+      const c = document.getElementById('matrix'), ctx = c.getContext('2d');
+      const fontSize = 16, letters = "01";
+      let cols, drops;
 
-<footer>
-  © 2025 DelorianCS | Built for hackers by a hacker
-</footer>
+      function resize() {
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+        cols = Math.floor(c.width / fontSize);
+        drops = Array(cols).fill(1);
+      }
 
-<script>
-  // Typing animation
-  const message = "delorian@kali > whoami";
-  let i = 0;
-  const speed = 100;
-  const typed = document.getElementById("typed");
-  const bio = document.getElementById("bio-text");
+      function draw() {
+        ctx.fillStyle = 'rgba(0,0,0,0.08)';
+        ctx.fillRect(0, 0, c.width, c.height);
 
-  function typeWriter() {
-    if (i < message.length) {
-      typed.textContent += message.charAt(i);
-      i++;
-      setTimeout(typeWriter, speed);
-    } else {
-      bio.style.display = "block";
-    }
-  }
-  typeWriter();
+        ctx.fillStyle = '#58a6ff';
+        ctx.font = fontSize + 'px monospace';
 
-  // Cards
-  const machineList = [
-    "anonymous", "anthem", "appointment", "archetype", "basic_pentesting_1", "blog", "blue",
-    "bolt", "bounty_hacker", "brooklynninenine", "cap", "chillhack", "colddbox", "crocodile",
-    "cyberlens", "dc-1", "dreaming", "gaming_server", "ice", "ignite", "kenobi",
-    "lesson_learned", "lookup", "madness", "mkingdom", "mr_robot_1", "mustacchio",
-    "oopsie", "publisher", "redeemer", "responder", "rootme", "sequel", "simple_ctf",
-    "source", "startup", "symfonos_1", "the_sticker_shop", "thompson", "ua_highschool",
-    "vaccine", "vulnversity", "w1se_guy"
-  ];
+        for (let x = 0; x < drops.length; x++) {
+          const text = letters.charAt(Math.floor(Math.random() * letters.length));
+          ctx.fillText(text, x * fontSize, drops[x] * fontSize);
 
-  const platformMap = {
-    "kenobi": "TryHackMe", "colddbox": "TryHackMe", "mr_robot_1": "VulnHub", "vulnversity": "TryHackMe",
-    "dc-1": "VulnHub", "basic_pentesting_1": "VulnHub", "symfonos_1": "VulnHub", "ice": "TryHackMe",
-    "simple_ctf": "TryHackMe", "blue": "TryHackMe", "startup": "TryHackMe", "thompson": "TryHackMe",
-    "anonymous": "TryHackMe", "mustacchio": "TryHackMe", "cap": "HackTheBox", "vaccine": "HackTheBox",
-    "oopsie": "HackTheBox", "blog": "TryHackMe", "archetype": "HackTheBox", "responder": "HackTheBox",
-    "crocodile": "HackTheBox", "sequel": "HackTheBox", "appointment": "HackTheBox", "redeemer": "HackTheBox",
-    "anthem": "TryHackMe", "bolt": "TryHackMe", "ignite": "TryHackMe", "publisher": "TryHackMe",
-    "chillhack": "TryHackMe", "source": "TryHackMe", "brooklynninenine": "TryHackMe", "mkingdom": "TryHackMe",
-    "rootme": "TryHackMe", "bounty_hacker": "TryHackMe", "madness": "TryHackMe", "gaming_server": "TryHackMe",
-    "dreaming": "TryHackMe", "cyberlens": "TryHackMe", "ua_highschool": "TryHackMe",
-    "the_sticker_shop": "TryHackMe", "lesson_learned": "TryHackMe", "w1se_guy": "TryHackMe",
-    "lookup": "TryHackMe"
-  };
+          if (drops[x] * fontSize > c.height && Math.random() > 0.975)
+            drops[x] = 0;
+          drops[x]++;
+        }
+      }
 
-  const container = document.getElementById("cards");
-  machineList.forEach(name => {
-    const platform = platformMap[name] || "TryHackMe";
-    const card = document.createElement("div");
-    card.className = "card";
-    card.setAttribute("data-name", name.replace(/_/g, " "));
-    card.setAttribute("data-platform", platform);
-    card.onclick = () => window.location.href = `writeups/${name}.html`;
-    card.innerHTML = `
-      <h2>${name.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}</h2>
-      <div class="platform">${platform}</div>
-    `;
-    container.appendChild(card);
-  });
-
-  const search = document.getElementById('search'),
-        plat = document.getElementById('filter-platform'),
-        cards = [...document.getElementById('cards').children];
-
-  function filterCards() {
-    const q = search.value.toLowerCase(),
-          p = plat.value;
-    cards.forEach(c => {
-      const name = c.dataset.name.toLowerCase(),
-            platform = c.dataset.platform;
-      const matches = (!q || name.includes(q)) && (!p || platform === p);
-      c.style.display = matches ? '' : 'none';
-    });
-  }
-
-  [search, plat].forEach(el => el.addEventListener('input', filterCards));
-</script>
-
+      resize();
+      setInterval(draw, 50);
+      window.addEventListener('resize', resize);
+    };
+  </script>
 </body>
 </html>
