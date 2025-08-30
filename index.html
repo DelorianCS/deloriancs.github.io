@@ -25,17 +25,24 @@
   }
 
   .content {
-    position: absolute; top:50%; left:50%;
-    transform: translate(-50%,-50%);
-    background: rgba(13,17,23,0.92);
-    padding: 3em 2em;
-    border-radius: 15px;
-    border: 1px solid #30363d;
-    max-width: 420px;
-    text-align: center;
-    box-shadow: 0 0 30px #58a6ff33;
-    animation: fadeInUp 1.2s ease both;
-  }
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(13,17,23,0.92);
+  padding: 2.5em 2em;       /* slightly more padding */
+  border-radius: 12px;
+  border: 1px solid #30363d;
+  max-width: 440px;         /* wider card */
+  width: 95%;               /* take up more width on small screens */
+  text-align: left;
+  box-shadow: 0 0 30px #58a6ff33;
+  animation: fadeInUp 1.2s ease both;
+  font-size: 1.1rem;        /* larger base text */
+}
+
+
+
 
   @keyframes fadeInUp {
     0% { opacity: 0; transform: translate(-50%, -40%); }
@@ -71,12 +78,13 @@
   }
 
   ul {
-    list-style: none;
-    padding: 0;
-    margin: 25px auto 0;
-    width: fit-content;
-    text-align: left;
-  }
+  list-style: none;
+  padding: 0;
+  margin: 25px 0 0; 
+  width: 100%;      
+  text-align: left;  
+}
+
 
   li {
     margin: 12px 0;
@@ -120,19 +128,23 @@
       <div class="output" id="typed-output">&gt; Delorian</div>
     </div>
 
-<p style="margin-bottom: 8px;"><strong>Skills:</strong>
+<p style="margin-bottom: 8px; text-align: left;"><strong>Skills:</strong>
   <span style="color:#c9d1d9;">
-    <i class="fa-brands fa-python"></i> Python &nbsp;·&nbsp;
-    <i class="fa-brands fa-html5"></i> HTML &nbsp;·&nbsp;
-    <i class="fa-solid fa-terminal"></i> Bash
+<i class="fa-brands fa-python"></i> Python
+&nbsp;
+<i class="fa-brands fa-cuttlefish"></i> C
+&nbsp;
+<i class="fa-solid fa-terminal"></i> Bash
+
   </span>
 </p>
+
 
 <p style="margin-bottom: 8px; text-align: left;">
   <strong>Focus:</strong>
   <span style="color:#c9d1d9;">
     <i class="fa-solid fa-sitemap"></i> Pentesting &nbsp;·&nbsp;
-    <i class="fa-solid fa-bullseye"></i> Red Teaming
+    <i class="fa-solid fa-bug"></i> MalDev &nbsp;&nbsp;
   </span>
 </p>
 
@@ -151,7 +163,7 @@
   <li><a href="https://delorian.gitbook.io/writeups/"><i class="fa-solid fa-book"></i>CTF Writeups</a></li>
   <li><a href="https://github.com/DelorianCS" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a></li>
   <li><a href="https://tryhackme.com/p/DelorianCS" target="_blank"><i class="fa-brands fa-hackerrank"></i>TryHackMe</a></li>
-  <li><a href="https://app.hackthebox.com/profile/DelorianCS" target="_blank"><i class="fa-solid fa-graduation-cap"></i>HTB Academy</a></li>
+  <li><a href="academy.pdf" target="_blank"><i class="fa-solid fa-graduation-cap"></i> HTB Academy</a></li>
   <li><a href="https://www.linkedin.com/in/iñaki-cordoba-790942375" target="_blank"><i class="fa-brands fa-linkedin"></i>LinkedIn</a></li>
 </ul>
   </div>
