@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cybersecurity Roadmap — DelorianCS</title>
 
-  <!-- Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -41,10 +39,8 @@
 </head>
 <body>
 
-  <!-- Reading progress -->
   <div id="progress"></div>
 
-  <!-- Header -->
   <header class="w-full flex justify-center pt-6">
     <nav class="glass rounded-xl px-4 sm:px-6 py-3 w-11/12 md:w-3/4 max-w-5xl flex items-center justify-between">
       <a href="../index.html" class="text-sm text-[var(--muted)] hover:text-white"><span class="mr-2">←</span>Back to portfolio</a>
@@ -59,11 +55,9 @@
   <main class="w-full flex justify-center">
     <article class="w-11/12 md:w-3/4 max-w-5xl space-y-8 mt-6">
 
-      <!-- Hero -->
       <section class="card p-6 md:p-10 text-center">
         <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">Cybersecurity Roadmap</h1>
 
-        <!-- Certification logos -->
         <div class="flex flex-wrap justify-center gap-6 mt-6">
           <img src="https://www.comptia.org/_next/image/?url=https%3A%2F%2Fimages.cmp.optimizely.com%2F8623b0fab71111efac96d615e91762a5%3Fwidth%3D300%26height%3D300&w=384&q=90" alt="Security+" class="w-[110px] h-[110px] object-contain">
           <img src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc3wze0lx3007irps13e6k3" alt="eJPT" class="w-[110px] h-[110px] object-contain">
@@ -71,12 +65,10 @@
           <img src="https://academy.hackthebox.com/storage/exam_badges/312krCbLBwwnMN1uaOXohoEjSE6Fb8ljaXi7B4zL.png" alt="CPTS" class="w-[110px] h-[110px] object-contain">
         </div>
 
-        <!-- Subtitle -->
         <p class="mt-5 text-lg md:text-xl text-[var(--muted)]">
           From absolute zero to professional penetration tester.
         </p>
 
-        <!-- Big tags -->
         <div class="mt-6 flex flex-wrap justify-center gap-4 text-base md:text-lg font-medium text-slate-300">
           <span>≈ 670–700 hours total</span>
           <span class="mx-2">•</span>
@@ -84,7 +76,6 @@
         </div>
       </section>
 
-      <!-- Compact TOC -->
       <nav class="grid sm:grid-cols-2 lg:grid-cols-4 gap-2">
         <a href="#fundamentals" class="card p-4 hover:bg-[#0e1420]">1) Fundamentals</a>
         <a href="#pentest-basics" class="card p-4 hover:bg-[#0e1420]">2) Pentesting fundamentals</a>
@@ -244,7 +235,6 @@
 
       <div class="divider"></div>
 
-      <!-- Footer -->
       <footer class="py-6 text-sm flex items-center justify-between text-[var(--muted)]">
         <a href="/" class="hover:text-white">← Back to portfolio</a>
         <span>© <span id="y2">2025</span> DelorianCS</span>
@@ -252,18 +242,15 @@
     </article>
   </main>
 
-  <!-- Back to top -->
   <div class="fixed right-4 bottom-4 z-40">
     <button class="pill" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to top</button>
   </div>
 
   <script>
-    // Year stamps
     const y = new Date().getFullYear();
     document.getElementById('yr').textContent = y;
     document.getElementById('y2').textContent = y;
 
-    // Reading progress bar
     const progress = document.getElementById('progress');
     function setProgress(){
       const h = document.documentElement;
@@ -273,7 +260,6 @@
     addEventListener('scroll', setProgress, {passive:true});
     setProgress();
 
-    // Copy direct link helpers
     function copy(text){
       navigator.clipboard.writeText(location.origin + location.pathname + text).then(()=>{
         const btns=[...document.querySelectorAll(`[data-copy="${text}"]`)];
