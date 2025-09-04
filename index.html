@@ -2,217 +2,235 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DelorianCS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delorian — Pentesting & MalDev</title>
+
+  <!-- Fonts + Icons + Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Inter like Dragkob -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-<style>
-  html, body {
-    margin: 0; padding: 0; height: 100%;
-    background-color: #000;
-    font-family: 'Hack', monospace;
-    color: #c9d1d9;
-    overflow: hidden;
-  }
-
-  canvas#matrix {
-    position: fixed; top: 0; left: 0; z-index: -1;
-    width: 100vw; height: 100vh;
-  }
-
-  .glow {
-    text-shadow: 0 0 5px #58a6ff, 0 0 10px #58a6ff;
-  }
-
-  .content {
-  position: absolute;
-  top: 50%; 
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(13,17,23,0.92);
-  padding: 2.5em 2em;       /* slightly more padding */
-  border-radius: 12px;
-  border: 1px solid #30363d;
-  max-width: 440px;         /* wider card */
-  width: 95%;               /* take up more width on small screens */
-  text-align: left;
-  box-shadow: 0 0 30px #58a6ff33;
-  animation: fadeInUp 1.2s ease both;
-  font-size: 1.1rem;        /* larger base text */
-}
-
-
-
-
-  @keyframes fadeInUp {
-    0% { opacity: 0; transform: translate(-50%, -40%); }
-    100% { opacity: 1; transform: translate(-50%, -50%); }
-  }
-
-  .terminal {
-    background: #161b22;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px #58a6ff55;
-    font-size: 1.3em;
-    color: #58a6ff;
-    margin-bottom: 1.5em;
-    letter-spacing: 1px;
-  }
-
-  .typed-text {
-    border-right: 2px solid #58a6ff;
-  }
-
-  .output {
-    opacity: 0;
-    color: #c9d1d9;
-    transition: opacity 0.4s ease;
-    margin-top: 5px;
-  }
-
-  .info-block {
-    font-size: 16px;
-    margin: 1em 0;
-    color: #8b949e;
-  }
-
-  ul {
-  list-style: none;
-  padding: 0;
-  margin: 25px 0 0; 
-  width: 100%;      
-  text-align: left;  
-}
-
-
-  li {
-    margin: 12px 0;
-    transition: transform 0.3s ease;
-    display: flex;
-    align-items: center;
-  }
-
-  li:hover {
-    transform: scale(1.05);
-  }
-
-  a {
-    color: #58a6ff;
-    text-decoration: none;
-    font-size: 1.165em;
-    display: flex;
-    align-items: center;
-    transition: 0.3s ease;
-  }
-
-  a i {
-    margin-right: 10px;
-    min-width: 20px;
-    text-align: center;
-  }
-
-  a:hover {
-    color: #8b949e;
-    text-shadow: 0 0 8px #58a6ff;
-  }
-</style>
-
-</head>
-<body>
-  <canvas id="matrix"></canvas>
-
-  <div class="content">
-    <div class="terminal glow">
-      <div><span>$</span> <span class="typed-text" id="typed-text"></span></div>
-      <div class="output" id="typed-output">&gt; Delorian</div>
-    </div>
-
-<p style="margin-bottom: 8px; text-align: left;"><strong>Skills:</strong>
-  <span style="color:#c9d1d9;">
-<i class="fa-brands fa-python"></i> Python
-&nbsp;
-<i class="fa-brands fa-cuttlefish"></i> C
-&nbsp;
-<i class="fa-solid fa-terminal"></i> Bash
-
-  </span>
-</p>
-
-
-<p style="margin-bottom: 8px; text-align: left;">
-  <strong>Focus:</strong>
-  <span style="color:#c9d1d9;">
-    <i class="fa-solid fa-sitemap"></i> Pentesting &nbsp;·&nbsp;
-    <i class="fa-solid fa-bug"></i> MalDev &nbsp;&nbsp;
-  </span>
-</p>
-
-<p style="margin-bottom: 8px; text-align: left;">
-  <strong>Certs:</strong>
-  <span style="color:#c9d1d9;">
-    eJPTv2&nbsp;·&nbsp;OSCP (soon...)
-  </span>
-</p>
-
-
-</p>
-</p>
-<ul>
-  <li><a href="https://app.hackthebox.com/profile/2378119" target="_blank"><i class="fa-solid fa-cube"></i>Hack The Box</a></li>
-  <li><a href="https://delorian.gitbook.io/writeups/"><i class="fa-solid fa-book"></i>CTF Writeups</a></li>
-  <li><a href="https://github.com/DelorianCS" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a></li>
-  <li><a href="https://tryhackme.com/p/DelorianCS" target="_blank"><i class="fa-brands fa-hackerrank"></i>TryHackMe</a></li>
-  <li><a href="academy.pdf" target="_blank"><i class="fa-solid fa-graduation-cap"></i> HTB Academy</a></li>
-  <li><a href="https://www.linkedin.com/in/iñaki-cordoba-790942375" target="_blank"><i class="fa-brands fa-linkedin"></i>LinkedIn</a></li>
-</ul>
-  </div>
-
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    const txt = 'whoami';
-    let i = 0;
-
-    window.onload = () => {
-      const t = document.getElementById('typed-text');
-      const o = document.getElementById('typed-output');
-      function typeChar(){
-        if(i<txt.length){ t.textContent+=txt[i++]; setTimeout(typeChar,100); }
-        else { t.style.borderRight='none'; setTimeout(()=>o.style.opacity=1,200); }
-      }
-      typeChar();
-
-      const c = document.getElementById('matrix'), ctx = c.getContext('2d');
-      const fontSize = 16, letters = "01";
-      let cols, drops;
-
-      function resize() {
-        c.width = window.innerWidth;
-        c.height = window.innerHeight;
-        cols = Math.floor(c.width / fontSize);
-        drops = Array(cols).fill(1);
-      }
-
-      function draw() {
-        ctx.fillStyle = 'rgba(0,0,0,0.08)';
-        ctx.fillRect(0, 0, c.width, c.height);
-
-        ctx.fillStyle = '#58a6ff';
-        ctx.font = fontSize + 'px monospace';
-
-        for (let x = 0; x < drops.length; x++) {
-          const text = letters.charAt(Math.floor(Math.random() * letters.length));
-          ctx.fillText(text, x * fontSize, drops[x] * fontSize);
-
-          if (drops[x] * fontSize > c.height && Math.random() > 0.975)
-            drops[x] = 0;
-          drops[x]++;
+    /* Make Tailwind's default sans be Inter */
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Arial', 'sans-serif'],
+          }
         }
       }
+    }
+  </script>
 
-      resize();
-      setInterval(draw, 50);
-      window.addEventListener('resize', resize);
-    };
+  <style>
+    :root { --bg:#000; --fg:#c9d1d9; --muted:#8b949e; --brand:#58a6ff; --panel: rgba(13,17,23,.85); --border:#30363d; }
+    html, body {
+      background:var(--bg);
+      color:var(--fg);
+      font-family:'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    #matrix { position: fixed; inset: 0; z-index: -1; }
+
+    .glass { background: var(--panel); backdrop-filter: blur(10px); border:1px solid var(--border); box-shadow: 0 0 30px #58a6ff22; }
+    .reveal { opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity:1; transform: translateY(0); }
+    .hover-glow { transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease; }
+
+    .caret { border-right: 2px solid var(--brand); animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { border-color: transparent; } }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans">
+  <canvas id="matrix"></canvas>
+
+  <!-- Header -->
+  <header class="w-full flex justify-center pt-6">
+    <nav class="glass rounded-xl px-4 sm:px-6 py-3 w-11/12 md:w-4/5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="https://avatars.githubusercontent.com/u/215902280?v=4" alt="Avatar"
+             class="w-12 h-12 rounded-full object-cover border border-slate-700"
+             onerror="this.src='https://ui-avatars.com/api/?name=D&background=111318&color=58a6ff'">
+        <div class="hidden sm:block text-xs text-slate-400">eJPTv2 | eCPPTv3 | OSCP+ (soon)</div>
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm">
+        <a class="hover:text-slate-300" href="#home">Home</a>
+        <a class="hover:text-slate-300" href="#blog">Blog</a>
+        <a class="hover:text-slate-300" href="#platforms">Platforms</a>
+        <a class="hover:text-slate-300" href="#certs">Certs</a>
+      </div>
+      <a href="https://github.com/DelorianCS" target="_blank" rel="noreferrer" class="text-sm text-slate-300 hover:text-white">
+        <i class="fa-brands fa-github mr-2"></i>GitHub
+      </a>
+    </nav>
+  </header>
+
+  <main id="home" class="flex-1 w-full flex flex-col items-center gap-16 md:gap-24">
+    <!-- MAIN -->
+    <section class="w-11/12 md:w-4/5 mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-6 md:gap-10 mt-10 md:mt-14 items-center reveal">
+      <div class="justify-self-center md:justify-self-start">
+        <img src="https://avatars.githubusercontent.com/u/215902280?v=4" alt="Avatar"
+             class="w-[120px] h-[120px] md:w-[160px] md:h-[160px] rounded-full object-cover ring-2 ring-slate-700">
+      </div>
+      <div class="text-center md:text-left">
+        <h1 class="text-3xl md:text-5xl font-black">Portfolio</h1>
+        <p class="text-lg md:text-2xl text-slate-300 mt-2"><span id="type" class="caret"></span></p>
+        <p class="text-sm md:text-base text-slate-400 mt-3">Pentesting • Malware Dev</p>
+      </div>
+    </section>
+
+    <!-- PLATFORMS -->
+    <section id="platforms"
+      class="w-11/12 md:w-4/5 grid grid-cols-1 md:grid-cols-3 auto-rows-fr gap-4 md:gap-6 reveal">
+
+      <a href="https://app.hackthebox.com/profile/2378119" target="_blank"
+         class="glass hover-glow rounded-xl p-5 flex flex-col items-center text-center h-full transition-transform hover:scale-105">
+        <i class="fa-solid fa-cube text-3xl mb-3"></i>
+        <h3 class="text-xl font-bold">Hack The Box</h3>
+        <p class="text-slate-400 text-sm mt-1">Profile & progress</p>
+      </a>
+
+      <a href="https://delorian.gitbook.io/writeups/" target="_blank"
+         class="glass hover-glow rounded-xl p-5 flex flex-col items-center text-center h-full transition-transform hover:scale-105">
+        <i class="fa-solid fa-book text-3xl mb-3"></i>
+        <h3 class="text-xl font-bold">CTF Writeups</h3>
+        <p class="text-slate-400 text-sm mt-1">Cheatsheets & walkthroughs</p>
+      </a>
+
+      <a href="https://tryhackme.com/p/DelorianCS" target="_blank"
+         class="glass hover-glow rounded-xl p-5 flex flex-col items-center text-center h-full transition-transform hover:scale-105">
+        <i class="fa-brands fa-hackerrank text-3xl mb-3"></i>
+        <h3 class="text-xl font-bold">TryHackMe</h3>
+        <p class="text-slate-400 text-sm mt-1">Labs & badges</p>
+      </a>
+
+      <a href="https://www.linkedin.com/in/inaki-cordoba-790942375" target="_blank"
+         class="glass hover-glow rounded-xl p-5 flex flex-col items-center text-center h-full transition-transform hover:scale-105">
+        <i class="fa-brands fa-linkedin text-3xl mb-3"></i>
+        <h3 class="text-xl font-bold">LinkedIn</h3>
+        <p class="text-slate-400 text-sm mt-1">Professional Profile</p>
+      </a>
+
+      <a href="https://github.com/DelorianCS" target="_blank"
+         class="glass hover-glow rounded-xl p-5 flex flex-col items-center text-center h-full transition-transform hover:scale-105">
+        <i class="fa-brands fa-github text-3xl mb-3"></i>
+        <h3 class="text-xl font-bold">GitHub</h3>
+        <p class="text-slate-400 text-sm mt-1">Projects & Tools</p>
+      </a>
+
+      <a href="academy.pdf" target="_blank"
+         class="glass hover-glow rounded-xl p-5 flex flex-col items-center text-center h-full transition-transform hover:scale-105">
+        <i class="fa-solid fa-graduation-cap text-3xl mb-3"></i>
+        <h3 class="text-xl font-bold">HackTheBox Academy</h3>
+        <p class="text-slate-400 text-sm mt-1">HTB Academy Progression (PDF)</p>
+      </a>
+    </section>
+
+    <!-- BLOG (card width matches grid above) -->
+    <section id="blog" class="w-11/12 md:w-4/5 reveal">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Blog</h2>
+
+      <!-- Use the same grid so cards have the SAME width as Platform cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <!-- Roadmap Blog Card -->
+        <a href="blog/roadmap.html"
+           class="glass rounded-xl hover-glow transition-transform hover:scale-105 flex items-center gap-4 p-4">
+          
+          <!-- Thumbnail (left) -->
+          <div class="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg overflow-hidden bg-[#0d1117] border border-[var(--border)]">
+            <img src="blog/roadmap-thumb.jpg"
+                 alt="Cybersecurity Roadmap"
+                 class="w-full h-full object-cover">
+          </div>
+
+          <!-- Text content -->
+          <div class="flex flex-col justify-center">
+            <h3 class="text-lg md:text-xl font-bold">Cybersecurity Roadmap</h3>
+            <p class="text-slate-400 text-sm mt-1">
+              A practical path from zero to junior pentester.
+            </p>
+            <div class="mt-2 text-sm text-[var(--brand)] flex items-center gap-2">
+              Read more <i class="fa-solid fa-arrow-right-long"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certs" class="w-11/12 md:w-4/5 reveal">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Certifications</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        
+        <!-- eJPTv2 -->
+        <a href="https://delorian.gitbook.io/writeups/certifications/ejptv2/conclusions" 
+           target="_blank" 
+           class="glass rounded-xl p-5 hover-glow flex flex-col items-center text-center transition-transform hover:scale-105">
+          <img src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc3wze0lx3007irps13e6k3" 
+               alt="eJPTv2" class="w-[110px] h-[110px] object-contain">
+          <h3 class="text-xl font-bold">eJPTv2</h3>
+          <p class="text-slate-400 text-sm">INE Security - Obtained 8/25</p>
+        </a>
+        
+        <!-- eCPPTv3 -->
+        <a href="https://delorian.gitbook.io/writeups/certifications/ecpptv3/conclusions" 
+           target="_blank" 
+           class="glass rounded-xl p-5 hover-glow flex flex-col items-center text-center transition-transform hover:scale-105">
+          <img src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc5xv63nfpn07irxufr2b8z" 
+               alt="eCPPTv3" class="w-[110px] h-[110px] object-contain">
+          <h3 class="text-xl font-bold">eCPPTv3</h3>
+          <p class="text-slate-400 text-sm">INE Security - Obtained 8/25</p>
+        </a>
+        
+        <!-- OSCP -->
+        <div class="glass rounded-xl p-5 flex flex-col items-center text-center opacity-70 cursor-not-allowed">
+          <img src="https://www.offsec.com/_astro/OSCP-plus.BZHuApYA_Ztlntl.svg" 
+               alt="OSCP" class="w-[110px] h-[110px] object-contain">
+          <h3 class="text-xl font-bold">OSCP+</h3>
+          <p class="text-slate-400 text-sm">Soon…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="w-full mt-16 mb-8 px-6 text-center text-xs text-slate-500">
+    <div>© <span id="year"></span> DelorianCS • Built with a tiny bit of <span class="text-[var(--brand)]">MAGIC</span></div>
+  </footer>
+
+  <script>
+    // typewriter
+    const line = 'whoami — Delorian';
+    let j = 0; const el = document.getElementById('type');
+    (function tick(){ if(!el) return; el.textContent += line[j++]||''; if(j<=line.length) setTimeout(tick, 70); })();
+
+    // matrix bg
+    const c = document.getElementById('matrix'); const ctx = c.getContext('2d');
+    const letters = '01'; let fontSize = 16, cols = 0, drops = [];
+    function resize(){ c.width = innerWidth; c.height = innerHeight; cols = Math.floor(c.width / fontSize); drops = Array(cols).fill(1); }
+    function draw(){
+      ctx.fillStyle = 'rgba(0,0,0,0.08)'; ctx.fillRect(0,0,c.width,c.height);
+      ctx.fillStyle = '#58a6ff'; ctx.font = fontSize + 'px monospace';
+      for(let i=0;i<drops.length;i++){
+        const ch = letters.charAt(Math.floor(Math.random()*letters.length));
+        ctx.fillText(ch, i*fontSize, drops[i]*fontSize);
+        if(drops[i]*fontSize>c.height && Math.random()>0.975) drops[i]=0; drops[i]++;
+      }
+    }
+    resize(); setInterval(draw, 50); addEventListener('resize', resize);
+
+    // reveal on view
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+    }, { threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
