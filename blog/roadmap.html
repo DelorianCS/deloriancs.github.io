@@ -15,7 +15,7 @@
 
   <style>
     :root{
-      --bg:#000;             /* match site */
+      --bg:#000;
       --panel:rgba(13,17,23,.85);
       --border:#30363d;
       --fg:#c9d1d9;
@@ -28,33 +28,15 @@
     .card:hover{transform:translateY(-2px);box-shadow:0 50px 50px #58a6ff33,0 0 0 1px #58a6ff44 inset}
     .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
     .link{color:var(--fg);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.25)}
-    .tag{font-size:.72rem;border:1px solid var(--border);padding:.2rem .5rem;border-radius:999px;color:var(--muted);background:#0d1117cc;box-shadow:0 0 0 1px #58a6ff22 inset}
-    .kpi{font-size:.85rem;color:var(--muted)}
-    a:hover{color:#fff}
-
-    /* progress bar */
-    #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#1f6feb,#58a6ff);box-shadow:0 0 12px #58a6ffaa;z-index:50}
-
-    /* sticky toc + scrollspy */
-    .toc a{display:block;padding:.5rem .75rem;border-radius:10px;border:1px solid transparent}
-    .toc a.active{color:#fff;border-color:#2b3440;background:#0d121a;box-shadow:0 0 0 1px #58a6ff33 inset}
-
-    /* collapsible caret */
-    .caret{transition:transform .2s ease}
-    details[open] .caret{transform:rotate(90deg)}
-
-    /* floating buttons */
-    .float-btn{position:fixed;right:16px;bottom:16px;z-index:40}
-    .pill{border:1px solid var(--border);background:#0d1117cc;border-radius:999px;padding:.5rem .8rem;display:inline-flex;gap:.5rem;align-items:center;box-shadow:0 0 0 1px #58a6ff22 inset}
-
-    /* small helper */
     .btn{border:1px solid var(--border);background:#0d1117cc;border-radius:10px;padding:.5rem .8rem}
     .btn:hover{box-shadow:0 0 0 1px #58a6ff33 inset}
-
-    /* fallback without backdrop-filter */
-    @supports not (backdrop-filter: blur(10px)) {
-      .glass,.card,.tag,.btn,.pill { background:#0d1117f2; }
-    }
+    .caret{transition:transform .2s ease}
+    details[open] .caret{transform:rotate(90deg)}
+    .pill{border:1px solid var(--border);background:#0d1117cc;border-radius:999px;padding:.5rem .8rem;display:inline-flex;gap:.5rem;align-items:center;box-shadow:0 0 0 1px #58a6ff22 inset}
+    /* Reading progress bar */
+    #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#1f6feb,#58a6ff);box-shadow:0 0 12px #58a6ffaa;z-index:50}
+    /* fallback w/o backdrop */
+    @supports not (backdrop-filter: blur(10px)) {.glass,.card,.btn,.pill{background:#0d1117f2}}
   </style>
 </head>
 <body>
@@ -67,286 +49,211 @@
     <nav class="glass rounded-xl px-4 sm:px-6 py-3 w-11/12 md:w-3/4 max-w-5xl flex items-center justify-between">
       <a href="../index.html" class="text-sm text-[var(--muted)] hover:text-white"><span class="mr-2">←</span>Back to portfolio</a>
       <div class="hidden md:flex items-center gap-3">
-        <span class="tag">Beginner-friendly</span>
-        <span class="tag">Hands-on labs</span>
-        <span class="tag">Updated <span id="yr">2025</span></span>
+        <span class="pill text-xs">Beginner-friendly</span>
+        <span class="pill text-xs">Hands-on labs</span>
+        <span class="pill text-xs">Updated <span id="yr">2025</span></span>
       </div>
     </nav>
   </header>
 
   <main class="w-full flex justify-center">
-    <article class="w-11/12 md:w-3/4 max-w-5xl grid lg:grid-cols-[260px,1fr] gap-6 md:gap-8 mt-6">
+    <article class="w-11/12 md:w-3/4 max-w-5xl space-y-8 mt-6">
 
-      <!-- TOC -->
-      <aside class="hidden lg:block sticky top-20 self-start">
-        <div class="card p-3">
-          <div class="text-sm font-semibold mb-2">On this page</div>
-          <nav class="toc text-sm space-y-1" id="toc">
-            <a href="#fundamentals">1) 1 — Fundamentals </a>
-            <a href="#pentest-basics">2) Intro to Pentesting</a>
-            <a href="#intermediate">3) Intermediate pentesting</a>
-            <a href="#jobs">4) Job finding & tips</a>
-          </nav>
+      <!-- Hero -->
+      <section class="card p-6 md:p-10 text-center">
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">Cybersecurity Roadmap</h1>
+
+        <!-- Certification logos -->
+        <div class="flex flex-wrap justify-center gap-6 mt-6">
+          <img src="https://www.comptia.org/_next/image/?url=https%3A%2F%2Fimages.cmp.optimizely.com%2F8623b0fab71111efac96d615e91762a5%3Fwidth%3D300%26height%3D300&w=384&q=90" alt="Security+" class="w-[110px] h-[110px] object-contain">
+          <img src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc3wze0lx3007irps13e6k3" alt="eJPT" class="w-[110px] h-[110px] object-contain">
+          <img src="https://www.offsec.com/_astro/OSCP-plus.BZHuApYA_Ztlntl.svg" alt="OSCP+" class="w-[110px] h-[110px] object-contain">
+          <img src="https://academy.hackthebox.com/storage/exam_badges/312krCbLBwwnMN1uaOXohoEjSE6Fb8ljaXi7B4zL.png" alt="CPTS" class="w-[110px] h-[110px] object-contain">
         </div>
 
-        <div class="mt-3 card p-3">
-          <div class="text-sm font-semibold mb-2">Quick actions</div>
-          <div class="flex flex-col gap-2">
-            <button id="expandAll" class="btn text-sm">Expand all</button>
-            <button id="collapseAll" class="btn text-sm">Collapse all</button>
-            <button id="resetChecks" class="btn text-sm">Reset progress</button>
-          </div>
+        <!-- Subtitle -->
+        <p class="mt-5 text-lg md:text-xl text-[var(--muted)]">
+          From absolute zero to professional penetration tester.
+        </p>
+
+        <!-- Big tags -->
+        <div class="mt-6 flex flex-wrap justify-center gap-4 text-base md:text-lg font-medium text-slate-300">
+          <span>≈ 670–700 hours total</span>
+          <span class="mx-2">•</span>
+          <span>Resources: HackTheBox, TryHackMe, YouTube</span>
         </div>
-
-        <div class="mt-3 card p-3">
-          <div class="text-sm font-semibold mb-2">Your hours</div>
-          <div class="text-sm text-[var(--muted)]">
-            Completed: <b id="hDone">0h</b><br>
-            Remaining: <b id="hLeft">~700h</b><br>
-            Total plan: <b id="hTotal">~700h</b>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Content -->
-      <section class="space-y-8">
-
-        <!-- Hero -->
-<!-- Hero -->
-<section class="card p-6 md:p-10 text-center">
-  <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">Cybersecurity Roadmap</h1>
-  
-  <!-- Certification logos -->
-  <div class="flex flex-wrap justify-center gap-6 mt-6">
-    <img src="https://www.comptia.org/_next/image/?url=https%3A%2F%2Fimages.cmp.optimizely.com%2F8623b0fab71111efac96d615e91762a5%3Fwidth%3D300%26height%3D300&w=384&q=90" 
-         alt="Security+" class="w-[110px] h-[110px] object-contain">
-    <img src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc3wze0lx3007irps13e6k3" 
-         alt="eJPT" class="w-[110px] h-[110px] object-contain">
-    <img src="https://www.offsec.com/_astro/OSCP-plus.BZHuApYA_Ztlntl.svg" 
-         alt="OSCP+" class="w-[110px] h-[110px] object-contain">
-    <img src="https://academy.hackthebox.com/storage/exam_badges/312krCbLBwwnMN1uaOXohoEjSE6Fb8ljaXi7B4zL.png" 
-         alt="CPTS" class="w-[110px] h-[110px] object-contain">
-  </div>
-
-  <!-- Subtitle -->
-  <p class="mt-5 text-lg md:text-xl text-[var(--muted)]">
-    From absolute zero to professional penetration tester.
-  </p>
-
-  <!-- Tags -->
-  <div class="mt-6 flex flex-wrap justify-center gap-4 text-base md:text-lg font-medium text-slate-300">
-    <span>≈ 670–700 hours total</span>
-    <span class="mx-2">•</span>
-    <span>Resources: HackTheBox, TryHackMe, YouTube</span>
-</section>
-
-
-        <div class="divider"></div>
-
-        <!-- Quick TOC (mobile) -->
-        <nav class="grid sm:grid-cols-2 lg:grid-cols-4 gap-2 lg:hidden">
-          <a href="#fundamentals" class="card p-3 hover:bg-[#0e1420]">1) Fundamentals</a>
-          <a href="#pentest-basics" class="card p-3 hover:bg-[#0e1420]">2) Pentesting fundamentals</a>
-          <a href="#intermediate" class="card p-3 hover:bg-[#0e1420]">3) Intermediate pentesting</a>
-          <a href="#jobs" class="card p-3 hover:bg-[#0e1420]">4) Job finding & tips</a>
-        </nav>
-
-        <!-- Section 1 -->
-        <section id="fundamentals" class="card p-6 md:p-8">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
-                1 — Fundamentals
-                        <img src="https://www.comptia.org/_next/image/?url=https%3A%2F%2Fimages.cmp.optimizely.com%2F8623b0fab71111efac96d615e91762a5%3Fwidth%3D300%26height%3D300&w=384&q=90"
-             alt="Security+" class="w-[75px] h-[75px] object-contain">
-                <button class="btn text-xs" data-copy="#fundamentals">Copy link</button>
-              </h2>
-              <p class="mt-2 text-[var(--muted)]">Total study time: ~70h</p>
-            </div>
-          </div>
-
-          <div class="mt-6 space-y-3">
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="aPlus" data-hours="20">
-                  <span><b>A+ Course — Professor Messer</b> — <a class="link" target="_blank" href="https://youtube.com/playlist?list=PLG49S3nxzAnnOmvg5UGVenB_qQgsh01uC">playlist</a> (~20h)</span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Networking basics, hardware, OS fundamentals.</p>
-            </details>
-
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="thmPreSec" data-hours="10">
-                  <span><b>TryHackMe Pre Security Fundamentals</b> — <a class="link" target="_blank" href="https://tryhackme.com/path/outline/presecurity">path</a> (~10h)</span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Option A for absolute beginners; high-level intro + hands-on.</p>
-            </details>
-
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="netPlus" data-hours="20">
-                  <span><b>Network+ — Professor Messer</b> — <a class="link" target="_blank" href="https://youtube.com/playlist?list=PLG49S3nxzAnl_tQe3kvnmeMid0mjF8Le8">playlist</a> (~20h)</span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Option B if you prefer deeper networking fundamentals.</p>
-            </details>
-
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="secPlus" data-hours="20">
-                  <span><b>Security+ — Professor Messer</b> — <a class="link" target="_blank" href="https://youtube.com/playlist?list=PLG49S3nxzAnl4QDVqK-hOnoqcSKEIDDuv">course playlist</a> (~20h)</span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Covers core security concepts and vocabulary for junior roles.</p>
-            </details>
-
-            <div class="mt-4 p-4 rounded-lg bg-[#0b121b] border border-[var(--border)]">
-              <div class="text-sm">First certification: <b>CompTIA Security+</b></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 2 -->
-        <section id="pentest-basics" class="card p-8 md:p-8">
-          <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
-            2 — Introduction to Pentesting
-            <img src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc3wze0lx3007irps13e6k3"
-             alt="ejptv2" class="w-[75px] h-[75px] object-contain">
-            <button class="btn text-xs" data-copy="#pentest-basics">Copy link</button>
-          </h2>
-          <p class="mt-2 text-[var(--muted)]">Total study time: ~100h</p>
-
-          <div class="mt-6 space-y-3">
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="thmJrPt" data-hours="70">
-                  <span><b>TryHackMe: Jr Penetration Tester</b> — <a class="link" target="_blank" href="https://tryhackme.com/path/outline/jrpenetrationtester">path</a> (~70h)</span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Covers recon, web basics, privilege escalation samplers.</p>
-            </details>
-
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="thmOffensive" data-hours="50">
-                  <span><b>TryHackMe: Offensive Pentesting</b> — <a class="link" target="_blank" href="https://tryhackme.com/path/outline/pentesting">path</a> (~50h)</span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Hands-on labs aligned with common job tasks.</p>
-            </details>
-
-            <div class="mt-4 p-4 rounded-lg bg-[#0b121b] border border-[var(--border)]">
-              <div class="text-sm">Second certification: <b>eJPT</b></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 3 -->
-        <section id="intermediate" class="card p-6 md:p-8">
-          <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
-            3 — Intermediate Pentesting
-            <img src="https://www.offsec.com/_astro/OSCP-plus.BZHuApYA_Ztlntl.svg"
-             alt="OSCP+" class="w-[75px] h-[75px] object-contain">
-            <button class="btn text-xs" data-copy="#intermediate">Copy link</button>
-          </h2>
-          <p class="mt-2 text-[var(--muted)]">Total study time: ~500h</p>
-
-          <div class="mt-6 space-y-3">
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="htbJobPath" data-hours="300">
-                  <span><b>HackTheBox Academy: Penetration Tester Job Role Path</b> — <a class="link" target="_blank" href="https://academy.hackthebox.com/path/preview/penetration-tester">path</a> (~300h)</span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Deep modules + labs; build routine and notes.</p>
-            </details>
-
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="tjnullList" data-hours="200">
-                  <span><b>TJNull – OSCP-style list</b> — <a class="link" target="_blank" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">spreadsheet</a></span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Pick HTB boxes matching your gaps; hours vary.</p>
-            </details>
-
-            <details class="rounded-lg border border-[var(--border)] p-4">
-              <summary class="cursor-pointer flex items-center gap-2 select-none">
-                <span class="caret">▶</span>
-                <label class="flex items-center gap-3">
-                  <input type="checkbox" class="res" data-key="ipsecCpts" data-hours="">
-                  <span><b>IPPSec CPTS Prep labs</b> — <a class="link" target="_blank" href="https://www.youtube.com/playlist?list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5">YouTube playlist</a></span>
-                </label>
-              </summary>
-              <p class="mt-3 text-[var(--muted)]">Great long-form lab walkthroughs; replicate, don’t just watch, hours may vary.</p>
-            </details>
-
-            <div class="mt-4 p-4 rounded-lg bg-[#0b121b] border border-[var(--border)]">
-              <div class="text-sm">Third certification: <b>CPTS</b> or <b>OSCP</b> (budget & preference)</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 4 -->
-        <section id="jobs" class="card p-6 md:p-8">
-          <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
-            4 — Job finding
-            <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/xbu/linkedin-revised-brand-guidelines/linkedin-logo/fg/brandg-linkedinlogo-hero-logo-dsk-v01.png.original.png"
-             alt="LinkedIn" class="w-[130px] h-[100px] object-contain">
-            </h2>
-            </p>
-            <button class="btn text-xs" data-copy="#jobs">Copy link</button>
-          </h2>
-
-          <div class="mt-6 space-y-3">
-            <p>Have <b>projects</b>, <b>write-ups</b>, and <b>tools</b> to strengthen your CV.</p>
-            <p>After <b>Security+</b>, apply for <b>SOC L1</b> if you need income — it adds relevant experience while you continue labs.</p>
-          </div>
-
-          <h3 class="mt-8 text-xl font-bold">Tips</h3>
-          <ul class="mt-3 space-y-2 text-[var(--muted)]">
-            <li>Use <b>Obsidian</b> / <b>Notion</b> / <b>CherryTree</b> for structured notes.</li>
-            <li>Build your own <b>cheatsheets</b> — you will reuse them constantly.</li>
-            <li>Learn <b>Python</b> to automate recon, parsing, and small exploits.</li>
-            <li>Track hours and revisit weak areas; don’t follow any plan blindly.</li>
-          </ul>
-
-          <div class="mt-6 p-4 rounded-lg bg-[#0b121b] border border-[var(--border)] text-sm">
-            Grand total study time (approx): <b>~700h</b>
-          </div>
-        </section>
-
-        <div class="divider"></div>
-
-        <!-- Footer -->
-        <footer class="py-6 text-sm flex items-center justify-between text-[var(--muted)]">
-          <a href="/" class="hover:text-white">← Back to portfolio</a>
-          <span>© <span id="y2">2025</span> DelorianCS</span>
-        </footer>
       </section>
+
+      <!-- Compact TOC -->
+      <nav class="grid sm:grid-cols-2 lg:grid-cols-4 gap-2">
+        <a href="#fundamentals" class="card p-4 hover:bg-[#0e1420]">1) Fundamentals</a>
+        <a href="#pentest-basics" class="card p-4 hover:bg-[#0e1420]">2) Pentesting fundamentals</a>
+        <a href="#intermediate" class="card p-4 hover:bg-[#0e1420]">3) Intermediate pentesting</a>
+        <a href="#jobs" class="card p-4 hover:bg-[#0e1420]">4) Job finding & tips</a>
+      </nav>
+
+      <!-- Section 1 -->
+      <section id="fundamentals" class="card p-6 md:p-8">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-3">
+              1 — Fundamentals
+              <img src="https://www.comptia.org/_next/image/?url=https%3A%2F%2Fimages.cmp.optimizely.com%2F8623b0fab71111efac96d615e91762a5%3Fwidth%3D300%26height%3D300&w=384&q=90" alt="Security+" class="w-[75px] h-[75px] object-contain">
+              <button class="btn text-xs" data-copy="#fundamentals">Copy link</button>
+            </h2>
+            <p class="mt-2 text-[var(--muted)]">Total study time: ~70h</p>
+          </div>
+        </div>
+
+        <div class="mt-6 space-y-3">
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>A+ Course — Professor Messer</b> — <a class="link" target="_blank" href="https://youtube.com/playlist?list=PLG49S3nxzAnnOmvg5UGVenB_qQgsh01uC">playlist</a> (~20h)
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Networking basics, hardware, OS fundamentals.</p>
+          </details>
+
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>TryHackMe Pre Security Fundamentals</b> — <a class="link" target="_blank" href="https://tryhackme.com/path/outline/presecurity">path</a> (~10h)
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Option A for absolute beginners; high-level intro + hands-on.</p>
+          </details>
+
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>Network+ — Professor Messer</b> — <a class="link" target="_blank" href="https://youtube.com/playlist?list=PLG49S3nxzAnl_tQe3kvnmeMid0mjF8Le8">playlist</a> (~20h)
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Option B if you prefer deeper networking fundamentals.</p>
+          </details>
+
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>Security+ — Professor Messer</b> — <a class="link" target="_blank" href="https://youtube.com/playlist?list=PLG49S3nxzAnl4QDVqK-hOnoqcSKEIDDuv">course playlist</a> (~20h)
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Covers core security concepts and vocabulary for junior roles.</p>
+          </details>
+
+          <div class="mt-4 p-4 rounded-lg bg-[#0b121b] border border-[var(--border)]">
+            <div class="text-sm">First certification: <b>CompTIA Security+</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2 -->
+      <section id="pentest-basics" class="card p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-3">
+          2 — Introduction to Pentesting
+          <img src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc3wze0lx3007irps13e6k3" alt="eJPT" class="w-[75px] h-[75px] object-contain">
+          <button class="btn text-xs" data-copy="#pentest-basics">Copy link</button>
+        </h2>
+        <p class="mt-2 text-[var(--muted)]">Total study time: ~100h</p>
+
+        <div class="mt-6 space-y-3">
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>TryHackMe: Jr Penetration Tester</b> — <a class="link" target="_blank" href="https://tryhackme.com/path/outline/jrpenetrationtester">path</a> (~70h)
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Covers recon, web basics, privilege escalation samplers.</p>
+          </details>
+
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>TryHackMe: Offensive Pentesting</b> — <a class="link" target="_blank" href="https://tryhackme.com/path/outline/pentesting">path</a> (~50h)
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Hands-on labs aligned with common job tasks.</p>
+          </details>
+
+          <div class="mt-4 p-4 rounded-lg bg-[#0b121b] border border-[var(--border)]">
+            <div class="text-sm">Second certification: <b>eJPT</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3 -->
+      <section id="intermediate" class="card p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-3">
+          3 — Intermediate Pentesting
+          <img src="https://www.offsec.com/_astro/OSCP-plus.BZHuApYA_Ztlntl.svg" alt="OSCP+" class="w-[75px] h-[75px] object-contain">
+          <button class="btn text-xs" data-copy="#intermediate">Copy link</button>
+        </h2>
+        <p class="mt-2 text-[var(--muted)]">Total study time: ~500h</p>
+
+        <div class="mt-6 space-y-3">
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>HackTheBox Academy: Penetration Tester Job Role Path</b> — <a class="link" target="_blank" href="https://academy.hackthebox.com/path/preview/penetration-tester">path</a> (~300h)
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Deep modules + labs; build routine and notes.</p>
+          </details>
+
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>TJNull – OSCP-style list</b> — <a class="link" target="_blank" href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview">spreadsheet</a>
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Pick HTB boxes matching your gaps; hours vary.</p>
+          </details>
+
+          <details class="rounded-lg border border-[var(--border)] p-4">
+            <summary class="cursor-pointer flex items-center gap-2 select-none">
+              <span class="caret">▶</span>
+              <b>IPPSec CPTS Prep labs</b> — <a class="link" target="_blank" href="https://www.youtube.com/playlist?list=PLidcsTyj9JXItWpbRtTg6aDEj10_F17x5">YouTube playlist</a>
+            </summary>
+            <p class="mt-3 text-[var(--muted)]">Great long-form lab walkthroughs; replicate, don’t just watch.</p>
+          </details>
+
+          <div class="mt-4 p-4 rounded-lg bg-[#0b121b] border border-[var(--border)]">
+            <div class="text-sm">Third certification: <b>CPTS</b> or <b>OSCP</b> (budget & preference)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4 -->
+      <section id="jobs" class="card p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-3">
+          4 — Job finding
+          <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/xbu/linkedin-revised-brand-guidelines/linkedin-logo/fg/brandg-linkedinlogo-hero-logo-dsk-v01.png.original.png" alt="LinkedIn" class="w-[130px] h-[100px] object-contain">
+          <button class="btn text-xs" data-copy="#jobs">Copy link</button>
+        </h2>
+
+        <div class="mt-6 space-y-3">
+          <p>Have <b>projects</b>, <b>write-ups</b>, and <b>tools</b> to strengthen your CV.</p>
+          <p>After <b>Security+</b>, apply for <b>SOC L1</b> if you need income — it adds relevant experience while you continue labs.</p>
+        </div>
+
+        <h3 class="mt-8 text-xl font-bold">Tips</h3>
+        <ul class="mt-3 space-y-2 text-[var(--muted)]">
+          <li>Use <b>Obsidian</b> / <b>Notion</b> / <b>CherryTree</b> for structured notes.</li>
+          <li>Build your own <b>cheatsheets</b> — you will reuse them constantly.</li>
+          <li>Learn <b>Python</b> to automate recon, parsing, and small exploits.</li>
+          <li>Track hours and revisit weak areas; don’t follow any plan blindly.</li>
+        </ul>
+
+        <div class="mt-6 p-4 rounded-lg bg-[#0b121b] border border-[var(--border)] text-sm">
+          Grand total study time (approx): <b>~700h</b>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Footer -->
+      <footer class="py-6 text-sm flex items-center justify-between text-[var(--muted)]">
+        <a href="/" class="hover:text-white">← Back to portfolio</a>
+        <span>© <span id="y2">2025</span> DelorianCS</span>
+      </footer>
     </article>
   </main>
 
   <!-- Back to top -->
-  <div class="float-btn hidden" id="toTop">
+  <div class="fixed right-4 bottom-4 z-40">
     <button class="pill" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Back to top</button>
   </div>
 
@@ -356,7 +263,7 @@
     document.getElementById('yr').textContent = y;
     document.getElementById('y2').textContent = y;
 
-    // Progress bar
+    // Reading progress bar
     const progress = document.getElementById('progress');
     function setProgress(){
       const h = document.documentElement;
@@ -366,104 +273,16 @@
     addEventListener('scroll', setProgress, {passive:true});
     setProgress();
 
-    // Back to top show/hide
-    const toTop = document.getElementById('toTop');
-    function toggleTop(){
-      toTop.classList.toggle('hidden', window.scrollY < 600);
-    }
-    addEventListener('scroll', toggleTop, {passive:true});
-    toggleTop();
-
-    // Scrollspy for TOC
-    const toc = document.getElementById('toc');
-    const links = toc ? toc.querySelectorAll('a') : [];
-    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-
-    const spy = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        const id = '#' + e.target.id;
-        const link = toc.querySelector(`a[href="${id}"]`);
-        if (link) {
-          if (e.isIntersecting) {
-            links.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            history.replaceState(null, '', id);
-          }
-        }
-      });
-    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
-
-    sections.forEach(s => spy.observe(s));
-
-    // Copy link helpers
+    // Copy direct link helpers
     function copy(text){
       navigator.clipboard.writeText(location.origin + location.pathname + text).then(()=>{
         const btns=[...document.querySelectorAll(`[data-copy="${text}"]`)];
         btns.forEach(b=>{const t=b.textContent;b.textContent='Copied!';setTimeout(()=>b.textContent='Copy link',1200);});
       });
     }
-    document.getElementById('copyLink').addEventListener('click',()=>copy(''));
     document.querySelectorAll('[data-copy]').forEach(btn=>{
       btn.addEventListener('click',()=>copy(btn.getAttribute('data-copy')));
     });
-
-    // Expand / Collapse all
-    const expandAll = document.getElementById('expandAll');
-    const collapseAll = document.getElementById('collapseAll');
-    function detailsAll(open){
-      document.querySelectorAll('section details').forEach(d=>d.open=open);
-    }
-    expandAll.addEventListener('click',()=>detailsAll(true));
-    collapseAll.addEventListener('click',()=>detailsAll(false));
-
-    // Hours calculator with persistence
-    const TOTAL_PLAN = 700;
-    const checks = document.querySelectorAll('.res');
-    const doneEl = document.getElementById('hDone');
-    const leftEl = document.getElementById('hLeft');
-    const totalEl = document.getElementById('hTotal');
-    totalEl.textContent = `~${TOTAL_PLAN}h`;
-
-    // load saved
-    const saved = JSON.parse(localStorage.getItem('roadmapChecks')||'{}');
-    checks.forEach(c=>{
-      if (saved[c.dataset.key]) c.checked = true;
-    });
-
-    function recalc(){
-      let done = 0;
-      checks.forEach(c=>{
-        if (c.checked) done += Number(c.dataset.hours||0);
-      });
-      doneEl.textContent = `${done}h`;
-      const left = Math.max(0, TOTAL_PLAN - done);
-      leftEl.textContent = `~${left}h`;
-    }
-    recalc();
-
-    // persist on change
-    checks.forEach(c=>{
-      c.addEventListener('change',()=>{
-        saved[c.dataset.key] = c.checked;
-        localStorage.setItem('roadmapChecks', JSON.stringify(saved));
-        recalc();
-      });
-    });
-
-    // Reset
-    document.getElementById('resetChecks').addEventListener('click',()=>{
-      checks.forEach(c=>c.checked=false);
-      localStorage.removeItem('roadmapChecks');
-      recalc();
-    });
-
-    // Open details when heading hash is used
-    if (location.hash){
-      const target = document.querySelector(location.hash);
-      if (target){
-        target.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    }
   </script>
 </body>
 </html>
