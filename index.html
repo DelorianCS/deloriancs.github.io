@@ -44,7 +44,6 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans">
-  <canvas id="matrix"></canvas>
 
   <header class="w-full flex justify-center pt-6">
     <nav class="glass rounded-xl px-4 sm:px-6 py-3 w-11/12 md:w-4/5 flex items-center justify-between">
@@ -188,30 +187,16 @@
   </footer>
 
   <script>
-    const line = 'whoami — Delorian';
-    let j = 0; const el = document.getElementById('type');
-    (function tick(){ if(!el) return; el.textContent += line[j++]||''; if(j<=line.length) setTimeout(tick, 70); })();
+  const line = 'whoami — Delorian';
+  let j = 0; const el = document.getElementById('type');
+  (function tick(){ if(!el) return; el.textContent += line[j++]||''; if(j<=line.length) setTimeout(tick, 70); })();
 
-    const c = document.getElementById('matrix'); const ctx = c.getContext('2d');
-    const letters = '01'; let fontSize = 16, cols = 0, drops = [];
-    function resize(){ c.width = innerWidth; c.height = innerHeight; cols = Math.floor(c.width / fontSize); drops = Array(cols).fill(1); }
-    function draw(){
-      ctx.fillStyle = 'rgba(0,0,0,0.08)'; ctx.fillRect(0,0,c.width,c.height);
-      ctx.fillStyle = '#58a6ff'; ctx.font = fontSize + 'px monospace';
-      for(let i=0;i<drops.length;i++){
-        const ch = letters.charAt(Math.floor(Math.random()*letters.length));
-        ctx.fillText(ch, i*fontSize, drops[i]*fontSize);
-        if(drops[i]*fontSize>c.height && Math.random()>0.975) drops[i]=0; drops[i]++;
-      }
-    }
-    resize(); setInterval(draw, 50); addEventListener('resize', resize);
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold:.12 });
+  document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
 
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
-    }, { threshold:.12 });
-    document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
