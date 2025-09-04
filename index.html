@@ -5,17 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Delorian — Pentesting & MalDev</title>
 
-  <!-- Fonts + Icons + Tailwind -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Inter like Dragkob -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    /* Make Tailwind's default sans be Inter */
     tailwind.config = {
       theme: {
         extend: {
@@ -50,7 +47,6 @@
 <body class="min-h-screen flex flex-col font-sans">
   <canvas id="matrix"></canvas>
 
-  <!-- Header -->
   <header class="w-full flex justify-center pt-6">
     <nav class="glass rounded-xl px-4 sm:px-6 py-3 w-11/12 md:w-4/5 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -72,7 +68,6 @@
   </header>
 
   <main id="home" class="flex-1 w-full flex flex-col items-center gap-16 md:gap-24">
-    <!-- MAIN -->
     <section class="w-11/12 md:w-4/5 mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-6 md:gap-10 mt-10 md:mt-14 items-center reveal">
       <div class="justify-self-center md:justify-self-start">
         <img src="https://avatars.githubusercontent.com/u/215902280?v=4" alt="Avatar"
@@ -85,7 +80,6 @@
       </div>
     </section>
 
-    <!-- PLATFORMS -->
     <section id="platforms"
       class="w-11/12 md:w-4/5 grid grid-cols-1 md:grid-cols-3 auto-rows-fr gap-4 md:gap-6 reveal">
 
@@ -132,24 +126,19 @@
       </a>
     </section>
 
-    <!-- BLOG (card width matches grid above) -->
     <section id="blog" class="w-11/12 md:w-4/5 reveal">
       <h2 class="text-2xl md:text-3xl font-bold mb-4">Blog</h2>
 
-      <!-- Use the same grid so cards have the SAME width as Platform cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        <!-- Roadmap Blog Card -->
         <a href="blog/roadmap.html"
            class="glass rounded-xl hover-glow transition-transform hover:scale-105 flex items-center gap-4 p-4">
           
-          <!-- Thumbnail (left) -->
           <div class="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg overflow-hidden bg-[#0d1117] border border-[var(--border)]">
             <img src="blog/roadmap-thumb.jpg"
                  alt="Cybersecurity Roadmap"
                  class="w-full h-full object-cover">
           </div>
 
-          <!-- Text content -->
           <div class="flex flex-col justify-center">
             <h3 class="text-lg md:text-xl font-bold">Cybersecurity Roadmap</h3>
             <p class="text-slate-400 text-sm mt-1">
@@ -163,12 +152,10 @@
       </div>
     </section>
 
-    <!-- CERTIFICATIONS -->
     <section id="certs" class="w-11/12 md:w-4/5 reveal">
       <h2 class="text-2xl md:text-3xl font-bold mb-4">Certifications</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         
-        <!-- eJPTv2 -->
         <a href="https://delorian.gitbook.io/writeups/certifications/ejptv2/conclusions" 
            target="_blank" 
            class="glass rounded-xl p-5 hover-glow flex flex-col items-center text-center transition-transform hover:scale-105">
@@ -178,7 +165,6 @@
           <p class="text-slate-400 text-sm">INE Security - Obtained 8/25</p>
         </a>
         
-        <!-- eCPPTv3 -->
         <a href="https://delorian.gitbook.io/writeups/certifications/ecpptv3/conclusions" 
            target="_blank" 
            class="glass rounded-xl p-5 hover-glow flex flex-col items-center text-center transition-transform hover:scale-105">
@@ -188,7 +174,6 @@
           <p class="text-slate-400 text-sm">INE Security - Obtained 8/25</p>
         </a>
         
-        <!-- OSCP -->
         <div class="glass rounded-xl p-5 flex flex-col items-center text-center opacity-70 cursor-not-allowed">
           <img src="https://www.offsec.com/_astro/OSCP-plus.BZHuApYA_Ztlntl.svg" 
                alt="OSCP" class="w-[110px] h-[110px] object-contain">
@@ -204,12 +189,10 @@
   </footer>
 
   <script>
-    // typewriter
     const line = 'whoami — Delorian';
     let j = 0; const el = document.getElementById('type');
     (function tick(){ if(!el) return; el.textContent += line[j++]||''; if(j<=line.length) setTimeout(tick, 70); })();
 
-    // matrix bg
     const c = document.getElementById('matrix'); const ctx = c.getContext('2d');
     const letters = '01'; let fontSize = 16, cols = 0, drops = [];
     function resize(){ c.width = innerWidth; c.height = innerHeight; cols = Math.floor(c.width / fontSize); drops = Array(cols).fill(1); }
@@ -224,7 +207,6 @@
     }
     resize(); setInterval(draw, 50); addEventListener('resize', resize);
 
-    // reveal on view
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
     }, { threshold:.12 });
