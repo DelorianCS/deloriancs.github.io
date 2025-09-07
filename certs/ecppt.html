@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>eCPPTv3 Review — DelorianCS</title>
 
-  <!-- Inter + Tailwind -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -21,15 +20,12 @@
     .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
     a.link{color:#fca5a5;text-decoration:underline;text-underline-offset:3px}
 
-    /* Reveal-on-scroll base state */
     .reveal{opacity:0; transform: translateY(18px) scale(.99); transition: opacity .7s ease, transform .7s ease, box-shadow .25s ease;}
     .reveal.show{opacity:1; transform: translateY(0) scale(1);}
 
-    /* Fancy underline for links in lists */
     .uline{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .3s ease;}
     .uline:hover{background-size:100% 1px;}
 
-    /* Hero glow + gradient shimmer */
     .glow{animation: glowPulse 2.5s ease-in-out infinite;}
     @keyframes glowPulse{
       0%,100%{ box-shadow: 0 0 0 0 rgba(239,68,68,0.15);}
@@ -45,25 +41,20 @@
     }
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-    /* Subtle floating hover for list items */
     .lift{transition: transform .2s ease, background-color .2s ease, border-color .2s ease;}
     .lift:hover{ transform: translateY(-2px); background-color: rgba(255,255,255,.02); border-color: #3a3f46; }
 
-    /* Stagger helper: set via inline style="--d: NUMBERms" */
     .stagger{transition-delay: var(--d, 0ms);}
 
-    /* Pill row for module labels */
     .pill{border:1px solid var(--border); background:#0c1016; border-radius:999px; padding:.35rem .6rem; display:inline-flex; align-items:center; gap:.4rem;}
     .pulse-dot{width:.5rem;height:.5rem;border-radius:999px;background:#f59e0b; box-shadow: 0 0 0 0 rgba(245,158,11,.5); animation:pulse 2s infinite;}
     @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,158,11,.5);}70%{box-shadow:0 0 0 10px rgba(245,158,11,0);}100%{box-shadow:0 0 0 0 rgba(245,158,11,0);}}
 
-    /* Big list sections styling */
     .list-box li{border:1px solid var(--border); border-radius:12px; padding:.6rem .8rem;}
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header class="w-full flex justify-center pt-6">
     <nav class="glass rounded-xl px-4 sm:px-6 py-3 w-11/12 md:w-3/4 max-w-6xl flex items-center justify-between reveal">
       <a href="../index.html" class="text-sm text-[var(--muted)] hover:text-white flex items-center gap-2 uline">
@@ -80,7 +71,6 @@
   <main class="w-full flex justify-center">
     <article class="w-11/12 md:w-3/4 max-w-6xl mt-8 md:mt-10 space-y-10">
 
-      <!-- Hero -->
       <section class="card p-6 md:p-10 text-center glow reveal">
         <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-rose-200 to-rose-400 bg-clip-text text-transparent shimmer">
           eCPPTv3 Review
@@ -98,13 +88,10 @@
         </p>
       </section>
 
-      <!-- Grid: Left content / Right sidebar -->
       <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-        <!-- Main content -->
         <div class="lg:col-span-2 space-y-8">
 
-          <!-- TOC -->
           <div class="card p-6 reveal">
             <h3 class="text-xl font-bold mb-4 underline decoration-rose-400">Table of contents</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[var(--muted)]">
@@ -119,7 +106,6 @@
             </div>
           </div>
 
-          <!-- Sections -->
           <div id="background" class="card p-6 md:p-8 reveal stagger" style="--d:80ms">
             <h2 class="text-2xl md:text-3xl font-bold mb-4">My Background</h2>
             <p class="text-[var(--muted)] leading-relaxed">
@@ -206,14 +192,11 @@
 
         </div>
 
-        <!-- Sidebar -->
         <aside class="space-y-6">
 
-          <!-- BIG Machines & Modules Card (replaces GitHub card) -->
           <div class="card p-6 md:p-8 reveal">
             <h3 class="text-2xl font-bold mb-4 text-rose-300">Machines & Modules</h3>
 
-            <!-- Linux Boxes -->
             <h4 class="text-lg font-semibold mb-2 text-white">Linux Boxes</h4>
             <ul class="list-box grid grid-cols-1 gap-2 text-[var(--muted)]">
               <li class="lift">CozyHosting</li>
@@ -226,7 +209,6 @@
               <li class="lift">Blocky</li>
             </ul>
 
-            <!-- AD Boxes -->
             <h4 class="text-lg font-semibold mt-6 mb-2 text-white">AD Boxes</h4>
             <ul class="list-box grid grid-cols-1 gap-2 text-[var(--muted)]">
               <li class="lift">Active</li>
@@ -238,7 +220,6 @@
               <li class="lift">Resolute</li>
             </ul>
 
-            <!-- HTB Modules -->
             <h4 class="text-lg font-semibold mt-6 mb-2 text-white">HTB Modules</h4>
             <ul class="grid grid-cols-1 gap-2 text-[var(--muted)]">
               <li class="lift border border-[var(--border)] rounded-xl p-3">
@@ -269,7 +250,6 @@
             </ul>
           </div>
 
-          <!-- Quick Facts -->
           <div class="card p-6 reveal stagger" style="--d:80ms">
             <h4 class="font-semibold mb-2">Quick facts</h4>
             <ul class="text-sm text-[var(--muted)] space-y-1">
@@ -284,7 +264,6 @@
 
       <div class="divider"></div>
 
-      <!-- Footer -->
       <footer class="pb-10 text-sm flex items-center justify-between text-[var(--muted)] reveal">
         <a href="../index.html" class="hover:text-white uline">← Back to portfolio</a>
         <span>© <span id="y2">2025</span> DelorianCS</span>
@@ -293,12 +272,10 @@
   </main>
 
   <script>
-    // Year stamps
     const y = new Date().getFullYear();
     document.getElementById('yr').textContent = y;
     document.getElementById('y2').textContent = y;
 
-    // IntersectionObserver: reveal on scroll (with stagger support)
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
