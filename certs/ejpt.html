@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>eJPTv2 Review — DelorianCS</title>
+
+  <!-- Inter + Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{ --bg:#000; --panel:rgba(13,17,23,.85); --border:#30363d; --fg:#c9d1d9; --muted:#8b949e; --brand:#ef4444; }
+    html,body{background:var(--bg);color:var(--fg);font-family:Inter,-apple-system,Segoe UI,Roboto,sans-serif; scroll-behavior:smooth;}
+    .glass{background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--border);}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:18px; box-shadow: 0 0 0 0 rgba(239,68,68,0.15);}
+    .card:hover{ box-shadow: 0 10px 30px -10px rgba(239,68,68,0.25); }
+    .tag{font-size:.72rem;border:1px solid var(--border);padding:.2rem .6rem;border-radius:999px;color:var(--muted);background:#0d1117cc}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+    a.link{color:#fca5a5;text-decoration:underline;text-underline-offset:3px}
+
+    /* Reveal-on-scroll */
+    .reveal{opacity:0; transform: translateY(18px) scale(.99); transition: opacity .7s ease, transform .7s ease, box-shadow .25s ease;}
+    .reveal.show{opacity:1; transform: translateY(0) scale(1);}
+
+    /* Underline effect */
+    .uline{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .3s ease;}
+    .uline:hover{background-size:100% 1px;}
+
+    /* Glow & shimmer */
+    .glow{animation: glowPulse 2.5s ease-in-out infinite;}
+    @keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.15);}50%{box-shadow:0 0 40px 0 rgba(239,68,68,0.22);}}
+    .shimmer{background:linear-gradient(90deg,rgba(255,255,255,.1),rgba(255,255,255,.35),rgba(255,255,255,.1));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 2.25s linear infinite;}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+    /* Hover lift */
+    .lift{transition: transform .2s ease, background-color .2s ease, border-color .2s ease;}
+    .lift:hover{ transform: translateY(-2px); background-color: rgba(255,255,255,.02); border-color: #3a3f46; }
+
+    /* Stagger animation */
+    .stagger{transition-delay: var(--d, 0ms);}
+
+    /* Pills */
+    .pill{border:1px solid var(--border); background:#0c1016; border-radius:999px; padding:.35rem .6rem; display:inline-flex; align-items:center; gap:.4rem;}
+    .pulse-dot{width:.5rem;height:.5rem;border-radius:999px;background:#f59e0b; box-shadow:0 0 0 0 rgba(245,158,11,.5); animation:pulse 2s infinite;}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,158,11,.5);}70%{box-shadow:0 0 0 10px rgba(245,158,11,0);}100%{box-shadow:0 0 0 0 rgba(245,158,11,0);}}
+
+    /* List styling */
+    .list-box li{border:1px solid var(--border); border-radius:12px; padding:.6rem .8rem;}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="w-full flex justify-center pt-6">
+    <nav class="glass rounded-xl px-4 sm:px-6 py-3 w-11/12 md:w-3/4 max-w-6xl flex items-center justify-between reveal">
+      <a href="../index.html" class="text-sm text-[var(--muted)] hover:text-white flex items-center gap-2 uline">
+        <span class="text-[var(--brand)]">←</span> Back to portfolio
+      </a>
+      <div class="hidden md:flex items-center gap-3">
+        <span class="tag">Review</span>
+        <span class="tag">Penetration Testing</span>
+        <span class="tag">Updated <span id="yr">2025</span></span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="w-full flex justify-center">
+    <article class="w-11/12 md:w-3/4 max-w-6xl mt-8 md:mt-10 space-y-10">
+
+      <!-- Hero -->
+      <section class="card p-6 md:p-10 text-center glow reveal">
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-rose-200 to-rose-400 bg-clip-text text-transparent shimmer">
+          eJPTv2 Review
+        </h1>
+        <div class="mt-3 text-sm text-[var(--muted)]">
+          <span>January 2025</span>
+          <span class="mx-2">•</span>
+          <span>by <a href="../index.html" class="link">DelorianCS</a></span>
+        </div>
+        <p class="mt-5 text-lg md:text-xl text-[var(--muted)] max-w-3xl mx-auto">
+          My experience preparing for INE’s eJPTv2: how I studied, what to focus on, what to skip, and tips for passing confidently.
+        </p>
+      </section>
+
+      <!-- Grid -->
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Main -->
+        <div class="lg:col-span-2 space-y-8">
+
+          <!-- TOC -->
+          <div class="card p-6 reveal">
+            <h3 class="text-xl font-bold mb-4 underline decoration-rose-400">Table of contents</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[var(--muted)]">
+              <a href="#background" class="hover:text-white underline uline">My Background</a>
+              <a href="#training" class="hover:text-white underline uline">The Training</a>
+              <a href="#skip" class="hover:text-white underline uline">What to Skip</a>
+              <a href="#add" class="hover:text-white underline uline">What to Add</a>
+              <a href="#prep" class="hover:text-white underline uline">Preparation</a>
+              <a href="#exam" class="hover:text-white underline uline">The Exam</a>
+              <a href="#flaws" class="hover:text-white underline uline">Exam Flaws</a>
+              <a href="#tips" class="hover:text-white underline uline">Tips</a>
+            </div>
+          </div>
+
+          <!-- Sections -->
+          <div id="background" class="card p-6 md:p-8 reveal stagger" style="--d:80ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">My Background</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              I was essentially a beginner. My main experience came from TryHackMe labs, where I learned networking basics
+              and cybersecurity fundamentals—enough to get started but nothing advanced.
+            </p>
+          </div>
+
+          <div id="training" class="card p-6 md:p-8 reveal stagger" style="--d:120ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">The Training</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              The official INE training is well-structured and thorough, but it goes beyond what’s needed for the exam itself.
+              Focus on the essentials for efficiency.
+            </p>
+          </div>
+
+          <div id="skip" class="card p-6 md:p-8 reveal stagger" style="--d:160ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">What to Skip</h2>
+            <ul class="list-disc pl-5 space-y-2 text-[var(--muted)]">
+              <li>Phishing modules</li>
+              <li>Some passive reconnaissance sections (useful but not exam-critical)</li>
+              <li>The web pentesting module is largely unnecessary for the exam</li>
+            </ul>
+          </div>
+
+          <div id="add" class="card p-6 md:p-8 reveal stagger" style="--d:200ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">What to Add</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              Focus on fundamentals: networking concepts, nmap scanning, FTP and SMB enumeration, Metasploit, and
+              common exploits like EternalBlue. Practice light TryHackMe machines for a balanced skill set.
+            </p>
+          </div>
+
+          <div id="prep" class="card p-6 md:p-8 reveal stagger" style="--d:240ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Preparation</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              Around 15–30 days of focused study is enough to comfortably pass the test if you stay consistent.
+            </p>
+          </div>
+
+          <div id="exam" class="card p-6 md:p-8 reveal stagger" style="--d:280ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">The Exam</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              The exam runs entirely in-browser through Guacamole, which feels different if you’re used to a local VM.
+              All required tools are provided, and you have 48 hours—plenty of time, as 5–6 hours is often enough.
+            </p>
+          </div>
+
+          <div id="flaws" class="card p-6 md:p-8 reveal stagger" style="--d:320ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Exam Flaws / Caveats</h2>
+            <ol class="list-decimal pl-5 space-y-2 text-[var(--muted)]">
+              <li>Occasional lab instability—flags may vanish until a reset</li>
+              <li>Overall no real flaws with the exam itself</li>
+
+            </ol>
+          </div>
+
+          <div id="tips" class="card p-6 md:p-8 reveal stagger" style="--d:360ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Tips</h2>
+            <ul class="list-disc pl-5 space-y-2 text-[var(--muted)]">
+              <li>Take detailed notes—hosts, credentials, footholds</li>
+              <li>Copy all exam questions into your notes (Obsidian is great)</li>
+              <li>If stuck, brute-force low-hanging services</li>
+              <li>Once you feel ready, take the exam without hesitation</li>
+              <li>Enjoy the process and have fun</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="space-y-6">
+          <div class="card p-6 md:p-8 reveal">
+            <h3 class="text-2xl font-bold mb-4 text-rose-300">Machines to Prepare</h3>
+            <ul class="list-box grid grid-cols-1 gap-2 text-[var(--muted)]">
+              <li class="lift">TryHackMe | Basic Pentesting</li>
+              <li class="lift">TryHackMe | Ice</li>
+              <li class="lift">TryHackMe | Brooklyn Nine Nine</li>
+              <li class="lift">TryHackMe | Anonymous</li>
+              <li class="lift">TryHackMe | Easy Peasy</li>
+              <li class="lift">TryHackMe | GoldenEye</li>
+              <li class="lift">TryHackMe | HA Joker CTF</li>
+              <li class="lift">TryHackMe | Source</li>
+              <li class="lift">TryHackMe | Poster</li>
+              <li class="lift">TryHackMe | Wordpress: CVE-2021-29447</li>
+              <li class="lift">TryHackMe | Blog</li>
+              <li class="lift">TryHackMe | RootMe</li>
+            </ul>
+          </div>
+          <div class="card p-6 reveal stagger" style="--d:80ms">
+            <h4 class="font-semibold mb-2">Quick facts</h4>
+            <ul class="text-sm text-[var(--muted)] space-y-1">
+              <li>Style: Really EASY, fundamentals-heavy</li>
+              <li>Time: 24-hour window (6 hours typical)</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Footer -->
+      <footer class="pb-10 text-sm flex items-center justify-between text-[var(--muted)] reveal">
+        <a href="../index.html" class="hover:text-white uline">← Back to portfolio</a>
+        <span>© <span id="y2">2025</span> DelorianCS</span>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    const y = new Date().getFullYear();
+    document.getElementById('yr').textContent = y;
+    document.getElementById('y2').textContent = y;
+
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('show');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold:.12 });
+    document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+  </script>
+</body>
+</html>

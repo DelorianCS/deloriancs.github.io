@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>eCPPTv3 Review — DelorianCS</title>
+
+  <!-- Inter + Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root{ --bg:#000; --panel:rgba(13,17,23,.85); --border:#30363d; --fg:#c9d1d9; --muted:#8b949e; --brand:#ef4444; }
+    html,body{background:var(--bg);color:var(--fg);font-family:Inter,-apple-system,Segoe UI,Roboto,sans-serif; scroll-behavior:smooth;}
+    .glass{background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--border);}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:18px; box-shadow: 0 0 0 0 rgba(239,68,68,0.15);}
+    .card:hover{ box-shadow: 0 10px 30px -10px rgba(239,68,68,0.25); }
+    .tag{font-size:.72rem;border:1px solid var(--border);padding:.2rem .6rem;border-radius:999px;color:var(--muted);background:#0d1117cc}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+    a.link{color:#fca5a5;text-decoration:underline;text-underline-offset:3px}
+
+    /* Reveal-on-scroll base state */
+    .reveal{opacity:0; transform: translateY(18px) scale(.99); transition: opacity .7s ease, transform .7s ease, box-shadow .25s ease;}
+    .reveal.show{opacity:1; transform: translateY(0) scale(1);}
+
+    /* Fancy underline for links in lists */
+    .uline{background-image:linear-gradient(currentColor,currentColor);background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .3s ease;}
+    .uline:hover{background-size:100% 1px;}
+
+    /* Hero glow + gradient shimmer */
+    .glow{animation: glowPulse 2.5s ease-in-out infinite;}
+    @keyframes glowPulse{
+      0%,100%{ box-shadow: 0 0 0 0 rgba(239,68,68,0.15);}
+      50%{ box-shadow: 0 0 40px 0 rgba(239,68,68,0.22);}
+    }
+    .shimmer{
+      background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.35), rgba(255,255,255,.1));
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 2.25s linear infinite;
+    }
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+    /* Subtle floating hover for list items */
+    .lift{transition: transform .2s ease, background-color .2s ease, border-color .2s ease;}
+    .lift:hover{ transform: translateY(-2px); background-color: rgba(255,255,255,.02); border-color: #3a3f46; }
+
+    /* Stagger helper: set via inline style="--d: NUMBERms" */
+    .stagger{transition-delay: var(--d, 0ms);}
+
+    /* Pill row for module labels */
+    .pill{border:1px solid var(--border); background:#0c1016; border-radius:999px; padding:.35rem .6rem; display:inline-flex; align-items:center; gap:.4rem;}
+    .pulse-dot{width:.5rem;height:.5rem;border-radius:999px;background:#f59e0b; box-shadow: 0 0 0 0 rgba(245,158,11,.5); animation:pulse 2s infinite;}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,158,11,.5);}70%{box-shadow:0 0 0 10px rgba(245,158,11,0);}100%{box-shadow:0 0 0 0 rgba(245,158,11,0);}}
+
+    /* Big list sections styling */
+    .list-box li{border:1px solid var(--border); border-radius:12px; padding:.6rem .8rem;}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="w-full flex justify-center pt-6">
+    <nav class="glass rounded-xl px-4 sm:px-6 py-3 w-11/12 md:w-3/4 max-w-6xl flex items-center justify-between reveal">
+      <a href="../index.html" class="text-sm text-[var(--muted)] hover:text-white flex items-center gap-2 uline">
+        <span class="text-[var(--brand)]">←</span> Back to portfolio
+      </a>
+      <div class="hidden md:flex items-center gap-3">
+        <span class="tag">Review</span>
+        <span class="tag">Penetration Testing</span>
+        <span class="tag">Updated <span id="yr">2025</span></span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="w-full flex justify-center">
+    <article class="w-11/12 md:w-3/4 max-w-6xl mt-8 md:mt-10 space-y-10">
+
+      <!-- Hero -->
+      <section class="card p-6 md:p-10 text-center glow reveal">
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-rose-200 to-rose-400 bg-clip-text text-transparent shimmer">
+          eCPPTv3 Review
+        </h1>
+
+        <div class="mt-3 text-sm text-[var(--muted)]">
+          <span>January 2025</span>
+          <span class="mx-2">•</span>
+          <span>by <a href="../index.html" class="link">DelorianCS</a></span>
+        </div>
+
+        <p class="mt-5 text-lg md:text-xl text-[var(--muted)] max-w-3xl mx-auto">
+          My hands-on experience with INE’s eCPPTv3: what the training covers (and misses), how the exam feels,
+          and practical tips to pass on your first go.
+        </p>
+      </section>
+
+      <!-- Grid: Left content / Right sidebar -->
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Main content -->
+        <div class="lg:col-span-2 space-y-8">
+
+          <!-- TOC -->
+          <div class="card p-6 reveal">
+            <h3 class="text-xl font-bold mb-4 underline decoration-rose-400">Table of contents</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[var(--muted)]">
+              <a href="#background" class="hover:text-white underline uline">My Background</a>
+              <a href="#training" class="hover:text-white underline uline">The Training</a>
+              <a href="#skip" class="hover:text-white underline uline">What to Skip</a>
+              <a href="#supplement" class="hover:text-white underline uline">What to Add</a>
+              <a href="#preparation" class="hover:text-white underline uline">Preparation</a>
+              <a href="#exam" class="hover:text-white underline uline">The Exam</a>
+              <a href="#flaws" class="hover:text-white underline uline">Exam Flaws</a>
+              <a href="#tips" class="hover:text-white underline uline">Tips</a>
+            </div>
+          </div>
+
+          <!-- Sections -->
+          <div id="background" class="card p-6 md:p-8 reveal stagger" style="--d:80ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">My Background</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              I was pretty much a beginner; my only cert was eJPTv2. I prepared mostly with HTB Academy and retired 
+              labs focused on AD and basic web pentesting. I also had a bit of THM for the fundamentals.
+            </p>
+          </div>
+
+          <div id="training" class="card p-6 md:p-8 reveal stagger" style="--d:120ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">The Training</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              The official INE content helps, but it’s not fully aligned with the exam’s path. Combine it with hands-on AD,
+              password attacks, and a few web labs to close the gaps.
+            </p>
+          </div>
+
+          <div id="skip" class="card p-6 md:p-8 reveal stagger" style="--d:160ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">What to skip on the Training</h2>
+            <ul class="list-disc pl-5 space-y-2 text-[var(--muted)]">
+              <li>I didn't do the full training, but from the index and attempts I’d skip:</li>
+              <li>Client-Side Attacks (rarely relevant for the attempt)</li>
+              <li>Intro x86/BOF (great skills, low direct payoff here)</li>
+              <li>Full C2 sections (nice to know; not strictly required)</li>
+            </ul>
+            <p class="mt-3 text-[var(--muted)]">These are still valuable—circle back post-exam.</p>
+          </div>
+
+          <div id="supplement" class="card p-6 md:p-8 reveal stagger" style="--d:200ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">What to add (to actually pass)</h2>
+            <h3 class="text-xl font-semibold mb-2">Active Directory</h3>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--muted)]">
+              <li>HTB Academy: Intro to AD; AD Enumeration & Attacks</li>
+              <li>Impacket fluency (secretsdump, wmiexec, GetUserSPNs, etc.)</li>
+              <li>PowerView basics & common AD misconfigs</li>
+            </ul>
+            <h3 class="text-xl font-semibold mt-5 mb-2">Web App</h3>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--muted)]">
+              <li>Practice WordPress + common vulns (auth bypass, LFI/RFI, SSRF, upload bypass)</li>
+              <li>Web portion is lighter—don’t over-index on it</li>
+            </ul>
+          </div>
+
+          <div id="preparation" class="card p-6 md:p-8 reveal stagger" style="--d:240ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Preparation</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              If you just passed eJPTv2, 30–40 days of focused practice is enough. Do the Machines & Modules listed here,
+              take notes, and you’ll be in great shape.
+            </p>
+          </div>
+
+          <div id="exam" class="card p-6 md:p-8 reveal stagger" style="--d:280ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">The Exam</h2>
+            <p class="text-[var(--muted)] leading-relaxed">
+              The exam runs in-browser via Guacamole, which can feel a bit odd if you’re used to your own VM. Some tools live
+              in containers and may have different names (e.g. <code class="text-rose-300">impacket-GetUserSPNs.py</code>).
+              You get 24 hours—plenty to finish if you plan well.
+            </p>
+          </div>
+
+          <div id="flaws" class="card p-6 md:p-8 reveal stagger" style="--d:320ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Exam Flaws / Caveats</h2>
+            <ol class="list-decimal pl-5 space-y-2 text-[var(--muted)]">
+              <li>Lab instability (dynamic flags sometimes missing until reset)</li>
+              <li>Provided cracking lists may mislead—bring your staples</li>
+              <li>Some tools not on the jump box—have backups ready</li>
+              <li>Expect some brute-forcing; AD is there but not the only path</li>
+              <li>Occasional misworded tasks (e.g., a user that doesn’t exist)</li>
+            </ol>
+          </div>
+
+          <div id="tips" class="card p-6 md:p-8 reveal stagger" style="--d:360ms">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Tips</h2>
+            <ul class="list-disc pl-5 space-y-2 text-[var(--muted)]">
+              <li>Take meticulous notes—hosts, creds, footholds, privesc ideas</li>
+              <li>Use only: <span class="pill"><span class="pulse-dot"></span>xato-net-10k</span>, 
+                  <span class="pill"><span class="pulse-dot"></span>seasons</span>, 
+                  <span class="pill"><span class="pulse-dot"></span>months</span>, 
+                  <span class="pill"><span class="pulse-dot"></span>rockyou</span></li>
+              <li>Paste all questions into your notes (Obsidian is great)</li>
+              <li>If stuck, brute-force the “low-hanging fruit” angles</li>
+              <li>Don’t forget to have fun 🙂</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="space-y-6">
+
+          <!-- BIG Machines & Modules Card (replaces GitHub card) -->
+          <div class="card p-6 md:p-8 reveal">
+            <h3 class="text-2xl font-bold mb-4 text-rose-300">Machines & Modules</h3>
+
+            <!-- Linux Boxes -->
+            <h4 class="text-lg font-semibold mb-2 text-white">Linux Boxes</h4>
+            <ul class="list-box grid grid-cols-1 gap-2 text-[var(--muted)]">
+              <li class="lift">CozyHosting</li>
+              <li class="lift">Keeper</li>
+              <li class="lift">Jerry</li>
+              <li class="lift">Love</li>
+              <li class="lift">Trick</li>
+              <li class="lift">Spectra</li>
+              <li class="lift">Backdoor</li>
+              <li class="lift">Blocky</li>
+            </ul>
+
+            <!-- AD Boxes -->
+            <h4 class="text-lg font-semibold mt-6 mb-2 text-white">AD Boxes</h4>
+            <ul class="list-box grid grid-cols-1 gap-2 text-[var(--muted)]">
+              <li class="lift">Active</li>
+              <li class="lift">Forest</li>
+              <li class="lift">Sauna</li>
+              <li class="lift">Monteverde</li>
+              <li class="lift">Cascade</li>
+              <li class="lift">Cicada</li>
+              <li class="lift">Resolute</li>
+            </ul>
+
+            <!-- HTB Modules -->
+            <h4 class="text-lg font-semibold mt-6 mb-2 text-white">HTB Modules</h4>
+            <ul class="grid grid-cols-1 gap-2 text-[var(--muted)]">
+              <li class="lift border border-[var(--border)] rounded-xl p-3">
+                <a class="link uline" target="_blank" href="https://academy.hackthebox.com/module/details/57">
+                  Login Brute Forcing
+                </a>
+              </li>
+              <li class="lift border border-[var(--border)] rounded-xl p-3">
+                <a class="link uline" target="_blank" href="https://academy.hackthebox.com/module/details/113">
+                  Attacking Common Applications
+                </a>
+              </li>
+              <li class="lift border border-[var(--border)] rounded-xl p-3">
+                <a class="link uline" target="_blank" href="https://academy.hackthebox.com/module/details/74">
+                  Intro to Active Directory
+                </a>
+              </li>
+              <li class="lift border border-[var(--border)] rounded-xl p-3">
+                <a class="link uline" target="_blank" href="https://academy.hackthebox.com/module/details/143">
+                  Active Directory Enumeration & Attacks
+                </a>
+              </li>
+              <li class="lift border border-[var(--border)] rounded-xl p-3">
+                <a class="link uline" target="_blank" href="https://academy.hackthebox.com/module/details/17">
+                  Hacking WordPress
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Quick Facts -->
+          <div class="card p-6 reveal stagger" style="--d:80ms">
+            <h4 class="font-semibold mb-2">Quick facts</h4>
+            <ul class="text-sm text-[var(--muted)] space-y-1">
+              <li>Style: Brute-Force is a must, AD-heavy</li>
+              <li>Time: one-day exam window</li>
+              <li>Focus: enumeration → chaining → privesc</li>
+            </ul>
+          </div>
+
+        </aside>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- Footer -->
+      <footer class="pb-10 text-sm flex items-center justify-between text-[var(--muted)] reveal">
+        <a href="../index.html" class="hover:text-white uline">← Back to portfolio</a>
+        <span>© <span id="y2">2025</span> DelorianCS</span>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    // Year stamps
+    const y = new Date().getFullYear();
+    document.getElementById('yr').textContent = y;
+    document.getElementById('y2').textContent = y;
+
+    // IntersectionObserver: reveal on scroll (with stagger support)
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('show');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold:.12 });
+
+    document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+  </script>
+</body>
+</html>
