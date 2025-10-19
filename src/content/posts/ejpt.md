@@ -1,7 +1,7 @@
 ---
 title: eJPT - Review 
 published: 2025-07-27
-description: Here I share my overall opinion on the eCPPTv3 Certification by INE, some Tips & Tricks and some machines & material to actually prepare for the certification 
+description: Here I share the full breakdown of the eJPTv2 Certification by INE, my opinion, some Tips & Tricks and some machines & material to actually prepare for the certification.
 image: 'https://miro.medium.com/1*KXRcpcS4sGp4xvLjhByI7A.png'
 tags: [Certification, INE, eJPT,]
 category: Certification
