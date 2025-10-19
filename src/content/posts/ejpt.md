@@ -3,7 +3,7 @@ title: eJPT - Review
 published: 2025-07-27
 description: Here I share my overall opinion on the eCPPTv3 Certification by INE, some Tips & Tricks and some machines & material to actually prepare for the certification 
 image: 'https://miro.medium.com/1*KXRcpcS4sGp4xvLjhByI7A.png'
-tags: [Active Directory, INE, eCPPT,]
+tags: [Certification, INE, eJPT,]
 category: Certification
 draft: false
 ---
