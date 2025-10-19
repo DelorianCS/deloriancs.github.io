@@ -9,7 +9,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "Delorian's Blog",
-	subtitle: "Delorian's Blog",
+	subtitle: "Pentesting & Red Teaming Notes, Writeups & Certification guides",
 	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 305, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
@@ -55,7 +55,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "https://i.pinimg.com/1200x/7d/6d/cd/7d6dcd3b4cd13635e6c58017b29d603b.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "Delorian",
-	bio: "Pentesting & Red Teaming - eCPPT | eJPT | CRTP...",
+	bio: "🇪🇸/🇵🇹 Pentesting & Red Teaming - eCPPT | eJPT | CRTP...",
 	links: [
 		{
 			name: "Discord",
