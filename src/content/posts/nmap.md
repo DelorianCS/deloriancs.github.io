@@ -14,24 +14,32 @@ draft: false
 
 ### Host Discovery
 
-```bash
-# Initial Host Discovery
-nmap -sn <IP>/24 -oG hosts.gnmap
 
-# Export hosts into a hostlist 
+Initial Host Discovery
+```bash
+nmap -sn <IP>/24 -oG hosts.gnmap
+```
+
+Export hosts into a hostlist 
+```bash
 grep "Up" hosts.gnmap | awk '{print $2}' > hosts.txt
 ```
 
 ### Port Scan
 
+
+
+Port scan
 ```bash
-# Port scan
 nmap -sS -p- --open -Pn -n --min-rate 5000 -iL hosts.txt -oN ports.txt
+```
 
-# Parse ports to a -p<ports> format
+Parse ports to a -p<ports> format
+```bash
 grep '^[0-9]' ports.txt | cut -d '/' -f1 | sort -u | xargs | tr '' ','
-
-# Service and Version and NSE Detection Scan
+```
+Service and Version and NSE Detection Scan
+```bash
 nmap -sCV --open -Pn -p<ports> -iL hosts.txt -oN scan.txt
 ```
 
@@ -45,8 +53,9 @@ nmap -p- --open -Pn -n --min-rate 5000 -sS <IP> -oN ports
 
 ### Parse open ports
 
+
+Add this function to .bashrc or .zshrc (Credits to S4vitar)
 ```bash
-# Add this function to .bashrc or .zshrc (Credits to S4vitar)
 extractPorts () {
 	ports="$(cat $1 | grep -oP '\d{1,5}/open' | awk '{print $1}' FS='/' | xargs | tr ' ' ',')" 
 	ip_address="$(cat $1 | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u | head -n 1)" 
@@ -58,8 +67,9 @@ extractPorts () {
 	batcat extractPorts.tmp
 	rm extractPorts.tmp
 }
-
-# Then do
+```
+Then do
+```bash
 extractPorts <ports file>
 ```
 
