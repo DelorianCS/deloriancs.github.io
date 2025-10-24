@@ -1,6 +1,6 @@
 ---
 title: HTB Imagery
-published: 2025-10-05
+published: 05-10-2025
 description: Imagery is a Linux medium machine of season 9, we will learn Stored XSS | LFI | Backend Enumeration | Code Review | OS Command Injection | AES Decryption | Script developement | Abusing charcol
 image: 'https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/662ccbe3935d62aee031d620014adac4.png'
 tags: [Linux, Medium, HackTheBox, Web Hacking]

@@ -1,6 +1,6 @@
 ---
 title: HTB DarkZero
-published: 2025-10-10
+published: 10-10-2025
 description: Darkzero is a Windows Active Directory hard machine of season 9, we will learn MSSQL | 2025 CVE | Persistence | Cross-Forest Abuse | Pivoting | Unconstrained Delegation abuse | DCSync...
 image: 'https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/78acdd0d87ed629f6cd2dc378bdcddac.png'
 tags: [Active Directory, Hard, HackTheBox,]
