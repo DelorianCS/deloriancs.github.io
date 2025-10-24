@@ -1,6 +1,6 @@
 ---
 title: eCPPT - Review
-published: 06-09-2025
+published: 2025-09-06
 description: Here I share my overall opinion on the eCPPTv3 Certification by INE, some Tips & Tricks and some machines & material to actually prepare for the certification 
 image: 'https://www.approach-cyber.com/wp-content/uploads/2025/01/30.webp'
 tags: [Active Directory, INE, eCPPT,]
