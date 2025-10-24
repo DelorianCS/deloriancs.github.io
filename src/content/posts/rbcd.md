@@ -1,6 +1,6 @@
 ---
 title: Resource-Based Constrained Delegation (RBCD)
-published: 2025-07-25
+published: 2025-10-25
 description: In this Post you'll learn everything you need to know about Resource-Based Constrained Delegation, from exploitation on Linux/Windows to how to Prevent it.
 image: 'https://delorian.gitbook.io/writeups/~gitbook/image?url=https%3A%2F%2F3550432212-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FgxTXO9Ixrx4ExK6jnMbc%252Fuploads%252FeNH7fh8aux3nJ75dkpDO%252Fimage.png%3Falt%3Dmedia%26token%3D9cd24f3b-0dd9-4376-a7b5-8dca7cfdeef6&width=768&dpr=1&quality=100&sign=da31eab4&sv=2'
 tags: [Blog, Attack, Active Directory]
