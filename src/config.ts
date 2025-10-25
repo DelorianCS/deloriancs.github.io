@@ -32,7 +32,7 @@ export const siteConfig: SiteConfig = {
 	favicon: [
 		// Leave this array empty to use the default favicon
 		 {
-		   src: 'https://i.pinimg.com/1200x/7d/6d/cd/7d6dcd3b4cd13635e6c58017b29d603b.jpg',    // Path of the favicon, relative to the /public directory
+		   src: 'https://i.pinimg.com/736x/f0/5c/b0/f05cb02b43a8056426e3fcd88494419d.jpg',    // Path of the favicon, relative to the /public directory
 		//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
 		   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
 		 }
@@ -53,7 +53,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "https://i.pinimg.com/736x/a6/ee/0b/a6ee0b30421ff19e51a625aa57c9bf33.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	avatar: "https://i.pinimg.com/736x/f0/5c/b0/f05cb02b43a8056426e3fcd88494419d.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "Delorian",
 	bio: "Pentesting & Red Teaming - eCPPT | eJPT | CRTP...",
 	links: [
