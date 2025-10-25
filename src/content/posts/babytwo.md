@@ -8,11 +8,9 @@ category: Writeup
 draft: false
 ---
 
-# Baby Two
-
 Today we are doing the continuation of the Baby (Easy) machine on VulnLab, BabyTwo. This machine will cover  Password-Spraying  | Hijacking a login script | `BloodHound` enumeration | Abusing some `ACLs`  & `GPOs` | `DCSync`...
 
-## Reconnaissance
+# Reconnaissance
 
 As always we start off with our TCP scan using `nmap`&#x20;
 
@@ -175,7 +173,7 @@ netexec smb baby2.vl -u 'Guest' -p '' --get-file dev/CHANGELOG CHANGELOG --share
 
 This is human-written, so we will consider it as a hint for the next steps.
 
-## AS-REP Roasting (Failed)
+# AS-REP Roasting (Failed)
 
 As we got a valid list of usernames but no passwords, `let's try a AS-REP Roasting` attack using impacket-GetNPUsers
 
@@ -191,7 +189,7 @@ impacket-GetNPUsers baby2.vl/ -no-pass -usersfile users.txt -format john
 
 As there's no success, let's try a `Pasword Spraying Attack`&#x20;
 
-## Password Spraying
+# Password Spraying
 
 Let's use `netexec` to password spray each user using users as passwords
 
@@ -221,7 +219,7 @@ netexec smb baby2.vl -u 'library' -p 'library' -M spider_plus
 
 The files discovered by the *share crawl* show a file that stands out: b`aby2.vl/scripts/login.vbs`&#x20;
 
-## Foothold: Hijacking login script
+# Foothold: Hijacking login script
 
 Remember the symbolic link we found earlier along with the `CHANGELOG` that indicated a possible login script
 
@@ -348,7 +346,7 @@ No **AV** detection and **cross-compiled.** \
 rusthound -d baby2.vl -i "10.129.234.72" -u 'library@baby2.vl' -p 'library' -z --adcs --old-bloodhound
 ```
 
-## Privilege Escalation using Bloodhound
+# Privilege Escalation using Bloodhound
 
 Now let's ingest it into our `Bloodhound`
 
@@ -362,7 +360,7 @@ sudo bloodhound
 
 We now visualize that the current user `AMELIA.GRIFFITHS` has `WriteDacl` & `WriteOwner` over `GPOADM` which means if we read the `BloodHound` documentation about this,we see that we can give us the `GenericAll` right over  `GPOADM`, hence changing this user's password without knowing our current password, this is exactly our desired situation so let's abuse this!
 
-## Abusing  WriteOwner & WriteDacl over GPOADM
+# Abusing  WriteOwner & WriteDacl over GPOADM
 
 First let's give us `GenericAll` over the `GPOADM` user using `PowerView.ps1` &#x20;
 
@@ -422,7 +420,7 @@ python3 pyGPOAbuse/pygpoabuse.py baby2.vl/gpoadm:'Password123!' -gpo-id "31B2F34
 
 <figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2F88oLMu4qN6dqNePuUKs7%2Fimage.png?alt=media&#x26;token=8b6b1f6d-e78a-4ccb-9635-9d5c08c809f1" alt=""><figcaption></figcaption></figure>
 
-## DCSync  using impacket
+# DCSync  using impacket
 
 Now we've got the right to perform a `DCSync` attack which will retrieve all hashes for the domain users, let's use `impacket-secretsdump` for this
 
