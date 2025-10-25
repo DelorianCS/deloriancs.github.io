@@ -202,7 +202,7 @@ netexec smb baby2.vl -u users.txt -p users.txt --no-bruteforce --continue-on-suc
 Success! We get two hits as valid credentials, one as `Carl.Moore:Carl.Moore` and the other as `library:library`.&#x20;
 
 :::warning
-This is a really **critical** security concern and shouldn't be happening \
+This is a really **critical** security concern and shouldn't be happening
 :::
 
 Now we will enumerate if we got any new share access abusing these users
@@ -217,7 +217,7 @@ netexec smb baby2.vl -u 'library' -p 'library' -M spider_plus
 
 <figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2FHhVzoDKAylJUh1vdi2Ry%2Fimage.png?alt=media&#x26;token=159b1f10-cae4-4fe4-9dfd-8ce6c6c979bb" alt=""><figcaption></figcaption></figure>
 
-The files discovered by the *share crawl* show a file that stands out: b`aby2.vl/scripts/login.vbs`&#x20;
+The files discovered by the *share crawl* show a file that stands out: `baby2.vl/scripts/login.vbs`&#x20;
 
 # Foothold: Hijacking login script
 
@@ -337,9 +337,9 @@ We finally got our *foothold* onto the system as `amelia.griffiths`!&#x20;
 For escalating our privileges let's use `bloodhound` with the `library:library` credentials which have access to `LDAP` along with our data collector, we will use `rusthound` in this case.
 
 :::note
-**RustHound** is a **cross-platform** **BloodHound** collector tool written in *Rust*, making it compatible with *Linux*, *Windows*, and *macOS*. \
-No **AV** detection and **cross-compiled.** \
-**RustHound** generates users, groups, computers, **OUs**, **GPOs**, containers, and domain **JSON** files that can be analyzed with **BloodHound**.\
+**RustHound** is a **cross-platform** **BloodHound** collector tool written in *Rust*, making it compatible with *Linux*, *Windows*, and *macOS*. 
+No **AV** detection and **cross-compiled.** 
+**RustHound** generates users, groups, computers, **OUs**, **GPOs**, containers, and domain **JSON** files that can be analyzed with **BloodHound**.
 :::
 
 ```bash
@@ -365,7 +365,7 @@ We now visualize that the current user `AMELIA.GRIFFITHS` has `WriteDacl` & `Wri
 First let's give us `GenericAll` over the `GPOADM` user using `PowerView.ps1` &#x20;
 
 :::note
-`PowerView` Is *a reconnaissance tool* which you one can use after an initial foothold is gained. You can get the `PowerView.ps1` script from `GitHub` <https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1>\
+`PowerView` Is *a reconnaissance tool* which you one can use after an initial foothold is gained. You can get the `PowerView.ps1` script from `GitHub` <https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1>
 :::
 
 To use `PowerView` first we need to import it
@@ -383,7 +383,7 @@ Add-DomainObjectAcl -PrincipalIdentity "legacy" -TargetIdentity "gpoadm" -Rights
 This gave us permission to change the `GPOADM's` password to something else using `net.exe` , let's put `Password123!`  as the new password
 
 :::warning
-Keep in mind that **net.exe** is not stealth at all and gives obvious traces to mark it as a security concerns, so in real life *Red Teaming* / *Pentesting* you shouldn't use it\
+Keep in mind that **net.exe** is not stealth at all and gives obvious traces to mark it as a security concerns, so in real life *Red Teaming* / *Pentesting* you shouldn't use it
 :::
 
 ```powershell
@@ -401,7 +401,7 @@ Now let's enumerate the *outbound object control* of this user using `bloodhound
 There's an interesting `GenericAll` permission over a Tier 0 GPO
 
 :::note
-**Tier 0 GPOs** are Group Policy Objects that can affect **Tier 0 assets** - the most privileged accounts and systems in an Active Directory environment.\
+**Tier 0 GPOs** are Group Policy Objects that can affect **Tier 0 assets** - the most privileged accounts and systems in an Active Directory environment.
 :::
 
 We can use [pyyGPOAbuse](https://github.com/Hackndo/pyGPOAbuse) in order to abuse this right
