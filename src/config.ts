@@ -58,13 +58,6 @@ export const profileConfig: ProfileConfig = {
 	bio: "Pentesting & Red Teaming - eCPPT | eJPT | CRTA | CRTO...",
 	links: [
 		{
-			name: "Discord",
-			icon: "fa6-brands:discord", // Visit https://icones.js.org/ for icon codes
-			// You will need to install the corresponding icon set if it's not already included
-			// `pnpm add @iconify-json/<icon-set-name>`
-			url: "https://discord.com/users/1371508453067198619",
-		},
-		{
 			name: "HackTheBox",
 			icon: "mdi:cube-outline",
 			url: "https://app.hackthebox.com/profile/2378119",
