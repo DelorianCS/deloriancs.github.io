@@ -55,7 +55,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "https://i.pinimg.com/736x/f0/5c/b0/f05cb02b43a8056426e3fcd88494419d.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "Delorian",
-	bio: "Pentesting & Red Teaming - eCPPT | eJPT | CRTP...",
+	bio: "Pentesting & Red Teaming - eCPPT | eJPT | CRTA | CRTO...",
 	links: [
 		{
 			name: "Discord",
