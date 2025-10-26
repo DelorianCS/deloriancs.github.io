@@ -43,7 +43,7 @@ Get-DomainComputer -TrustedToAuth
 * Configured on the **target** object (the resource being accessed)
 * **Computer-to-computer** delegation only
 
-If you want to learn more about the attack, [Microsoft offers some documentation](https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-constrained-delegation-overview) about it
+If you want to learn more about the feature, [Microsoft offers some documentation](https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-constrained-delegation-overview) about it
 
 # 2. Scenario
 
