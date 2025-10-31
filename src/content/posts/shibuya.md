@@ -2,8 +2,8 @@
 title: VL Shibuya
 published: 2025-10-31
 description: Shibuya is a Windows Active Directory Hard machine from Vulnlab, we will learn Reconnaissance | Password Spraying | Dumping hashes locally | Hash Spraying | Hijacking SSH authorized_keys | BloodHound enumeration | Cross-Session DCOM Relay Attack | Cracking Nigel's hash | Port Forwarding | Firewall Evasion | Finding Vulnerable ADCs | Exploiting ESC1
-image: '[https://assets.vulnlab.com/baby_slide.png'](https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/a4722e1f824f8f6349259f75e597acd3.png)
-tags: [Active Directory, Hard, Vulnlab,]
+image: https://htb-mp-prod-public-storage.s3.eu-central-1.amazonaws.com/avatars/a4722e1f824f8f6349259f75e597acd3.png
+tags: [Active Directory, Hard, Vulnlab]
 category: Writeup
 draft: false
 ---
