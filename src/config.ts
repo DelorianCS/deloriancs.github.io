@@ -75,7 +75,7 @@ export const profileConfig: ProfileConfig = {
 {
 			name: "LinkedIn",
 			icon: "mdi:linkedin",
-			url: "www.linkedin.com/in/inaki-cordoba",
+			url: "https://www.linkedin.com/in/inaki-cordoba",
 		},
 	],
 };
