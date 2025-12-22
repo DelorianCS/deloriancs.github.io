@@ -72,6 +72,11 @@ export const profileConfig: ProfileConfig = {
 			icon: "mdi:keyboard",
 			url: "https://monkeytype.com/profile/DelorianCS",
 		},
+{
+			name: "LinkedIn",
+			icon: "mdi:linkedin",
+			url: "www.linkedin.com/in/inaki-cordoba",
+		},
 	],
 };
 
